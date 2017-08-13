@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/8 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
+  <title>阿里云服务器目录权限问题解决方法 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:url" content="http://yoursite.com/archives/2017/08/index.html">
+  <meta name="description" content="刚做好的图片，上传到linux系统上就各种权限问题，很是烦恼，当时就想：哪里有问题~~~ 虽然这样当时是没有问题的，但是在安全性上是也就降低了，找了个时间找了一些资料，发现一个还比较好的服务器上项目是放在/alidata/www/default这个文件夹下如果使用root 用户上传项目，则全部默认所有者和组为root，但是我仔细看了一下默认的那几个文件的所有者和组都是www根据文档和自己的思考，设">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里云服务器目录权限问题解决方法">
+<meta property="og:url" content="http://yoursite.com/2017/06/23/e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95/index.html">
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta property="og:description" content="刚做好的图片，上传到linux系统上就各种权限问题，很是烦恼，当时就想：哪里有问题~~~ 虽然这样当时是没有问题的，但是在安全性上是也就降低了，找了个时间找了一些资料，发现一个还比较好的服务器上项目是放在/alidata/www/default这个文件夹下如果使用root 用户上传项目，则全部默认所有者和组为root，但是我仔细看了一下默认的那几个文件的所有者和组都是www根据文档和自己的思考，设">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-08-13T02:47:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta name="twitter:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta name="twitter:title" content="阿里云服务器目录权限问题解决方法">
+<meta name="twitter:description" content="刚做好的图片，上传到linux系统上就各种权限问题，很是烦恼，当时就想：哪里有问题~~~ 虽然这样当时是没有问题的，但是在安全性上是也就降低了，找了个时间找了一些资料，发现一个还比较好的服务器上项目是放在/alidata/www/default这个文件夹下如果使用root 用户上传项目，则全部默认所有者和组为root，但是我仔细看了一下默认的那几个文件的所有者和组都是www根据文档和自己的思考，设">
   
     <link rel="alternative" href="/atom.xml" title="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。" type="application/atom+xml">
   
@@ -157,52 +158,67 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/" class="archive-article-date">
-  	<time datetime="2017-08-06T15:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/">Locust性能测试工具的安装及使用</a>
+    <h1 class="article-title" itemprop="name">
+      阿里云服务器目录权限问题解决方法
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Locust</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        <a href="/2017/06/23/e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95/" class="archive-article-date">
+  	<time datetime="2017-06-23T05:22:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>刚做好的图片，上传到linux系统上就各种权限问题，很是烦恼，当时就想：哪里有问题~~~</p>
+<div id="js_article" class="rich_media"><br><div class="rich_media_inner"><br><div id="page-content" class="rich_media_area_primary"><br><div id="img-content"><br><div id="js_content" class="rich_media_content "><br><br>虽然这样当时是没有问题的，但是在安全性上是也就降低了，找了个时间找了一些资料，发现一个还比较好的<br><br>服务器上项目是放在/alidata/www/default这个文件夹下<br><br>如果使用root 用户上传项目，则全部默认所有者和组为root，但是我仔细看了一下默认的那几个文件的所有者和组都是www<br><br>根据文档和自己的思考，设置步骤如下：<br><br>1、把网站目录和文件所有者和组都设置为www<br><br><span style="color: #333333; line-height: 21.6px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 14px; background-color: inherit;">     </span><span style="color: black; line-height: 1.6; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; font-size: 16px; white-space: pre-wrap; background-color: inherit;">chown -R www:www /alidata/www/</span><span style="color: #006699; line-height: 1.6; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; font-size: 16px; font-weight: bold; white-space: pre-wrap; background-color: inherit;">default</span><span style="color: black; line-height: 1.6; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; font-size: 16px; white-space: pre-wrap; background-color: inherit;">  </span><br><br><span style="color: #333333; line-height: 21.6px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 14px; background-color: #ffffff;">2.设置网站目录权限为750，750是www这个用户对目录拥有读写执行的权限，这样www用户可以在任何目录下创建文件，用户组有有读执行权限，这样就有进入目录的权限，其它用户没有任何权限。</span><br><br>chmod 750 /alidata/www/default<br><br>cd /alidata/www/default<br><br>find -type d -exec chmod 750 {} \;<br><br><span style="color: #333333; line-height: 21.6px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 14px; background-color: #ffffff;">3.设置网站文件权限为640，640指只有www用户对网站文件有更改的权限，apache服务器只有读取文件的权限，无法更改文件，其它用户无任何权限。</span><br><br>find -not -type d -exec chmod 640 {} \;<br><br>4.需要针对个别目录来设置权限，以Thinkphp为例，它的Runtime 目录存储的有日志文件，还有与数据库做ORM映射的数据库表信息，这说明apache服务器要对这些目录<br><br>有访问的权限，并且对于线面的日志文件有写入的权限，那么这样就需要对于这些特殊目录设置。<br><br>   cd /alidata/www/default<br><br>find . -name “Runtime” -type d -exec chmod -R 770 {} \;<br><br>执行上面的命令请注意 “{}”与 “\”之间是有空格的，上面的-R参数是递归给Runtime 目录下面的目录和文件赋予 770 权限，当然了你会说日志文件是不需要执行权限的，<br><br>不过这里没关系，当你把日志文件删除掉之后，生成出来的文件是没执行权限的。因为当你把日志文件删除掉之后，那么生成日志文件的的用户和所有者都是www<br><br>这样整个站点你就可以通过这种方式管理起来了。文档参考：<a href="http://www.cnblogs.com/stackflow/p/3928407.html" target="_blank" rel="external">http://www.cnblogs.com/stackflow/p/3928407.html</a><br><br>使用过程中发现我用的百度编辑器还不正常，我想起来我的一些外部插件都放在根下public下了，并且上传图片会放到upload下<br><br>所以照葫芦画瓢public下插件和upload750权限，default目录下执行以下命令<br><br>   find . -name “Uploads” -type d -exec chmod -R 770 {} \;<br><br>find . -name “Public” -type d -exec chmod -R 770 {} \;<br><br><span style="color: #333333; line-height: 21.6px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 14px; background-color: #ffffff;">这样就搞定了~~~</span><br><br></div><br></div><br></div><br></div><br></div>
+      
 
-          
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/zfbshoukuan.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/wxshoukuan.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -215,17 +231,112 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/23/e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/06/26/python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Python Django之路与您同行
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MonkeyScript及Monkeyrunner介绍</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
 
 
           </div>
@@ -252,8 +363,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

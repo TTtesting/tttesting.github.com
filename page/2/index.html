@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/8 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
+  <title>测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:url" content="http://yoursite.com/archives/2017/08/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
 <meta property="og:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
 <meta property="og:locale" content="zh-CN">
@@ -159,50 +159,151 @@
           <div id="js-content" class="content-ll">
             
   
-  
+    <article id="post-bug-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/" class="archive-article-date">
-  	<time datetime="2017-08-06T15:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/">Locust性能测试工具的安装及使用</a>
+      <a class="article-title" href="/2017/06/11/bug-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/">BUG，带给我的思考</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Locust</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        <a href="/2017/06/11/bug-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/" class="archive-article-date">
+  	<time datetime="2017-06-11T09:30:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天打开EverNote时，翻到了四年前在anjuke时做的一些bug分析总结。现在回过头看看也是有些价值所在，挑选出部分bug分享，希望能有所启发。</p>
+<p><strong>一、</strong></p>
+<p>iOS新房APP4.4由于在91市场进行试点时，量大的crash召回。具体情况如下：</p>
+<p><em>*</em> -[__NSArrayM objectAtIndex:]: index 20 beyond bounds [0 .. 19]</p>
+<p><em>*</em> -[__NSArrayM objectAtIndex:]: index 40 beyond bounds [0 .. 39]</p>
+<p><em>*</em> -[__NSArrayM objectAtIndex:]: index 60 beyond bounds [0 .. 59]</p>
+<p><em>*</em> -[__NSArrayM objectAtIndex:]: index 80 beyond bounds [0 .. 79]</p>
+<p>&nbsp;</p>
+<p><strong>复现过程：</strong></p>
+<p>1.根据ama上的log记录用户行为进行多次复现操作时，没能复现出此问题。</p>
+<p>2.后来开发说可能是列表的问题，当时改过老功能代码，然后我就从列表找起，最后复现出此crash。</p>
+<p>&nbsp;</p>
+<p><strong>操作步骤：</strong></p>
+<p>1.新房–地图找房–点击小区标点（超过20套）；</p>
+<p>2.小区房源列表，加载出数据后，把网络切为无效网络；</p>
+<p>3.再滑动列表加载更多，弹出加载失败提示框，点击取消，再进行滑动列表；</p>
+<p>&nbsp;</p>
+<p><strong>结果：</strong></p>
+<p>再进行滑动列表时发生crash。</p>
+<p>&nbsp;</p>
+<p><strong>根本原因：</strong></p>
+<p>请求参数city id、page、pagesize，列表里有个逻辑是总数&gt;page x pagesize显示出加载更多，总数&lt;=page x pagesize不显示加载更多。举例：总数=25，第一页显示1x20=20个，此时切换成无效网络，请求第二页时，page自动+1，page x pagesize=2x20=40,实际上加载失败了还是20个，此时“加载更多”需要显示在41行，但是只有21行，所以发生crash。</p>
+<p>&nbsp;</p>
+<p><strong>解决方法：</strong></p>
+<p>修改为总数与缓存进行比对，比如总数=25，第一页显示1x20=20个，此时切换成无效网络，请求第二页时，总数与缓存的20个进行比对，就不会出现此crash。</p>
+<p>&nbsp;</p>
+<p><strong>总结</strong>：</p>
+<p>1.在RC阶段修改一个bug，动了底层代码导致，测试不知情。（bug一定要搞清楚产生的原因和如何修复）</p>
+<p>2.作为QA这个bug当时验证的时候应该在多检查一下相关的功能，毕竟是改的老功能的地方不排除有带出新bug的可能，虽然不一定就能发现那个问题，但是这个习惯还是要养成。</p>
+<p>3.另外开发过程中这种对新列表和单页的网络情况都要做判断包括两种网络（无网络和无效网络） 。</p>
+<p>&nbsp;</p>
+<p><strong>二、</strong></p>
+<p>&nbsp;</p>
+<p>量大crash日志：</p>
+<p><em>*</em> -[NSPlaceholderString initWithString:]: nil argument</p>
+<p><strong>复现过程：</strong></p>
+<p>1.线上发现该问题</p>
+<p>2.开发通过log定位到问题的方法和原因：  使用到了initWithString方法，当cityid取到的城市name为空值时，传入到该方法中应用crash</p>
+<p>3.未想到在何种步骤下cityid会拿到空的name名称，先在模拟器上模拟城市name为空值传入的情况，确认该情况报的crash确实和线上一致</p>
+<p>4.追究真机上重现步骤，开发给出各种设想（城市名称表坏了、用户越狱了、定位到的城市为未开通城市从安居客拿到cityid但新房没开通…），逻辑上均说不通</p>
+<p>5.根据开发的设想和bug产生的原因，我们最终在真机上找到重现步骤（开始以为跟定位有关系，最终逐个排除step，确定下key step）</p>
+<p>&nbsp;</p>
+<p><strong>操作步骤：</strong></p>
+<p>1.全新启动app，进入首页；</p>
+<p>2.假如首页显示的当前城市是“北京”，此时，不要做任何操作，直接再切换一次城市“北京”；</p>
+<p>3.再进行切换新房tab；</p>
+<p>&nbsp;</p>
+<p><strong>结果：</strong></p>
+<p>点击新房tab时发生crash；</p>
+<p>&nbsp;</p>
+<p><strong>根本原因：</strong></p>
+<p>1.代码中有一个逻辑cityid等其他一些筛选条件，再切换城市时，会被清掉，另外外面还有一套逻辑是：当切换的城市与当前城市相同时，缓存数据（cityid，page等）被清掉了，但是没有重新赋cityid，导致cityid为空。</p>
+<p>2.使用了initWithString方法，当cityid取到的城市为空值时，传入到该方法中应用crash（方法使用问题，此方法本身缺陷）。</p>
+<p>&nbsp;</p>
+<p><strong>解决方法：</strong></p>
+<p>1.当切换的城市与当前的城市相同时，不清除缓存数据。</p>
+<p>2.不使用initWithString方法，改成苹果系统中的方法lblCityName.text方法，如</p>
+<p>if (self.filter.cityID) {</p>
+<p>if ([[RTCityManager sharedInstance] cityNameForCityID:self.filter.cityID] == nil) {</p>
+<p>//            [[RTCityManager sharedInstance] setSelectedCityID:@”11”];</p>
+<p>lblCityName.text = @”城市未开通”;</p>
+<p>}</p>
+<p>else</p>
+<p>lblCityName.text = [[RTCityManager sharedInstance] cityNameForCityID:self.filter.cityID];</p>
+<p>}</p>
+<p>另外当cityid真的为空时，又打了一个补丁，城市显示为“未开通”</p>
+<p>&nbsp;</p>
+<p><strong>总结：</strong></p>
+<p>1.此问题之前一直隐藏的问题，当时的表现是按照上面操作，提示加载失败，当时以为是网络问题，而很容易被忽略掉。</p>
+<p>2.如果不能复现出此问题，先根据初步判断进行在模拟器上模拟一些情况进行是否与线上crash报的错误一致，从而再进一步进行问题的定位。</p>
+<p>3.之前在户型选择的时候曾出现过类似问题，再有选择项时，一定要对重复选择项多做测试。</p>
+<p>4.在使用initWithString等方法的时候一定要考虑一些边界情况，对一些空的情况做下处理。</p>
+<p>5.之前4.3版本上存在过渠道包打错渠道包的问题，在打渠道包时，一定要注意是QA最后测试的版本。这个以后也要引起注意。</p>
+<p>6.在RC阶段，如果没有大的问题一定不要轻易的动底层代码，如果问题严重一定要动底层代码的话QA一定要了解清楚可能影响的模块，进行评估风险。</p>
+<p>&nbsp;</p>
+<p><strong>三、</strong></p>
+<p>&nbsp;</p>
+<p><strong>bug描述：</strong>iOS新房4.5：连续18次进入新房地图找房时，发生crash。</p>
+<p>&nbsp;</p>
+<p><strong>复现过程：</strong></p>
+<p>1.daily build的最后两天发现的此问题，然后就提了一个偶发bug：新盘首页锁屏放置了大概10分钟左右，解锁后进入地图找房，地图无法显示；</p>
+<p>2.两天内出现了3-4次，应该会有必现的规律，找开发确认此问题，当时的猜测是（进入地图找房请求数据的时候卡住了，api的问题等等）；</p>
+<p>3.接下来从地图入手，新盘地图找房和新房地图找房来回切换，让开发连接真机调试的时候发现问题所在</p>
+<p>&nbsp;</p>
+<p><strong>操作步骤</strong>：</p>
+<p>新房tab–地图找房–返回（连续操作18次–iphone5）</p>
+<p>&nbsp;</p>
+<p><strong>根本原因：</strong></p>
+<p>在新房地图找房返回时，没有内存没有及时回收。</p>
+<p>&nbsp;</p>
+<p><strong>总结：</strong></p>
+<p>今后在测试中对于一些新加的功能模块，或改动较大的模块，适当的进行一些类似压力的测试（观察内存和cpu的使用情况）。</p>
+<p>&nbsp;</p>
+<p><strong>当时的一点思考总结：</strong></p>
+<p>&nbsp;</p>
+<p>1.当你在和开发人员确认问题的时候，一定要搞清楚原因，特别是bug如何产生和如何修复的。</p>
+<p>&nbsp;</p>
+<p>2.项目合作时，要更加的主动（比如在发包的时候，可能邮件描述的不清楚，要主动去确认，修改了那些东西？底层的东西有没有动，如果动了可能那些模块会受到影响等等），多沟通多确认。</p>
+<p>&nbsp;</p>
+<p>3.花一点时间去挑战偶发的crash等奇怪现象，其实bug正常来看的话都有必现的步骤。</p>
+<p>&nbsp;</p>
+<p>4.多看代码（在空闲的时候多去看看代码，了解了解具体的逻辑是怎么样的）</p>
+<p>&nbsp;</p>
+<p>以上内容不敢说对所有的人都有所用，但是应该能对部分人有所帮助和启发。</p>
+<p>&nbsp;</p>
+<p><strong>对于测试人员来说一定要注意：</strong></p>
+<p>&nbsp;</p>
+<p>1.当我们去做某一个项目时，一定要搞清楚架构、功能等是如何实现的，系统之间是如何交互的，使用到哪些技术，等等（不懂多问、多查资料，多思考，多总结）；</p>
+<p>&nbsp;</p>
+<p>2.测试前准备：数据准备、流程图、接口、数据库、兼容性等都梳理清楚，搞明白透彻，测试前分析到位；</p>
+<p>&nbsp;</p>
+<p>3.用例设计：按照步骤2的分析进行用例的编写，除了正常的流程外，多考虑其中的异常场景。说到这里，可能会有朋友说，小需求我哪里有时间写测试用例，时间那么紧急。用例一定要写，小需求也要把测试点写出来，如果没有测试点，怎么去测？如何能更好的保证质量？</p>
+<p>&nbsp;</p>
+<p>4.用例评审：保证三方（产品、研发、测试）需求的统一性，另外，尽可能的达到用例的全面性，对遗漏的用例做补充。</p>
+<p>&nbsp;</p>
+<p><div><br><strong><font color="#FF0000"></font></strong>要做到：<strong>不懂多问、多沟通、多查资料、多思考、多总结。</strong><br></div><br>&nbsp;</p>
 
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -215,17 +316,1071 @@
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/bug-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
   
+    <article id="post-e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
-    </div></section>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/">关键对话，带给我的思考</a>
+    </h1>
   
 
+        
+        <a href="/2017/06/11/e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/" class="archive-article-date">
+  	<time datetime="2017-06-11T09:17:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在生活当中经常会遇到很多情况，第一、升职加薪、面试、第一次去相亲等等，这都可以理解为关键对话。第二、对话双方的情绪很激烈，两个人都在大声的嚷嚷和争论，这时候也是关键对话。第三、双方的意见存在很大的分歧，比如，你希望你的孩子不要玩游戏，而你的孩子非要玩游戏。以上三种都称之为关键对话。</p>
+<p>&nbsp;</p>
+<p>有没有自己反思过关键时候掉链子的情况，每次谈完话就想，我当时说这个就好了，我怎么忘了这事呢！为什么会在关键时候掉链子？当面临公众演讲的时候，当面临与领导谈话的时候，当跟开发或者产品争论的时候，都会变得嘴有些笨，该说的话都没有说出来。一般人处理关键对话两种不好的结局：要么得罪对方，自己变得特别失态，失去风度；还有一种状况是，算了，假装没发生，避而不谈。那么有没有做的很好呢？要对对方保持百分之一百的尊重，同时要做到百分之一百的坦诚。</p>
+<p>&nbsp;</p>
+<p>从心开始。做一个关键对话之前要做一些准备，先把自己的心态调整好，让自己的心平静下来再与对方进行对话。生气的时候不要与别人沟通，当你生气的时候智商为零，特别高兴的时候不要随便答应给别人东西，彩票中了分你一半，真中了结果会分么？我们总以为苦恼是由他人导致的，这种思维方式会让你的情绪不受控制，并且不由自主的想要伤害对方，或者自认倒霉。其实只有改变自己才能改变结果。要知道你永远都有着选择的权利，没有能够伤害你，除非你自己允许。做到这一点，你才能努力考虑如何去解决问题，而不是伤害或被伤害。</p>
+<p>&nbsp;</p>
+<p>在对话前学会问自己几个问题：</p>
+<p>1、这次对话我的目标是什么？</p>
+<p>2、这次对话我希望为对方达成的目标是什么？</p>
+<p>3、这次对话之后我希望为我们俩的关系达成一个什么样的目标？</p>
+<p>4、为了达成这些目标我应该怎么做？</p>
+<p>&nbsp;</p>
+<p>当我们把这几个问题问完，这就是关键对话的引导性思维。比如，你的孩子喜欢天天玩游戏，说他怎么都没用，发脾气没收手机都没用，来做一场关键对话：</p>
+<p>&nbsp;</p>
+<p>1、这次对话的目标：希望通过这场对话帮助他减少打游戏时间，能够让他更专注学习；</p>
+<p>2、这次对话我希望为对方达成的目标是什么：我希望让对方感觉到爸妈是爱他的，能够感觉到爸妈是替他着想的，并且找到一个平衡打游戏和学习的方法；</p>
+<p>3、这次对话之后我希望为我们俩的关系达成一个什么样的目标：通过这次对话，跟孩子的关系变得更加融洽，让孩子感受到对他无条件的爱；</p>
+<p>4、应该怎么做：比如应该先表达关心和爱，应该先表达理解，应该告诉他说爸爸小时候也特别喜欢打游戏，那么为什么爸爸要跟你谈这个事，咱们应该怎么做。</p>
+<p>&nbsp;</p>
+<p>另外，<strong>对于测试人员来说，也存在不少关键对话。这里就拿与产品、开发对话举例：</strong></p>
+<p>假如，产品给你一个需求，产品三言两语的简单说下什么需求，开发leader认为这个需求很简单，不需要再次核对，就交给小弟去做了，但是作为测试人员的我们可能认为其中有不少需要注意的地方，还是需要一起理下需求和技术实现，达成一致，同时保证质量且能够按时交付上线。结果，做了三四天实现的功能并不是产品所需，又打回重做，这样前期就浪费了不少时间和资源，造成的后果是，必须要上线了，重新定方案，开发leader亲自做，最后通过加班也如期上线了。其实通过这个小的需求当中项目相关人员还是存在不少问题的。</p>
+<p>&nbsp;</p>
+<p>测试人员还是要坚持自己的原则，对于不明确或者存在风险的地方，主动与产品、开发从产品需求和技术实现上达成一致，只有这样才能更好的为测试做准备，设计好测试分析和用例，提前规避风险。那么针对这个案例就可以参考关键对话：</p>
+<p>1、这次对话的目标：希望产品需求和技术实现达成一致；</p>
+<p>2、这次对话我希望为对方达成的目标是什么：满足产品需求，理清技术方案，避免不必要的时间和资源浪费；</p>
+<p>3、这次对话之后我希望为我们俩的关系达成一个什么样的目标：通过这次对话，与产品、开发关系更融洽，让他们感受到对产品的质量负责；</p>
+<p>4、应该怎么做：召集产品、开发一起理清需求和技术方案的讨论，测试人员提前准备好疑惑点，最后经过讨论达成一致，并评估出提测时间和上线时间，做好会议纪要发给大家。</p>
+<p>&nbsp;</p>
+<p><strong>关键对话中需要注意：</strong></p>
+<p>1、从心开始（调整心态，自己首先摆脱暴力或沉默的状态，寻找双赢的可能）</p>
+<p>2、注意观察（除了内容，还要关注谈话的氛围）</p>
+<p>3、保证安全（如果对方情绪出现问题，想办法让对方觉得安全）</p>
+<p>4、控制想法（不要轻易的觉得受到冒犯或者不公平，公平不重要，解决问题才重要）</p>
+<p>5、陈述观点（输出事实，表达观点，对比说明）</p>
+<p>6、了解动机（帮助对方调整情绪）</p>
+<p>&nbsp;</p>
+<p>可以尝试着用在工作和生活当中，希望对你能有所帮助！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">关键对话</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">职场沟通</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3/">Charles抓取https请求详解</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3/" class="archive-article-date">
+  	<time datetime="2017-06-11T09:16:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>现在基本大部分网站都使用了https，所以要想抓到https的请求，首要任务是先有工具：charles、fiddler，先介绍下charles针对https请求的抓取方法，此方法兼容windows和mac用户（mac用户方法类似，如果有必要，请关注微信公众号：测试架构师，留言给我。后续我会专门再做整理）。</p>
+<p>1、 windows下安装charles，看到此文章的用户相信都已经安装了charles，如果还真的没安装，麻烦就自行搜索，进行安装了，打开charles（我使用的charles版本是3.11.4），再继续浏览。</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles001.png" alt=""></p>
+<p>2、 ok，charles已准备完成，接下来就要配置charles证书：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles002.jpg" alt=""></p>
+<p>之后会弹出安装证书：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles003.jpg" alt=""></p>
+<p>点击安装，一路下一步，直到提示“导入成功”</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles004.jpg" alt=""></p>
+<p>此时证书还是不被信任的，让不信任变成信任：打开IE浏览器—&gt;工具—&gt;Internet选项—&gt;内容—&gt;证书—&gt;把中级证书颁发机构中的charles证书导出来—&gt;再把导出来的证书导入到受信任的根证书颁发机构中。这样就ok了。</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles005.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles006.jpg" alt=""></p>
+<p>3、 在移动设备上配置手机代理并安装证书</p>
+<p>在手机上设置代理：设置—&gt;无线网络，设置服务器ip和端口号：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles007.jpg" alt=""></p>
+<p>然后，手机安装证书：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles008.jpg" alt=""></p>
+<p>会弹出一个提示框，如下：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles009.jpg" alt=""></p>
+<p>然后手机浏览器输入如上地址：<a href="http://charlesproxy.com/getssl" target="_blank" rel="external">http://charlesproxy.com/getssl</a>会弹出如下页面：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles010.png" alt=""></p>
+<p>点击安装即可，安装完成后就变成已验证，如下：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles011.png" alt=""></p>
+<p>下面以访问百度wap站点为例：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles012.jpg" alt=""></p>
+<p>上图看到，访问百度wap站点还是看不到https的请求数据，下面还需要再继续配置：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles013.jpg" alt=""></p>
+<p>点击SSL Proxying Settings，弹出下面的框，输入Host填写要抓取的ip或域名，port填写443即可。</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles014.jpg" alt=""></p>
+<p>设置完成后，重新方位百度wap站点就可以抓取到https请求了</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles015.jpg" alt=""></p>
+<p>如果以上还没解决，请关注我的微信公众号：测试架构师，后台留言找到我！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">charles</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">https</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-cdn-ef-bc-8c-e4-bd-a0-e4-ba-86-e8-a7-a3-e5-a4-9a-e5-b0-91-ef-bc-9f" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/cdn-ef-bc-8c-e4-bd-a0-e4-ba-86-e8-a7-a3-e5-a4-9a-e5-b0-91-ef-bc-9f/">CDN，你了解多少？</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/cdn-ef-bc-8c-e4-bd-a0-e4-ba-86-e8-a7-a3-e5-a4-9a-e5-b0-91-ef-bc-9f/" class="archive-article-date">
+  	<time datetime="2017-06-11T09:03:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大家对CDN并不陌生，工作中或多或少都有所接触，最近也有人问到，在此对CDN相关概念和流程做下总结，希望还能对其他朋友也有所帮助。</p>
+<p>&nbsp;</p>
+<p><strong>一、什么是CDN</strong></p>
+<p>&nbsp;</p>
+<p>维基百科上是这样定义的：</p>
+<blockquote>
+<p>CDN：内容分发网络（Content delivery network或Content distribution network）是指一种通过互联网互相连接的电脑网络系统，利用最靠近每位用户的服务器，更快、更可靠地将音乐、图片、视频、应用程序及其他文件发送给用户，来提供高性能、可扩展性及低成本的网络内容传递给用户。<br>&nbsp;</p>
+</blockquote>
+<p>对于还未了解的朋友，可能还不清楚CDN到底是啥，到底是做什么的？下面举个例子说明下：</p>
+<p>以前还没有火车票代售点，12306.cn也只不过是最近几年才有。那时候火车票还智能在火车站的售票大厅购买，好多小县城不通火车，火车票要到市里去买，从小县城到市里去买火车票来回要花不少时间。后来小县城有了火车票代售点，可以直接在代售点购买车票，方便了很多，全市人民再也不用苦逼的排队在一个点买票了，可以分散到不同的火车票代售点。那么CDN就可以理解为分布在每个县城的火车票代售点，用户在浏览网站时，CDN会选择一个离用户最近的CDN边缘节点来响应用户的请求，这样上海的移动用户的请求就不用千里迢迢跑到北京电信机房的服务器上了（假设源站部署在北京电信机房）。这样，CDN节点解决了跨运营商和跨地域访问的问题，访问时间大大降低，同时，大部分请求在CDN边缘节点完成，CDN起到了分流作用，减轻了源站的负载。</p>
+<p>&nbsp;</p>
+<p><strong>二、CDN工作流程</strong></p>
+<p>&nbsp;</p>
+<p>用户访问未使用CDN缓存网站的过程为：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/cdn1.jpeg" alt=""><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkJDQzA1MTVGNkE2MjExRTRBRjEzODVCM0Q0NEVFMjFBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkJDQzA1MTYwNkE2MjExRTRBRjEzODVCM0Q0NEVFMjFBIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QkNDMDUxNUQ2QTYyMTFFNEFGMTM4NUIzRDQ0RUUyMUEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QkNDMDUxNUU2QTYyMTFFNEFGMTM4NUIzRDQ0RUUyMUEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6p+a6fAAAAD0lEQVR42mJ89/Y1QIABAAWXAsgVS/hWAAAAAElFTkSuQmCC" alt=""></p>
+<p>用户在浏览网站的时候，浏览器能够在本地保存网站中的图片或者资源文件，这样用户再次访问该网站的时候，浏览器就不用再下载全部的资源文件，减少了下载量意味着提高了页面加载的速度。</p>
+<p>&nbsp;</p>
+<p>CDN网络是在用户和服务器之间增加Cache层，主要是通过接管DNS实现,将用户的请求引导到Cache上获得源服务器的数据</p>
+<p>下面让我们看看访问使用CDN缓存后的网站的过程：</p>
+<p>&nbsp;</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/cdn2.jpeg" alt=""></p>
+<p>一般来说CDN节点会包括nginx和cache两部分，nginx作负载均衡，cache作为缓存，用户请求到CDN节点后，如果cache中没有缓存用户的内容（包括真的没有或者是过期时间到了），这时候CDN节点会去源站去请求用户所需的资源，拿到数据后CDN节点会做两件事情，把数据返回给用户，并且把数据缓存在cache，这样同样的请求就可以从cache取，不需要回源了。另外你要注意，当前的CDN不会让源站来推送数据的，都是第一次去源站取，采用拉数据的方式。</p>
+<p>&nbsp;</p>
+<p>对于测试人员，需要确认下网站所加载的图片等资源是否都走了CDN，看下是否为CDN域名地址，网站提速不可缺少的一部分。</p>
+<p>&nbsp;</p>
+<p>当前CDN都在拼价格，不想以前被chinaCache垄断，BAT都有自己的CDN节点，对第三方CDN的依赖也在下降。就写到这吧，是否对CDN有所了解了，留言告诉我吧！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CDN</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/cdn-ef-bc-8c-e4-bd-a0-e4-ba-86-e8-a7-a3-e5-a4-9a-e5-b0-91-ef-bc-9f/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-e6-94-af-e4-bb-98-e5-90-8c-e6-ad-a5-e5-92-8c-e5-bc-82-e6-ad-a5-e6-8e-a5-e5-8f-a3-ef-bc-8c-e4-bd-a0-e8-bf-98-e6-9c-89-e7-96-91-e6-83-91-e4-b9-88-ef-bc-9f" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/e6-94-af-e4-bb-98-e5-90-8c-e6-ad-a5-e5-92-8c-e5-bc-82-e6-ad-a5-e6-8e-a5-e5-8f-a3-ef-bc-8c-e4-bd-a0-e8-bf-98-e6-9c-89-e7-96-91-e6-83-91-e4-b9-88-ef-bc-9f/">支付同步和异步接口，你还有疑惑么？</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/e6-94-af-e4-bb-98-e5-90-8c-e6-ad-a5-e5-92-8c-e5-bc-82-e6-ad-a5-e6-8e-a5-e5-8f-a3-ef-bc-8c-e4-bd-a0-e8-bf-98-e6-9c-89-e7-96-91-e6-83-91-e4-b9-88-ef-bc-9f/" class="archive-article-date">
+  	<time datetime="2017-06-11T08:58:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当一个支付请求被发送到支付渠道方，支付渠道会很快返回一个结果。但是这个结果，只是告诉你调用成功了，不是扣款成功，<strong>这叫同步调用</strong>。很多新手会拿这个结果当作支付成功了，那就会被坑死，结果就是支付成功率特别高，伴随着一堆无法解释的坏账率，测试人员尤其要注意测试数据的篡改：金额，同步返回结果，订单号等。</p>
+<p>同步请求参数里面会有一个回调地址，这个地址是支付渠道在扣款成功后调用的，<strong>这叫异步调用</strong>。一般同步接口仅检查参数是否正确，签名是否无误等。异步接口才告诉你扣款结果。一般异步接口有5秒以内的延迟。调用不成功会重试。有时候是这边成功了，但支付渠道侧没收到返回，于是会继续调。当天的支付到第二天还在被异步调用也都是正常的。这也是开发人员需要特别注意的地方，不要当做重复支付。测试人员也要对重复回调进行测试，应只有一次有效。这还不是最坑的，一般支付渠道侧，只有支付成功了才通知你。要是支付失败了，压根儿都不告诉你。</p>
+<p>另一方面，如何老收不到异步结果呢？那就得查查了。同步结果不可靠，异步调用不可靠，那怎么确定支付结果？最终的杀招就是查单了，反查，一般支付渠道侧都会提供反查接口，定时获取DB中待支付的订单调用支付渠道侧的反查接口，最终把支付渠道侧扣款成功的订单完成掉。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">支付测试</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">接口测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/e6-94-af-e4-bb-98-e5-90-8c-e6-ad-a5-e5-92-8c-e5-bc-82-e6-ad-a5-e6-8e-a5-e5-8f-a3-ef-bc-8c-e4-bd-a0-e8-bf-98-e6-9c-89-e7-96-91-e6-83-91-e4-b9-88-ef-bc-9f/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-e7-94-a8-e6-88-b7-e4-bd-93-e9-aa-8c-e6-b5-8b-e8-af-95-e4-b8-80-e6-a0-b7-e5-be-88-e9-87-8d-e8-a6-81" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/e7-94-a8-e6-88-b7-e4-bd-93-e9-aa-8c-e6-b5-8b-e8-af-95-e4-b8-80-e6-a0-b7-e5-be-88-e9-87-8d-e8-a6-81/">用户体验测试一样很重要</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/e7-94-a8-e6-88-b7-e4-bd-93-e9-aa-8c-e6-b5-8b-e8-af-95-e4-b8-80-e6-a0-b7-e5-be-88-e9-87-8d-e8-a6-81/" class="archive-article-date">
+  	<time datetime="2017-06-11T08:50:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>从锤子科技新产品发布会谈用户体验</strong></p>
+<p><pre></pre><br>先从锤子科技新产品Smartisan M1和M1L发布会说起，其中老罗也提到了不少用户体验，下面举出三个例子：</p>
+<ul>
+<li>亮度加减键和音量加减键可以对调，照顾左右手用户的习惯，本来电源键长按三秒开关机，短按/按一秒唤醒屏幕/睡眠键，如果还不习惯，可以到系统设置中不用的那一侧的键，比如亮度加减键设置成唤醒屏幕/睡眠键。</li>
+<li>home键短按是home键，home键轻触是返回，这就和安卓阵营里大多数安卓手机是一样的，考虑安卓过来的用户习惯。</li>
+<li>晚上躺在床上手机快没电的时候准备往手机里插USB，可能多次插不进去，针对此现象做了微不足道的尝试，USB处有微弱的光，方便用户插USB，从而提供了更好的体验。当然，在发布会的过程中还提到很多体验上的问题，让用户惊叹不已。<br><em><br><em>*实际项目中对待用户体验问题的现状是什么？</em></em></li>
+</ul>
+<p>&nbsp;</p>
+<p>那么，在我们实际工作当中，往往遇到的体验问题被我们所忽视。可能我们听到最多的是：</p>
+<ul>
+<li>这种问题需求文档里面没有提到，设计就是这样不是你说的那样。</li>
+<li>这是体验问题不是bug，体验的问题先放一放。等等…<br>那么用户体验问题究竟是不是bug？</li>
+</ul>
+<p>我认为：『用户体验问题肯定是bug。』我们首先要考虑的就是用户体验，测试工程师从用户习惯、参考其他产品等视角去合理判断某功能点在用户体验上有问题，作为测试工程师来讲，把任何细小的问题都要录入缺陷管理系统中，这是我们的天职。相信我们提出的问题产品经理也会考虑和关注的，即使他们不关注，通过我们的日报等形式也会让所对应的领导引起关注。相信最后还是会处理掉的。</p>
+<p>&nbsp;</p>
+<p><strong>作为测试工程师如何提高自己的用户体验测试经验？</strong></p>
+<p>&nbsp;</p>
+<ul>
+<li>体验更多的产品，网站或者APP。不只是国内的产品，国外的产品也要多体验，从产品的设计和功能的布局上为什么别人要这么做？多思考总结。</li>
+<li>用户反馈。多看用户多我们产品的体验反馈、建议等，多去AppStore及其他安卓市场看产品的评论，从评论中也能get到一些关键信息。</li>
+<li>数据统计。数据统计从几个方面去看：</li>
+</ul>
+<p>a、比如使用百度统计分析APP安装情况，活跃情况，都使用了哪些手机型号，手机型号的使用排名，对测试工程师来说，可以在节约成本的情况下购买用户分布多的机型。另外，通过百度统计测试人员可以再重点关注下crash情况，把crash日志抓取下来找研发一起分析。提高APP的稳定性，从而提高用户体验。</p>
+<p>b、百度统计跟踪页面的访问，按钮的点击情况，从而分析数据，优化页面。</p>
+<p>c、通过强大的数据中心部门，进行数据的挖掘和分析，做出更多优化。<br><strong>在移动互联网的时代</strong>，可能多人在盲目的追随着用户体验，但是却忘了用户体验的根本『用户需求』。只要需求的存在，才会有产品的产生，而由于用户体验的存在，才会推出优质的产品。作为测试工程师来说，在做好产品功能、性能测试的同时，也要重视用户的体验测试。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/e7-94-a8-e6-88-b7-e4-bd-93-e9-aa-8c-e6-b5-8b-e8-af-95-e4-b8-80-e6-a0-b7-e5-be-88-e9-87-8d-e8-a6-81/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/">python实现：将文本文件分割成多个小文本文件</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/" class="archive-article-date">
+  	<time datetime="2017-06-11T08:38:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前两天有个朋友说，想实现一个文本文件按照固定行数进行分割成多个文本文件，却不知如何实现。如果数据量小手动分割下就好了，如果数据量很大的话手动完成实在太耗费人力了，也不现实。那么就需要借助脚本去实现。既然有朋友想简单的完成这个任务，那么不如记录下来，给需要的朋友提供方便。</p>
+<p>&nbsp;</p>
+<p>下面我就使用python进行脚本的实现和操作，当然用其他语言都能实现，大家可根据对语言的熟悉程度进行自主选择，如果有朋友还没有达到编写代码的能力的话，那么最起码对语言环境的使用要会，只要达到这些，就可以完成如下工作。演示如下：</p>
+<p>比如我们要对A.txt文件进行分割，按照5行一分割，分割成多个txt文件。</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge1.jpeg" alt=""></p>
+<p>&nbsp;</p>
+<p>A.txt文件为要分割的测试数据，我创建了21条数据，如下：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge2.jpeg" alt=""></p>
+<p>&nbsp;</p>
+<p>每五行一分割的话就是5个txt文件，下面为实现的python脚本：split.py</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge3.jpeg" alt=""></p>
+<p>&nbsp;</p>
+<p>执行脚本：python split.py</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge4.jpeg" alt=""></p>
+<p>&nbsp;</p>
+<p>查看执行结果:</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge5.jpeg" alt=""></p>
+<p>&nbsp;</p>
+<p>再看下0.txt和4.txt的内容：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge6.jpeg" alt=""></p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge7.jpeg" alt=""></p>
+<p>就这样21条数据就被分割成了5个文本文件，同样数据量大的情况下，只需要修改脚本中的LIMIT（一个txt文件要分割的条数），当然文件格式不仅限于txt，csv等都可以，有兴趣的朋友不妨试试看。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-e4-ba-92-e8-81-94-e7-bd-91-e4-ba-a7-e5-93-81-e6-8e-a5-e5-85-a5-e7-ac-ac-e4-b8-89-e6-96-b9-e6-94-af-e4-bb-98-e5-8a-9f-e8-83-bd-e5-ba-94-e5-a6-82-e4-bd-95-e6-b5-8b-e8-af-95-ef-bc-9f" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/e4-ba-92-e8-81-94-e7-bd-91-e4-ba-a7-e5-93-81-e6-8e-a5-e5-85-a5-e7-ac-ac-e4-b8-89-e6-96-b9-e6-94-af-e4-bb-98-e5-8a-9f-e8-83-bd-e5-ba-94-e5-a6-82-e4-bd-95-e6-b5-8b-e8-af-95-ef-bc-9f/">互联网产品接入第三方支付功能应如何测试？</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/e4-ba-92-e8-81-94-e7-bd-91-e4-ba-a7-e5-93-81-e6-8e-a5-e5-85-a5-e7-ac-ac-e4-b8-89-e6-96-b9-e6-94-af-e4-bb-98-e5-8a-9f-e8-83-bd-e5-ba-94-e5-a6-82-e4-bd-95-e6-b5-8b-e8-af-95-ef-bc-9f/" class="archive-article-date">
+  	<time datetime="2017-06-11T08:03:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>现在有不少测试朋友做的项目中，可能也会涉及到支付相关的功能。比如：做商城的，做游戏的以及其他在线交易的网站、APP等。如果支付出了问题，或者用户拿少的钱通过篡改请求数据购买大金额的商品，如果是实物的话，发货前还有可能被发现。如果是虚拟商品话费、游戏币等就有可能造成损失。</p>
+<p>&nbsp;</p>
+<p>所以，不管是实物也好，虚拟商品也好，涉及到支付功能时，大家在测试的过程中一定要重视，否则，会造成很大损失。之前可能大家也都看到过或者听过一个bug损失4.6亿美金的惨痛教训或者身边也有发生过其他因为支付功能的bug导致直接损失的案例。</p>
+<p>&nbsp;</p>
+<p>给大家举个真实的案例：比如使用支付宝购买虚拟商品，往支付宝跳转时，篡改了小的金额，结果购买虚拟商品成功了。（原本10元的商品，0.01元就搞定了）。多么可怕的一个bug啊，当然这个问题可能对于一个做过支付有过经验的测试朋友来说，可能会想：哎呀，这个问题都发现不了，还做什么测试？是的，问题是很简单，对于一个刚入职场的测试朋友或者没有支付相关经验的测试朋友来说，很有可能会忽略。</p>
+<p>&nbsp;</p>
+<p>那么，问题来了，对于支付模块的相关测试，我们应该如何进行呢？比如，针对游戏来说，使用第三方支付往游戏充值游戏币功能，看起来是不是很简单，大家主要思考下以下内容：</p>
+<ol>
+<li>支付都是与第三方支付（支付宝、微信、财付通、QQ钱包、短信支付等）进行对接，那么，是否了解了第三方接口有哪些？是否都能清楚我们的产品与第三方是如何交互的？是否能画出流程图？</li>
+<li>异常场景有哪些？</li>
+<li>有哪些风险，如何规避？<br>第三方支付的流程，与商户的对接方式基本相似，大同小异。（题外推荐：如下流程图使用的chrome插件：Gliffy，个人感觉比较好用。）</li>
+</ol>
+<p>支付流程：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/zhifu1.jpeg" alt=""></p>
+<p>&nbsp;</p>
+<p>退款流程：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/zhifu2.jpeg" alt=""></p>
+<p>&nbsp;</p>
+<p>查询流程：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/zhifu3.png" alt=""><br>先看下流程图，是否对流程图有些了解，不仅仅是做支付功能相关测试才去搞清楚其中的流程，做其他的测试一样也要搞清楚流程，只有搞清楚流程，才能更好的评估其中的风险，才能有利于测试用例的设计。当然流程图中只是提到了商户与第三方是如何交互的，同样商户内部处理的流程也要有所了解及数据怎么存储的，涉及到哪些DB也要清楚。</p>
+<p>&nbsp;</p>
+<p>流程清楚之后，我们再来看看其中会涉及到哪些接口？这个支付流程图里面就涉及到了第三方支付接口：</p>
+<ul>
+<li>下单接口：商户提交下单请求到第三方支付接口，第三方支付收单成功后返回下单成功结果给到商户系统。（下单接口的最终处理结果分为下单成功和下单失败，若未收到明确结果可调用单笔订单查询接口查询结果。）</li>
+<li>支付接口：调用该接口时指定支付参数，完成买家账户向商户账户的支付，采用页面跳转交互模式和后台通知交互模式。（结果分为两路返回：一路为前台在return_url页面跳转显示支付结果；一路为后台在notify_url收到支付结果通知后进行响应。）</li>
+<li>退款接口：调用第三方支付的支付请求接口返回付款成功后，在需要做退款处理时调用退款请求接口发起退款处理。（退款接口的最终处理结果分为退款成功和退款失败，若未收到明确结果可调用退款查询接口查询结果。）</li>
+<li>单笔订单查询接口：根据订单号查询单笔订单信息和状态。</li>
+<li>退款订单查询接口：调用第三方支付的退款接口返回后，在需要查询退款请求状态可调用退款订单查询接口查询退款订单的状态和订单信息。<br>那么针对第三方的接口，我们大致也有所了解了，接下来针对测试过程中涉及到主要的测试点整理如下：</li>
+</ul>
+<p>测试过程中需要注意的主要测试点及异常场景：</p>
+<ul>
+<li>首先要保证接口都能正常调用；</li>
+<li>生成一笔订单，支付完成后，同步或异步重复回调，只有一次有效；</li>
+<li>生成一笔订单，复制订单号和金额，再次生成一笔订单，用fiddler设置断点，用第一笔已完成的订单号和订单金额去替换现有的订单号和金额，无法完成支付；</li>
+<li>生成一笔订单，跳转到第三方时修改金额，无法到账，或者如果是游戏充值游戏币的话，到账为篡改后的金额对应的游戏币；</li>
+<li>异步通知屏蔽，同步有效，进行支付，同步能够正常到账；</li>
+<li>同步设置无效，异步有效，进行支付，异步能够正常到账；</li>
+<li>同步异步都设置无效，在第三方支付完成后，在重发机制时间范围内，设置异步有效，到下次通知时间点时，能够正常通知到账（补单机制的验证，如果商户收到第三方支付成功的通知后，要告知第三方支付收到了成功的通知，如果第三方支付收到商户应答不是ok或超时，第三方支付就会认为通知失败，会在规定的时间内持续调用notify_url，一般有时间或次数的限制）；</li>
+<li>针对支付订单在数据库中存储是否完整和正确进行校验（比如：第三方订单号–方便与第三方对账和问题排查、订单金额、订单状态等）；</li>
+<li>如果是用户购买实物商品，用户发起退货，要保证退货流程正常，资金能正常返还，要考虑下并发情况的验证以确保安全性；</li>
+<li><p>如果是用户购买虚拟商品，比如话费、油卡之类的商品，只有在发货失败的时候才能发起退货，注意验证；<br>遇到过的坑：</p>
+</li>
+<li><p>用户购买100元游戏币时，前往第三方支付跳转进行金额的篡改由100元改成0.01元，结果就拿了0.01元充值了100元的游戏币。对订单金额没有做校验导致这样的后果，损失比较大。大家在测试的过程中一定要注意对服务端进行校验，支付时数据的篡改一定要有校验。</p>
+</li>
+<li>当同步、异步通知都存在的情况的，异步通知（第三方支付成功后台通知），没有到账，导致部分用户充值不到账，引起客诉。当同步、异步并存的时候，一定要分别对同步和异步进行检验，确保都能正常到账。<br>&nbsp;</li>
+</ul>
+<p>我们所做的绝大多少的互联网产品都会涉及到第三方支付，所以支付功能必然是重要的，作为测试互联网产品的一员，我们必须要做好支付的安全性。</p>
+<p>那么，如何规避支付风险？</p>
+<p>为了进一步的加强支付功能的安全，也可以适当的增加一些监控机制，比如：订单与第三方订单进行对比，可以使用跑批完成，当我们完成支付的订单从数据库中查出来与通过第三方订单查询接口查询出来的同一个订单金额有异常时，进行报警通知能够及时发现处理，甚至当有异常情况进行创建订单的终止，从而把损失降到最低。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全测试</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">支付测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/e4-ba-92-e8-81-94-e7-bd-91-e4-ba-a7-e5-93-81-e6-8e-a5-e5-85-a5-e7-ac-ac-e4-b8-89-e6-96-b9-e6-94-af-e4-bb-98-e5-8a-9f-e8-83-bd-e5-ba-94-e5-a6-82-e4-bd-95-e6-b5-8b-e8-af-95-ef-bc-9f/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-e4-bd-a0-e9-97-ae-e6-88-91-e7-ad-94-ef-bc-8c-e5-8f-8a-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e6-96-b9-e5-90-91-e5-8f-91-e5-b1-95" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/e4-bd-a0-e9-97-ae-e6-88-91-e7-ad-94-ef-bc-8c-e5-8f-8a-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e6-96-b9-e5-90-91-e5-8f-91-e5-b1-95/">你问我答，及测试人员方向发展</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/e4-bd-a0-e9-97-ae-e6-88-91-e7-ad-94-ef-bc-8c-e5-8f-8a-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e6-96-b9-e5-90-91-e5-8f-91-e5-b1-95/" class="archive-article-date">
+  	<time datetime="2017-06-11T07:55:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;</p>
+<blockquote>
+<p>做开发好还是测试好？如果做测试怎么入门？<br>既然还有人问这样的问题，我想应该还有部分人可能会有这样的疑问，我并不觉得这问题问的多么可笑，可能对于刚进入职场之前的我们也会有这样的疑问。我个人觉得，首先，应该去了解开发和测试需要做的事情，使用到的技能，在问这些问题之前有没有去主动的了解和学习这个行业的知识。如果要想进入某一个行业，是否自己发自内心的喜欢这个行业，是否愿意去学习相关知识和技能？个人也整理了并分享了一些资料，有些朋友也都已经拿到手，有入门的书籍和视频教程，也要进阶的书籍，只要认真看，在测试行业也能有不错的发展。</p>
+</blockquote>
+<p>&nbsp;</p>
+<blockquote>
+<p>想参加一些培训班，有没有推荐的？<br>问这个问题的人可能是刚参加工作，或者准备进入测试行业的同学，可能还是想通过培训机构进行学习。说实话，测试行业在不断发展，培训机构越来越多，培训的费用1万开外，效果真的有那么明显吗？当然我个人不反对培训，但大家要明白，无论参加什么形式的培训”免费的或收费的”，自己要不断努力，要想办法多实践，尽量不要参加纯理论的培训，要找一些具有真实的案例分析和有实践的培训。总而言之，不是不让大家参加培训，要慎重考虑去选择。</p>
+</blockquote>
+<p>&nbsp;</p>
+<blockquote>
+<p>一直做功能测试，想学习自动化测试，怎么提高？<br>之前我写过一篇文章《公司到底要不要做自动化测试》，里面写到了我个人的观点，在这就不过多阐述。功能测试是否做的够深了，是否能达到一种效果，当给你某个功能让你独自去测试的时候，你是否都能搞明白功能的实现及将要测试的用例，需要测试的点在脑海中都能形成，能够保证尽可能的覆盖场景？不是不建议自动化，而是不要太盲目，如果觉得功能测试已经达到一定程度了，个人建议可以学习的技能是性能测试（如：LoadRunner）及会熟练编写一门脚本语言（比如python、java等）。可能还有部分朋友问到APP native相关测试，可以多去了解一些：ddms、adb命令、monkey测试、instrumentation、robotium、appium、traceview、Memory Analzer tool等</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>最近看到一些测试朋友，对测试未来比较迷茫，不知该如何前行，无方向感。目前来看，业界目前存在一个普遍的矛盾，一方面很多人会觉得测试没有发展前途，另一方面，又有非常多的企业急需专业的测试人员。当我们公司开启招聘的时候，也都会为招不到优秀的测试人员而苦恼，平均面试10个人能进来一个就谢天谢地了。</p>
+<p>&nbsp;</p>
+<p>其实在我们的实际工作中，可能大家也都见过一部分测试人员转行做：产品经理、开发人员、项目管理、运营人员、创业者等等其他角色。如果有比当前机会更好、更有发展前途的，那么可以考虑转行。针对这些转行的测试人员不过多讨论，这里我们重点讨论继续在测试领域发现的测试人员，以下几点方向，大家可根据自身情况考虑：</p>
+<p>&nbsp;</p>
+<ul>
+<li><strong>具备有丰富的业务测试经验的测试人员</strong><br>可以努力成为具有丰富业务测试经验的测试人员，并且也要具备测试设计能力、质量推动能力、沟通协调能力。测试设计能力对于测试人员来说是一项很重要的技能，这就需要长期的练习和培养。测试分析和测试用例设计能力的全面性和深度，能够更好的发现大部分缺陷。业务测试人员对项目全局的把控，能够持续的推动项目质量而不仅仅停留在发现bug，所以这就要对研发流程非常了解，推动研发项目提交测试的质量。</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>具备开发能力和测试思维的测试人员</strong><br>在测试部门，能通过测试技术和工具提升整个部门的测试深度和效率的测试开发工程师。这也是部分测试人员不断追求的一个目标，所以目前具备良好开发能力的测试人员也是非常紧缺的。如果说只具备了良好的code功底是不够的，还需要有一定的测试思维和经验，最好去尝试和实践做一些测试平台和工具的开发，从而提高测试深度和团队工作效率。再次强调一下，一个能写代码的开发人员未必能够做好测试工具的开发，一定要有测试思维和经验，不然很有可能开发出来的东西偏离。</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>测试团队负责人（管理路线）</strong><br>我面试候选人时也经常会问到，未来3-5年有什么规划，几乎大部分人都会说到向测试管理岗发展。有梦想当然是好的，不是随便说说的，要实际行动的，拆分长期目标为短期目标去实现，坚持下来的才是赢家。比如：把自己的目标、计划以及每天的进度情况、个人总结，发布到我们刚刚成立不久的『测试技术分享圈』–点击–&gt;<a href="http://mp.weixin.qq.com/s?__biz=MzI3MDQ3MDQ2OA==&amp;mid=2247483795&amp;idx=2&amp;sn=532ac101e67bbb9ac5890453bc13fe6b&amp;chksm=ead1ddb8dda654ae3f27798a6f96bd2b4bd581ea9e56e97d169d1d34772eafffe4020f5f2c44&amp;scene=21#wechat_redirect" target="_blank" rel="external">小密圈</a>。</li>
+</ul>
+<p>&nbsp;</p>
+<p>测试团队的负责人，需要有良好的技术功底，因为测试团队负责人的技术能力和开阔的视野，对团队成员影响是很大的，要考虑是否可以把团队的技术能力带到一定的高度。除了技能能力之外，还要有对人的洞察力，团队成员的定期沟通，以及部门内与外沟通协调能力，最后还要具备良好的规划能力，能够系统的考虑团队面临的问题，需要提升的方向及制定最终达成的方案。这些都是必不可少的技能。</p>
+<p>&nbsp;</p>
+<ul>
+<li><strong>公司的CTO、CEO</strong><br>大家看到这个方向或许会觉得我疯了，我想告诉大家的是这个是真实存在的，只不过是要付出更多的代价，比其他人多努力很多。这个就不过多描述了，也是我个人的大目标！😄</li>
+</ul>
+<p>&nbsp;</p>
+<p>测试人员的发展线路可能不止这些，可能还有其他发展线路，总而言之，测试人员的发展空间还是很大的，未来还有很大的希望。奔跑吧，测试朋友们！！！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/e4-bd-a0-e9-97-ae-e6-88-91-e7-ad-94-ef-bc-8c-e5-8f-8a-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e6-96-b9-e5-90-91-e5-8f-91-e5-b1-95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-e6-8e-a5-e5-8f-a3-e6-b5-8b-e8-af-95-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e5-bf-85-e5-a4-87-e6-8a-80-e8-83-bd" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/e6-8e-a5-e5-8f-a3-e6-b5-8b-e8-af-95-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e5-bf-85-e5-a4-87-e6-8a-80-e8-83-bd/">接口测试-测试人员必备技能</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/e6-8e-a5-e5-8f-a3-e6-b5-8b-e8-af-95-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e5-bf-85-e5-a4-87-e6-8a-80-e8-83-bd/" class="archive-article-date">
+  	<time datetime="2017-06-11T07:52:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>接口测试，其实并没有那么可怕，但是作为测试人员也是必不可少的技能。</p>
+<p>&nbsp;</p>
+<p>接口分为：内部接口和外部接口。</p>
+<p>&nbsp;</p>
+<ul>
+<li>内部接口：是浏览器与服务器的接口。这个很容易理解，web开发一般分前端和后端，前端开发人员用html/css/javascript等技术。后端开发人员用php/java/python等各种语言。用户输入的数据是输入到前端页面上。怎样把这些数据传递到后台呢？通过http协议的get、post请求来实现前后端的数据传递。这也可以认为是接口测试，这通常称之为内部接口。</li>
+<li>外部接口：大部分都是服务端与服务端之间的调用接口。比如淘宝、京东等购物网站，在进行付款时，可以选择支付宝、微信、网银等支付方式，那这些支付宝、微信支付、网银等久提供了对外服务的接口，这就是外部接口<br>&nbsp;</li>
+</ul>
+<p>不管是内部接口还是外部接口，都要引起重视，今天先说下内部接口测试，不要因为测试人员的忽视，导致接口有bug，相信大家也看过一个bug在45分钟损失4亿多美元的真实例子，作为测试人员也要为我们所测试的应用保质保量，风险降到最低，是我们的责任也是我们的义务。</p>
+<p>&nbsp;</p>
+<p>1、http常用的请求方法：</p>
+<ul>
+<li>get–从指定的资源请求数据</li>
+<li>b.post–向指定的资源提交要被处理的数据</li>
+<li>c.put–向指定的资源修改数据</li>
+<li>d.delete–向指定的资源删除数据<br>通常我们用的最多的请求方式：get和post参数到相应的URL。</li>
+</ul>
+<p>&nbsp;</p>
+<p>2、测试步骤：</p>
+<ul>
+<li>编写接口调用程序（一般可自己搞个表单提交或使用其他测试工具，如postman等）</li>
+<li>模拟输入参数</li>
+<li>检查接口输出<br>&nbsp;</li>
+</ul>
+<p>3、测试技能要求：</p>
+<ul>
+<li>能写接口调用程序</li>
+<li>懂json，能分析结果输出</li>
+<li>熟悉应用功能涉及到数据存取部分，能了解具体流程<br>&nbsp;</li>
+</ul>
+<p>4、数据准备：</p>
+<ul>
+<li>正向用例：符合业务逻辑的数据</li>
+<li>特殊字符，如：&lt;、&gt;、&amp;、=、%、空格等。重点是&amp;、=、空格，这些字符在post、get请求中是关键字，如果没有进行转义，就会报错</li>
+<li>空参数。如果参数为必选，不传该参数，会有何结果</li>
+<li>参数类型错误。如需要输入整形，实际输入字符型，会有何结果</li>
+<li>参数类型错误。如需要输入整型，实际输入字符型，小数，负数，会有何结果</li>
+<li>字符串长度超长，会有何结果</li>
+<li>用户可输入的参数，是否能SQL注入<br>&nbsp;</li>
+</ul>
+<p>5、结果检查：</p>
+<ul>
+<li>输出结果是否符合逻辑。原本正确的操作，是否返回true。原本异常的操作，是否能显示正确的错误提示</li>
+<li>输出结果字段值是否正确，是否按照约定都正常输出</li>
+</ul>
+<p>&nbsp;<br>&nbsp;</p>
+<p>接口测试其实没那么难的，只要用心学，都是可以达到的。后续再专门介绍外部接口测试以及支付相关测试，今天就写到这里。真心祝愿每一位读者升职加薪！😄</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/e6-8e-a5-e5-8f-a3-e6-b5-8b-e8-af-95-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e5-bf-85-e5-a4-87-e6-8a-80-e8-83-bd/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    </nav>
+  
 
 
           </div>
@@ -251,9 +1406,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
+		isHome: true,
 		isPost: false,
-		isArchive: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/8 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
+  <title>QQ好友在线/离线，怎么测试？ | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:url" content="http://yoursite.com/archives/2017/08/index.html">
+  <meta name="description" content="即时通讯是目前internet上最为流行的通讯方式，各种各样的即时通讯软件也层出不穷，那么今天主要针对QQ好友在线状态/QQ群友在线状态功能出发，一起思考其中的实现原理以及我们如何去测试此功能？ &amp;nbsp; 当大家在使用QQ的时候，是否和我一样有如下疑问： &amp;nbsp;  在好友列表中为什么可以实时的看到qq好友的在线、离线等状态？ 在QQ群的群友列表中能看到当前群友的在线、离线等状态，是如何实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QQ好友在线&#x2F;离线，怎么测试？">
+<meta property="og:url" content="http://yoursite.com/2017/06/10/qq-e5-a5-bd-e5-8f-8b-e5-9c-a8-e7-ba-bf-e7-a6-bb-e7-ba-bf-ef-bc-8c-e6-80-8e-e4-b9-88-e6-b5-8b-e8-af-95-ef-bc-9f/index.html">
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta property="og:description" content="即时通讯是目前internet上最为流行的通讯方式，各种各样的即时通讯软件也层出不穷，那么今天主要针对QQ好友在线状态/QQ群友在线状态功能出发，一起思考其中的实现原理以及我们如何去测试此功能？ &amp;nbsp; 当大家在使用QQ的时候，是否和我一样有如下疑问： &amp;nbsp;  在好友列表中为什么可以实时的看到qq好友的在线、离线等状态？ 在QQ群的群友列表中能看到当前群友的在线、离线等状态，是如何实">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-08-13T02:47:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta name="twitter:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta name="twitter:title" content="QQ好友在线&#x2F;离线，怎么测试？">
+<meta name="twitter:description" content="即时通讯是目前internet上最为流行的通讯方式，各种各样的即时通讯软件也层出不穷，那么今天主要针对QQ好友在线状态/QQ群友在线状态功能出发，一起思考其中的实现原理以及我们如何去测试此功能？ &amp;nbsp; 当大家在使用QQ的时候，是否和我一样有如下疑问： &amp;nbsp;  在好友列表中为什么可以实时的看到qq好友的在线、离线等状态？ 在QQ群的群友列表中能看到当前群友的在线、离线等状态，是如何实">
   
     <link rel="alternative" href="/atom.xml" title="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。" type="application/atom+xml">
   
@@ -157,52 +158,107 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-qq-e5-a5-bd-e5-8f-8b-e5-9c-a8-e7-ba-bf-e7-a6-bb-e7-ba-bf-ef-bc-8c-e6-80-8e-e4-b9-88-e6-b5-8b-e8-af-95-ef-bc-9f" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/" class="archive-article-date">
-  	<time datetime="2017-08-06T15:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/">Locust性能测试工具的安装及使用</a>
+    <h1 class="article-title" itemprop="name">
+      QQ好友在线/离线，怎么测试？
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Locust</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        <a href="/2017/06/10/qq-e5-a5-bd-e5-8f-8b-e5-9c-a8-e7-ba-bf-e7-a6-bb-e7-ba-bf-ef-bc-8c-e6-80-8e-e4-b9-88-e6-b5-8b-e8-af-95-ef-bc-9f/" class="archive-article-date">
+  	<time datetime="2017-06-10T12:54:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>即时通讯是目前internet上最为流行的通讯方式，各种各样的即时通讯软件也层出不穷，那么今天主要针对QQ好友在线状态/QQ群友在线状态功能出发，一起思考其中的实现原理以及我们如何去测试此功能？</p>
+<p>&nbsp;</p>
+<p>当大家在使用QQ的时候，是否和我一样有如下疑问：</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>在好友列表中为什么可以实时的看到qq好友的在线、离线等状态？</p>
+<p>在QQ群的群友列表中能看到当前群友的在线、离线等状态，是如何实现的？</p>
+<p>作为测试工程师究竟该如何去测试里面用到的技术？<br>&nbsp;</p>
+</blockquote>
+<p>我带着这些问题，去搜集了一些资料进行了解、学习和总结后，现分享给大家。</p>
+<p>关于QQ好友在线/离线状态我所理解的流程是：</p>
+<blockquote>
+<p>当用户A登录成功时，服务器要把用户A的在线状态（online）写到缓存（高可用的缓存集群里）；userid-A—》login—》server—》set status in cache（userid：online）</p>
+<p>当用户A下线（登出）时，服务器要找到用户A的缓存将在线状态（online）变成离线状态（offline）；userid-A—》loginout—》server—》update status in cache（userid-A：offline）</p>
+<p>其他所有用户的状态都会存储在缓存中，所以当用户A登录时，从数据库中查出用户A的好友，再从缓存中查出这些好友所对应的在线状态，从而用户A可以看出哪些好友在线哪些好友离线；</p>
+<p>userid-A—》my friends status—》get friends userids in DB —》get userids status in cache（userid1:online，userid2:offline，userid3:offline，userid4:online……）<br>&nbsp;</p>
+</blockquote>
+<p>针对上面的流程主要考虑的测试点如下：</p>
+<blockquote>
+<p>无缓存情况下，用户A登录时，写入缓存正常（缓存大家应该都了解过，比如memcache、redis等如何查看缓存？不会的同学可以咨询也可自己查下相关资料）</p>
+<p>当用户退出登录时，缓存中对应的value被置为offline；</p>
+<p>缓存存的有效期校验；</p>
+<p>用户A的好友用户B下线/上线时，状态是否显示正确；</p>
+<p>用户A的多个好友中有在线有离线的，当用户A查看好友状态时，状态显示是否正确；</p>
+<p>当redis连接异常或超时时，应该如何处理；<br>等等…大家可以想想需要测试的功能点，要了解开发实现的过程，尽可能的去覆盖测试点。</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>写到这里，其实其中还有一个重要的点：比如用户A的好友用户B在线，突然，用户B离线了，那么用户A能否立即看到好友由在线变成离线呢？这也是我们测试人员需要考虑的功能点！到底是不是实时的我也不能确定，如果有人知道的话可以分享下。如果对实时性要求较高，可以采用推送的方式同步，如果实时性要求不太高的话，可以采用轮询拉取的方式进行同步。</p>
+<p>&nbsp;</p>
+<p>再普及下轮询拉取方式和推送方式，如下：</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>什么是轮询拉取方式<br>举例说明：用户userid-A要看到好友的在线状态的话，比如就要每分钟轮询向服务器拉取全部好友的在线状态。缺点就是：有一分钟的延迟，同时当好友的状态期间没有变化时也请求服务器拉取产生大量的无效请求暂用服务器的资源。这种方式可能大家在工作中也经常用到，不断的轮询获取服务器的信息。</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>什么是推送的方式<br>继续举例说明：还是用户userid-A要看到好友用户userid-B在线状态的话，当用户userid-B下线时，由在线变成离线（更新缓存为offline），同时要将这个状态改变的通知推送给用户userid-B的在线反向好友。这样就变成实时了，但是缺点就是：在线好友量大的话，任何一个用户状态的改变会扩散很多实时通知，需要考虑承载能力。</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>大家可以思考下，QQ群友的在线同步应该是怎样的流程呢？到底是使用轮询的方式还是推送的方式呢？后续如果有时间的话可以继续讨论。</p>
 
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/zfbshoukuan.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/wxshoukuan.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -215,17 +271,112 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/10/qq-e5-a5-bd-e5-8f-8b-e5-9c-a8-e7-ba-bf-e7-a6-bb-e7-ba-bf-ef-bc-8c-e6-80-8e-e4-b9-88-e6-b5-8b-e8-af-95-ef-bc-9f/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/06/10/123/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          QQ群友在线/离线，如何测试？
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/05/21/e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e5-ba-94-e8-af-a5-e5-a6-82-e4-bd-95-e5-8f-91-e5-b1-95-ef-bc-9f/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">测试人员应该如何发展？</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
 
 
           </div>
@@ -252,8 +403,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

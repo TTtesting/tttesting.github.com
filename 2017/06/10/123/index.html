@@ -6,18 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/8 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
+  <title>QQ群友在线/离线，如何测试？ | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:url" content="http://yoursite.com/archives/2017/08/index.html">
+  <meta name="description" content="上篇文章『QQ好友在线/离线，如何测试？』针对即时通讯的“状态”进行了分析和总结，主要说到了QQ好友在线/离线实现方案，测试过程中需要注意的测试点。 &amp;nbsp; 针对好友状态实时性的要求需要使用不同的方式，如果实时性要求高可以采用推送的方式，那么QQ好友针对在线/离线要求较高，可以采用推送的方式进行同步。大家在做通讯工具方便的项目时，如果实时性要求不高的话，可以采用轮询拉取的方式同步。备注：轮询">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QQ群友在线&#x2F;离线，如何测试？">
+<meta property="og:url" content="http://yoursite.com/2017/06/10/123/index.html">
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta property="og:description" content="上篇文章『QQ好友在线/离线，如何测试？』针对即时通讯的“状态”进行了分析和总结，主要说到了QQ好友在线/离线实现方案，测试过程中需要注意的测试点。 &amp;nbsp; 针对好友状态实时性的要求需要使用不同的方式，如果实时性要求高可以采用推送的方式，那么QQ好友针对在线/离线要求较高，可以采用推送的方式进行同步。大家在做通讯工具方便的项目时，如果实时性要求不高的话，可以采用轮询拉取的方式同步。备注：轮询">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/login1-300x221.jpeg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/login2-300x187.jpeg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/login3-300x171.jpeg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/login4-300x173.jpeg">
+<meta property="og:updated_time" content="2017-08-13T02:47:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta name="twitter:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta name="twitter:title" content="QQ群友在线&#x2F;离线，如何测试？">
+<meta name="twitter:description" content="上篇文章『QQ好友在线/离线，如何测试？』针对即时通讯的“状态”进行了分析和总结，主要说到了QQ好友在线/离线实现方案，测试过程中需要注意的测试点。 &amp;nbsp; 针对好友状态实时性的要求需要使用不同的方式，如果实时性要求高可以采用推送的方式，那么QQ好友针对在线/离线要求较高，可以采用推送的方式进行同步。大家在做通讯工具方便的项目时，如果实时性要求不高的话，可以采用轮询拉取的方式同步。备注：轮询">
+<meta name="twitter:image" content="http://www.87testing.com/wp-content/uploads/2017/06/login1-300x221.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。" type="application/atom+xml">
   
@@ -157,52 +163,97 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-123" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/" class="archive-article-date">
-  	<time datetime="2017-08-06T15:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/">Locust性能测试工具的安装及使用</a>
+    <h1 class="article-title" itemprop="name">
+      QQ群友在线/离线，如何测试？
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Locust</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        <a href="/2017/06/10/123/" class="archive-article-date">
+  	<time datetime="2017-06-10T13:01:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上篇文章『QQ好友在线/离线，如何测试？』针对即时通讯的“状态”进行了分析和总结，主要说到了QQ好友在线/离线实现方案，测试过程中需要注意的测试点。</p>
+<p>&nbsp;</p>
+<p>针对好友状态实时性的要求需要使用不同的方式，如果实时性要求高可以采用推送的方式，那么QQ好友针对在线/离线要求较高，可以采用推送的方式进行同步。大家在做通讯工具方便的项目时，如果实时性要求不高的话，可以采用轮询拉取的方式同步。备注：轮询方式和推送方式在上篇已经介绍到，在这里就不过多描述。</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>QQ群友的状态又是按照什么方式进行同步状态的呢？</p>
+<p>QQ群友的状态又该怎么去测试呢？<br>我们带着这个问题，继续了解和学习，现总结分享如下：</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>简单回顾下QQ好友在线/离线流程，尽量用流程图形式能让大家看明白。</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>用户登录时流程：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/login1-300x221.jpeg" alt=""><br>&nbsp;<br>用户登出时流程：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/login2-300x187.jpeg" alt=""><br>&nbsp;<br>用户登录时看到哪些好友在线哪些离线的流程：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/login3-300x171.jpeg" alt=""><br>&nbsp;</p>
+</blockquote>
+<p>&nbsp;</p>
+<blockquote>
+<p>用户状态变更时的实时推送流程：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/login4-300x173.jpeg" alt=""><br>群友状态按正常来讲也可以使用实时推送的方式，从而保证状态的实时性，但是目前大多数还是采用轮询拉取方式，主要因为群友状态实时推送压力实在太大，全部实时获取系统往往会承受不了。那么轮询拉取方式也会给服务器带来比较大的压力，可以使用按需拉取，延时拉取的方式，用户群可能较多，当用户进入某一个群时才进行用户状态的拉取。从来降低服务器压力，且满足需求。</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>从测试角度主要考虑：</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>缓存机制能够正常，缓存数据的准确性；</p>
+<p>拉取方式的测试，当进入某一个群时才拉取；</p>
+<p>用户在线/离线状态的正确性校验；</p>
+<p>并发测试；等等…</p>
+</blockquote>
 
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/zfbshoukuan.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/wxshoukuan.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -215,17 +266,112 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/10/123/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/06/11/e6-95-b0-e6-8d-ae-e5-ba-93-e4-ba-8b-e5-8a-a1-e5-92-8c-e9-94-81/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          数据库事务和锁
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/06/10/qq-e5-a5-bd-e5-8f-8b-e5-9c-a8-e7-ba-bf-e7-a6-bb-e7-ba-bf-ef-bc-8c-e6-80-8e-e4-b9-88-e6-b5-8b-e8-af-95-ef-bc-9f/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">QQ好友在线/离线，怎么测试？</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
 
 
           </div>
@@ -252,8 +398,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

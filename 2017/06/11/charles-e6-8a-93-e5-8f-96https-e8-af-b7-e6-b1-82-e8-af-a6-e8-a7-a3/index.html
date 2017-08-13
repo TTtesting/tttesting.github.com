@@ -6,18 +6,36 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/8 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
+  <title>Charles抓取https请求详解 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:url" content="http://yoursite.com/archives/2017/08/index.html">
+  <meta name="description" content="现在基本大部分网站都使用了https，所以要想抓到https的请求，首要任务是先有工具：charles、fiddler，先介绍下charles针对https请求的抓取方法，此方法兼容windows和mac用户（mac用户方法类似，如果有必要，请关注微信公众号：测试架构师，留言给我。后续我会专门再做整理）。 1、 windows下安装charles，看到此文章的用户相信都已经安装了charles，如">
+<meta name="keywords" content="charles,https">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Charles抓取https请求详解">
+<meta property="og:url" content="http://yoursite.com/2017/06/11/charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3/index.html">
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta property="og:description" content="现在基本大部分网站都使用了https，所以要想抓到https的请求，首要任务是先有工具：charles、fiddler，先介绍下charles针对https请求的抓取方法，此方法兼容windows和mac用户（mac用户方法类似，如果有必要，请关注微信公众号：测试架构师，留言给我。后续我会专门再做整理）。 1、 windows下安装charles，看到此文章的用户相信都已经安装了charles，如">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles001.png">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles002.jpg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles003.jpg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles004.jpg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles005.jpg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles006.jpg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles007.jpg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles008.jpg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles009.jpg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles010.png">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles011.png">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles012.jpg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles013.jpg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles014.jpg">
+<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles015.jpg">
+<meta property="og:updated_time" content="2017-08-13T02:47:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta name="twitter:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta name="twitter:title" content="Charles抓取https请求详解">
+<meta name="twitter:description" content="现在基本大部分网站都使用了https，所以要想抓到https的请求，首要任务是先有工具：charles、fiddler，先介绍下charles针对https请求的抓取方法，此方法兼容windows和mac用户（mac用户方法类似，如果有必要，请关注微信公众号：测试架构师，留言给我。后续我会专门再做整理）。 1、 windows下安装charles，看到此文章的用户相信都已经安装了charles，如">
+<meta name="twitter:image" content="http://www.87testing.com/wp-content/uploads/2017/06/charles001.png">
   
     <link rel="alternative" href="/atom.xml" title="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。" type="application/atom+xml">
   
@@ -157,52 +175,113 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/" class="archive-article-date">
-  	<time datetime="2017-08-06T15:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/">Locust性能测试工具的安装及使用</a>
+    <h1 class="article-title" itemprop="name">
+      Charles抓取https请求详解
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/06/11/charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3/" class="archive-article-date">
+  	<time datetime="2017-06-11T09:16:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>现在基本大部分网站都使用了https，所以要想抓到https的请求，首要任务是先有工具：charles、fiddler，先介绍下charles针对https请求的抓取方法，此方法兼容windows和mac用户（mac用户方法类似，如果有必要，请关注微信公众号：测试架构师，留言给我。后续我会专门再做整理）。</p>
+<p>1、 windows下安装charles，看到此文章的用户相信都已经安装了charles，如果还真的没安装，麻烦就自行搜索，进行安装了，打开charles（我使用的charles版本是3.11.4），再继续浏览。</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles001.png" alt=""></p>
+<p>2、 ok，charles已准备完成，接下来就要配置charles证书：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles002.jpg" alt=""></p>
+<p>之后会弹出安装证书：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles003.jpg" alt=""></p>
+<p>点击安装，一路下一步，直到提示“导入成功”</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles004.jpg" alt=""></p>
+<p>此时证书还是不被信任的，让不信任变成信任：打开IE浏览器—&gt;工具—&gt;Internet选项—&gt;内容—&gt;证书—&gt;把中级证书颁发机构中的charles证书导出来—&gt;再把导出来的证书导入到受信任的根证书颁发机构中。这样就ok了。</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles005.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles006.jpg" alt=""></p>
+<p>3、 在移动设备上配置手机代理并安装证书</p>
+<p>在手机上设置代理：设置—&gt;无线网络，设置服务器ip和端口号：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles007.jpg" alt=""></p>
+<p>然后，手机安装证书：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles008.jpg" alt=""></p>
+<p>会弹出一个提示框，如下：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles009.jpg" alt=""></p>
+<p>然后手机浏览器输入如上地址：<a href="http://charlesproxy.com/getssl" target="_blank" rel="external">http://charlesproxy.com/getssl</a>会弹出如下页面：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles010.png" alt=""></p>
+<p>点击安装即可，安装完成后就变成已验证，如下：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles011.png" alt=""></p>
+<p>下面以访问百度wap站点为例：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles012.jpg" alt=""></p>
+<p>上图看到，访问百度wap站点还是看不到https的请求数据，下面还需要再继续配置：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles013.jpg" alt=""></p>
+<p>点击SSL Proxying Settings，弹出下面的框，输入Host填写要抓取的ip或域名，port填写443即可。</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles014.jpg" alt=""></p>
+<p>设置完成后，重新方位百度wap站点就可以抓取到https请求了</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles015.jpg" alt=""></p>
+<p>如果以上还没解决，请关注我的微信公众号：测试架构师，后台留言找到我！</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/zfbshoukuan.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/wxshoukuan.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Locust</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">charles</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能测试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">https</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -215,17 +294,112 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/11/charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/06/11/e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          关键对话，带给我的思考
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/06/11/cdn-ef-bc-8c-e4-bd-a0-e4-ba-86-e8-a7-a3-e5-a4-9a-e5-b0-91-ef-bc-9f/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CDN，你了解多少？</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
 
 
           </div>
@@ -252,8 +426,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

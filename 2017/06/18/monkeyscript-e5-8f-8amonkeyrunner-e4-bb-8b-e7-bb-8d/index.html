@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/8 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
+  <title>MonkeyScript及Monkeyrunner介绍 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:url" content="http://yoursite.com/archives/2017/08/index.html">
+  <meta name="description" content="获取app包名：adb logcat |grep START 执行Monkey脚本的命令：adb shell monkey -f &amp;lt;scriptfile&amp;gt; &amp;lt;event-count&amp;gt; 1、Dispatch Trackball命令（轨迹球事件） Dispatch Trackball(long downtime,long eventide,int action,float x,">
+<meta name="keywords" content="monkey,monkeyrunner,monkeyscript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MonkeyScript及Monkeyrunner介绍">
+<meta property="og:url" content="http://yoursite.com/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/index.html">
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta property="og:description" content="获取app包名：adb logcat |grep START 执行Monkey脚本的命令：adb shell monkey -f &amp;lt;scriptfile&amp;gt; &amp;lt;event-count&amp;gt; 1、Dispatch Trackball命令（轨迹球事件） Dispatch Trackball(long downtime,long eventide,int action,float x,">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-08-13T02:47:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta name="twitter:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta name="twitter:title" content="MonkeyScript及Monkeyrunner介绍">
+<meta name="twitter:description" content="获取app包名：adb logcat |grep START 执行Monkey脚本的命令：adb shell monkey -f &amp;lt;scriptfile&amp;gt; &amp;lt;event-count&amp;gt; 1、Dispatch Trackball命令（轨迹球事件） Dispatch Trackball(long downtime,long eventide,int action,float x,">
   
     <link rel="alternative" href="/atom.xml" title="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。" type="application/atom+xml">
   
@@ -157,52 +159,115 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/" class="archive-article-date">
-  	<time datetime="2017-08-06T15:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/">Locust性能测试工具的安装及使用</a>
+    <h1 class="article-title" itemprop="name">
+      MonkeyScript及Monkeyrunner介绍
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/" class="archive-article-date">
+  	<time datetime="2017-06-18T13:02:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>获取app包名：<br>adb logcat |grep START</p>
+<p>执行Monkey脚本的命令：<br>adb shell monkey -f &lt;scriptfile&gt; &lt;event-count&gt;</p>
+<p>1、Dispatch Trackball命令（轨迹球事件）</p>
+<p>Dispatch Trackball(long downtime,long eventide,<span style="color: #ff0000;">int action,float x,float y</span>,float pressure,float size,int metastate,float xprecision,float yprecision,int device,int edgeflags)<br>action 0代表按下，1代表弹起，x和y代表的坐标点</p>
+<p>2、DispatchPointer命令（点击事件）</p>
+<p>DispatchPointer(long downtime,long eventide,<span style="color: #ff0000;">int action,float x,float y</span>,float pressure,float size,int metastate,float xprecision,float yprecision,int device,int edgeflags)<br>action 0代表按下，1代表弹起，x和y代表的坐标点</p>
+<p>3、DispatchString(String text)(输入字符串事件)</p>
+<p>4、LaunchActivity命令（启动应用）</p>
+<p>LaunchActivity(package,Activity)</p>
+<p>5、UserWait命令（等待事件）</p>
+<p>UserWait(1000)</p>
+<p>6、DispatchPress命令（按下键值）</p>
+<p>DispatchPress(int keycode) #keycode 66 回车键</p>
+<p>举例：<br>1、启动app<br>2、点击输入框<br>3、输入查询词<br>4、点击搜索按钮<br>5、等待结果的出现<br>6、点击clear按钮</p>
+<p>#search.script，使用命令adb shell monkey -f search.script 2(注意脚本在电脑上，monkey在手机上跑，需要将脚本push到手机上：adb push serch.script /data/local/tmp;另外，在AndroidManifest.xml中的activity加入android:exported=”true”,最后，可使用sdk自带工具uiautomatorviewer获取坐标点)</p>
+<p><code>typ=user</code><br><code>count=10</code><br><code>speed=1.0</code><br><code>start data &amp;gt;&amp;gt;</code></p>
+<p><code>LaunchActivity(com.android.chrome,com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity)</code><br><code>UserWait(2000)</code><br><code>DispatchPointer(10,10,0,100,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,100,100,1,1,-1,1,1,0,0)</code><br><code>DispatchString(test)</code><br><code>UserWait(1000)</code><br><code>DispatchPress(66)</code><br><code>UserWait(1000)</code><br><code>DispatchPointer(10,10,0,300,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,300,100,1,1,-1,1,1,0,0)</code><br><code>UserWait(6000)</code><br><code>DispatchPointer(10,10,0,400,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,400,100,1,1,-1,1,1,0,0)</code></p>
+<p><strong>MonkeyRunner:</strong><br>1、MonkeyRunner API -alert(警示框)<br>void alert(string message,string title,string okTitle)</p>
+<p>#举例：demo.py 执行使用monkeyrunner demo.py<br><code>#!usr/bin/python</code><br><code>#_*_ UTF-8 _*_</code><br><code>from com.android.monkeyrunner import MonkeyRunner</code><br><code>MonkeyRunner.alert(&#39;Hello TT frends&#39;,&#39;This is title&#39;,&#39;OK&#39;)</code></p>
+<p>2、MonkeyRunner API -waitForConnection(等待设备连接，有多个device id，需要指明具体哪个设备)<br>WaitForConnection(float timeout,string deviceid)</p>
+<p>3、MonkeyDevice API - drag(拖动)<br>drag(tuple start,tuple end,float duration,integer steps)</p>
+<p>4、MonkeyDevice API - press(按键)<br>press(string keycode,dictionary type)<br>keycode名，Down、UP、DOWN_AND_UP</p>
+<p>5、MonkeyDevice API -startActivity(启动应用)<br>startActivity(package+’/‘+activity)</p>
+<p>6、MonkeyDevice API -touch(点击)<br>touch(integer x,integer y,integer type)<br>x坐标值，y坐标值，<br>type：DOWN,UP,DOWN_AND_UP</p>
+<p>7、MonkeyDevice API - type(输入)<br>type(string message)</p>
+<p>8、MonkeyDevice API - takeSnapshot(截屏)<br>MonkeyImage takeSnapshot()</p>
+<p>9、MonkeyImage API - sameAs(图像对比)<br>boolean sameAs(MonkeyImage other,float percent)</p>
+<p>10、MonkeyImage API - writetoFile(保存图像文件)<br>void writeToFile(string path,string format)</p>
+<p>#举例：实现在搜索框中输入查询词，并截图</p>
+<p><code>#!/usr/bin/python</code><br><code>#_*_ UTF-8 _*_</code><br><code>from com.android.monkeyrunner import MonkeyRunner,MonkeyDevice,MonkeyImage</code><br><code>#连接设备</code><br><code>device = MonkeyRunner.waitForConnection(3,&quot;emulator-5554&quot;)</code><br><code>#启动app</code><br><code>device.startActivity(&quot;com.android.chrome/com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity&quot;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击搜索框</code><br><code>device.touch(100,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#输入查询词</code><br><code>device.type(&#39;test&#39;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击回车键</code><br><code>device.press(&#39;KEYCODE_ENTER&#39;,&#39;DOWN_AND_UP&#39;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击搜索按钮</code><br><code>device.touch(400,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(5)</code><br><code>#截图</code><br><code>image = device.takeSnapshot()</code><br><code>image.writeToFile(&#39;./test.png&#39;,&#39;png&#39;)</code><br><code>#点击清除按钮</code><br><code>device.touch(300,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(3)</code></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/zfbshoukuan.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/wxshoukuan.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Locust</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">monkey</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能测试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">monkeyrunner</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">monkeyscript</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -215,17 +280,112 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/06/23/e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          阿里云服务器目录权限问题解决方法
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/06/17/e8-ae-a9-e5-bf-83-e7-9b-ae-e4-b8-ad-e7-9a-84-e5-a4-a7-e8-b1-a1-ef-bc-8c-e6-8a-93-e7-b4-a7-e6-97-b6-e9-97-b4-e8-b5-b7-e9-a3-9e/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">让心目中的大象，抓紧时间起飞</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
 
 
           </div>
@@ -252,8 +412,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

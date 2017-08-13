@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/8 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
+  <title>数据库事务和锁 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:url" content="http://yoursite.com/archives/2017/08/index.html">
+  <meta name="description" content="平常工作中，大家或多或少都听到过或接触过数据库事务和数据库锁，对于还不清楚数据库事务和数据库锁到底是什么的朋友，可以花几分钟时间简单了解下。无论对工作也好，新的一年可能也有朋友考虑要跳槽，也不妨了解下这些概念，不至于一问三不知。也从网上搜集了一些资料，查过维基百科，看过一些博客，觉得整理出来还是有用的，希望对大家也能有所帮助。事务 数据库事务（简称：事务）是数据库管理系统执行过程中的一个逻辑单位，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库事务和锁">
+<meta property="og:url" content="http://yoursite.com/2017/06/11/e6-95-b0-e6-8d-ae-e5-ba-93-e4-ba-8b-e5-8a-a1-e5-92-8c-e9-94-81/index.html">
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta property="og:description" content="平常工作中，大家或多或少都听到过或接触过数据库事务和数据库锁，对于还不清楚数据库事务和数据库锁到底是什么的朋友，可以花几分钟时间简单了解下。无论对工作也好，新的一年可能也有朋友考虑要跳槽，也不妨了解下这些概念，不至于一问三不知。也从网上搜集了一些资料，查过维基百科，看过一些博客，觉得整理出来还是有用的，希望对大家也能有所帮助。事务 数据库事务（简称：事务）是数据库管理系统执行过程中的一个逻辑单位，">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-08-13T02:47:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta name="twitter:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta name="twitter:title" content="数据库事务和锁">
+<meta name="twitter:description" content="平常工作中，大家或多或少都听到过或接触过数据库事务和数据库锁，对于还不清楚数据库事务和数据库锁到底是什么的朋友，可以花几分钟时间简单了解下。无论对工作也好，新的一年可能也有朋友考虑要跳槽，也不妨了解下这些概念，不至于一问三不知。也从网上搜集了一些资料，查过维基百科，看过一些博客，觉得整理出来还是有用的，希望对大家也能有所帮助。事务 数据库事务（简称：事务）是数据库管理系统执行过程中的一个逻辑单位，">
   
     <link rel="alternative" href="/atom.xml" title="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。" type="application/atom+xml">
   
@@ -157,52 +158,104 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-e6-95-b0-e6-8d-ae-e5-ba-93-e4-ba-8b-e5-8a-a1-e5-92-8c-e9-94-81" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/" class="archive-article-date">
-  	<time datetime="2017-08-06T15:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/">Locust性能测试工具的安装及使用</a>
+    <h1 class="article-title" itemprop="name">
+      数据库事务和锁
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Locust</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        <a href="/2017/06/11/e6-95-b0-e6-8d-ae-e5-ba-93-e4-ba-8b-e5-8a-a1-e5-92-8c-e9-94-81/" class="archive-article-date">
+  	<time datetime="2017-06-11T07:23:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>平常工作中，大家或多或少都听到过或接触过数据库事务和数据库锁，对于还不清楚数据库事务和数据库锁到底是什么的朋友，可以花几分钟时间简单了解下。无论对工作也好，新的一年可能也有朋友考虑要跳槽，也不妨了解下这些概念，不至于一问三不知。也从网上搜集了一些资料，查过维基百科，看过一些博客，觉得整理出来还是有用的，希望对大家也能有所帮助。<strong><br>事务
+</strong>数据库事务（简称：事务）是数据库管理系统执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。</p>
+<p>一个数据库事务通常包含了一个序列的对数据库的读/写操作。它的存在包含有以下两个目的：</p>
+<p>1. 为数据库操作序列提供了一个从失败中恢复到正常状态的方法，同时提供了数据库即使在异常状态下仍能保持一致性的方法。</p>
+<p>2. 当多个应用程序在并发访问数据库时，可以在这些应用程序之间提供一个隔离方法，以防止彼此的操作互相干扰。</p>
+<p>&nbsp;</p>
+<p>当事务被提交给了DBMS（数据库管理系统），则DBMS（数据库管理系统）需要确保该事务中的所有操作都成功完成且其结果被永久保存在数据库中，如果事务中有的操作没有成功完成，则事务中的所有操作都需要被回滚，回到事务执行前的状态;同时，该事务对数据库或者其他事务的执行无影响，所有的事务都好像在独立的运行。</p>
+<p>&nbsp;</p>
+<p>但在现实情况下，失败的风险很高。在一个数据库事务的执行过程中，有可能会遇上事务操作失败、数据库系统/操作系统失败，甚至是存储介质失败等情况。这便需要DBMS对一个执行失败的事务执行恢复操作，将其数据库状态恢复到一致状态（数据的一致性得到保证的状态）。为了实现将数据库状态恢复到一致状态的功能，DBMS通常需要维护事务日志以追踪事务中所有影响数据库数据的操作。</p>
+<p>以上为维基百科的描述，使用一个例子来加深下对事务的理解：同一个银行转账，A转1000元给B，这里就会存在两个操作，一个操作是A账户扣款1000元，另一个操作是B账户增加1000元，两者就构成了转账这个事务。如果把两个操作放在一个事务里面，并且是数据库提供的内在事务支持，那就不会有问题，要不全部成功，要不全部不成功。如果两个操作放在两个独立的事务里面，第一个事务处理成功，第二个事务处理失败，就会出现了中间态（A用户的钱扣了，B用户钱没到账），所以事务使用不当也会存在问题。</p>
+<p>并非任意的对数据库的操作序列都是数据库事务。数据库事务拥有以下四个特性，习惯上被称之为ACID特性。</p>
+<ul>
+<li>原子性（Atomicity）：事务作为一个整体被执行，包含在其中的对数据库的操作要么全部被执行，要么都不执行。</li>
+<li>一致性（Consistency）：事务应确保数据库的状态从一个一致状态转变为另一个一致状态。一致状态的含义是数据库中的数据应满足完整性约束。</li>
+<li>隔离性（Isolation）：多个事务并发执行时，一个事务的执行不应影响其他事务的执行。</li>
+<li>持久性（Durability）：已被提交的事务对数据库的修改应该永久保存在数据库中。</li>
+</ul>
+<hr>
+<p><strong>锁</strong></p>
+<p>当并发事务同时访问一个资源时，有可能导致数据不一致，因此需要一种机制来将数据访问顺序化，以保证数据库数据的一致性。锁就是其中的一种机制。</p>
+<p>1、共享锁</p>
+<p>共享锁（S 锁）允许并发事务在封闭式并发控制下读取 (SELECT)资源。资源上存在共享锁（S锁）时，任何其他事务都不能修改数据。读取操作一完成，就立即释放资源上的共享锁（S锁），除非将事务隔离级别设置为可重复读或更高级别，或者在事务持续时间内用锁定提示保留共享锁（S锁）。</p>
+<p>2、更新锁（U锁）</p>
+<p>更新锁是共享锁和排他锁的结合。更新锁意味着在做一个更新时，一个共享锁在扫描完成符合条件的数据后可能会转化成排他锁。</p>
+<p>这里面有两个步骤：</p>
+<p>1) 扫描获取Where条件时，这部分是一个更新查询，此时是一个更新锁。</p>
+<p>2) 如果将执行写入更新。此时该锁升级到排他锁。否则，该锁转变成共享锁。</p>
+<p>更新锁可以防止常见的死锁。</p>
+<p>3、排他锁</p>
+<p>排他锁（X 锁）可以防止并发事务对资源进行访问。排他锁不与其他任何锁兼容。使用排他锁（X锁）时，任何其他事务都无法修改数据；仅在使用 NOLOCK提示或未提交读隔离级别时才会进行读取操作。</p>
+<p>&nbsp;</p>
+<p>悲观锁</p>
+<p>悲观锁是指假设并发更新冲突会发生，所以不管冲突是否真的发生，都会使用锁机制。<br>悲观锁会完成以下功能：锁住读取的记录，防止其它事务读取和更新这些记录。其它事务会一直阻塞，直到这个事务结束.<br>悲观锁是在使用了数据库的事务隔离功能的基础上，独享占用的资源，以此保证读取数据一致性，避免修改丢失。</p>
+<p>悲观锁可以使用Repeatable Read事务，它完全满足悲观锁的要求。</p>
+<p>&nbsp;</p>
+<p>乐观锁</p>
+<p>乐观锁不会锁住任何东西，也就是说，它不依赖数据库的事务机制，乐观锁完全是应用系统层面的东西。</p>
+<p>如果使用乐观锁，那么数据库就必须加版本字段，否则就只能比较所有字段，但因为浮点类型不能比较，所以实际上没有版本字段是不可行的</p>
 
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/zfbshoukuan.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/wxshoukuan.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -215,17 +268,112 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/11/e6-95-b0-e6-8d-ae-e5-ba-93-e4-ba-8b-e5-8a-a1-e5-92-8c-e9-94-81/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/06/11/e5-86-99-e7-bb-99-e6-b5-ae-e8-ba-81-e7-9a-84-e6-b5-8b-e8-af-95-e5-b7-a5-e7-a8-8b-e5-b8-88-e4-b8-80-e5-b0-81-e4-bf-a1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          写给浮躁的测试工程师一封信
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/06/10/123/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">QQ群友在线/离线，如何测试？</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
 
 
           </div>
@@ -252,8 +400,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

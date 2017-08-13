@@ -159,35 +159,75 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/10/hello-world/">Hello World</a>
+      <a class="article-title" href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/">Locust性能测试工具的安装及使用</a>
     </h1>
   
 
         
-        <a href="/2017/08/10/hello-world/" class="archive-article-date">
-  	<time datetime="2017-08-10T12:50:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-10</time>
+        <a href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/" class="archive-article-date">
+  	<time datetime="2017-08-06T15:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p><strong>一、安装Locust</strong></p>
+<p>安装Locust之前先安装的库：<br>gevent库：第三方库，gevent为python提供了比较完善的协程支持。使用gevent,可以获得极高的并发性能。</p>
+<p>pip install gevent==1.1.2</p>
+<p>flask库：Flask是一个使用 Python 编写的轻量级 Web 应用框架。</p>
+<p>pip install flask==0.10.1</p>
+<p>requests库:用python写过接口测试的朋友应该都不陌生，Requests 是用Python语言编写，基于 urllib，采用 Apache2 Licensed 开源协议的 HTTP 库。它比 urllib 更加方便，可以节约我们大量的工作，完全满足 HTTP 测试需求。</p>
+<p>pip install requests==2.10.0</p>
+<p>msgpack-python库:比JSON快10倍的序列化包。</p>
+<p>pip install msgpack-python==0.4.2</p>
+<p>six库：six 提供了一些简单的工具用来封装 Python 2 和 Python 3 之间的差异性。</p>
+<p>pip install six==1.10.0</p>
+<p>pyzmq库：Pyzmq是zeromq的Python绑定。</p>
+<p>pip install pyzmq==15.2.0</p>
+<p>安装库的过程中可能会遇到一些报错信息：<br>ReadTimeoutError: HTTPSConnectionPool(host=’pypi.python.org’, port=443): Read timed out.<br>解决方案：<br>更新pip版本到pip官网下载：<a href="https://pypi.python.org/simple/pip/" target="_blank" rel="external">https://pypi.python.org/simple/pip/</a><br>比如下载pip-9.0.1-py2.py3-none-any.whl<br>pip install pip-9.0.1-py2.py3-none-any.whl<br>如果还报错再执行：<br>pip –default-timeout=100 install -U pip</p>
+<p>其他第三方库都安装完成后，接下来再安装locust：</p>
+<p>pip install locustio</p>
+<p>安装locustio库时可能会报错：<br>error:command ‘gcc’ failed with exit status 1<br>解决方案：yum install gcc python-devel</p>
+<p>安装完成后，执行：locust–help<br>看到如下locust相关命令介绍，说明安装成功。</p>
+<p>Usage: locust [options] [LocustClass [LocustClass2 … ]]</p>
+<p>Options:<br>-h, –help show this help message and exit<br>-H HOST, –host=HOST Host to load test in the following format:<br><a href="http://10.21.32.33" target="_blank" rel="external">http://10.21.32.33</a><br>–web-host=WEB_HOST Host to bind the web interface to. Defaults to ‘’ (all<br>interfaces)<br>-P PORT, –port=PORT, –web-port=PORT<br>Port on which to run web host<br>-f LOCUSTFILE, –locustfile=LOCUSTFILE<br>Python module file to import, e.g. ‘../other.py’.<br>Default: locustfile<br>–master Set locust to run in distributed mode with this<br>process as master<br>–slave Set locust to run in distributed mode with this<br>process as slave<br>–master-host=MASTER_HOST<br>Host or IP address of locust master for distributed<br>load testing. Only used when running with –slave.<br>Defaults to 127.0.0.1.<br>–master-port=MASTER_PORT<br>The port to connect to that is used by the locust<br>master for distributed load testing. Only used when<br>running with –slave. Defaults to 5557. Note that<br>slaves will also connect to the master node on this<br>port + 1.<br>–master-bind-host=MASTER_BIND_HOST<br>Interfaces (hostname, ip) that locust master should<br>bind to. Only used when running with –master.<br>Defaults to * (all available interfaces).<br>–master-bind-port=MASTER_BIND_PORT<br>Port that locust master should bind to. Only used when<br>running with –master. Defaults to 5557. Note that<br>Locust will also use this port + 1, so by default the<br>master node will bind to 5557 and 5558.<br>–no-web Disable the web interface, and instead start running<br>the test immediately. Requires -c and -r to be<br>specified.<br>-c NUM_CLIENTS, –clients=NUM_CLIENTS<br>Number of concurrent clients. Only used together with<br>–no-web<br>-r HATCH_RATE, –hatch-rate=HATCH_RATE<br>The rate per second in which clients are spawned. Only<br>used together with –no-web<br>-n NUM_REQUESTS, –num-request=NUM_REQUESTS<br>Number of requests to perform. Only used together with<br>–no-web<br>-L LOGLEVEL, –loglevel=LOGLEVEL<br>Choose between DEBUG/INFO/WARNING/ERROR/CRITICAL.<br>Default is INFO.<br>–logfile=LOGFILE Path to log file. If not set, log will go to<br>stdout/stderr<br>–print-stats Print stats in the console<br>–only-summary Only print the summary stats<br>-l, –list Show list of possible locust classes and exit<br>–show-task-ratio print table of the locust classes’ task execution<br>ratio<br>–show-task-ratio-json<br>print json data of the locust classes’ task execution<br>ratio<br>-V, –version show program’s version number and exit</p>
+<p><strong>二、使用Locust测试淘宝首页</strong></p>
+<p>#locust_taobao.py</p>
+<p><code>#!/usr/bin/env python</code><br><code>#-*-coding:utf-8-*-</code><br><code>#author:@TT</code></p>
+<p>&nbsp;</p>
+<p><code>from locust import HttpLocust, TaskSet, task</code><br><code>#定义用户行为</code><br><code>class UserBehavior(TaskSet):</code></p>
+<p>&nbsp;</p>
+<p><code>@task</code><br><code>def taobao_page(self): #定义一个方法访问淘宝首页</code><br><code>self.client.get(&quot;/&quot;)</code></p>
+<p>&nbsp;</p>
+<p><code>class WebsiteUser(HttpLocust):</code><br><code>task_set = UserBehavior</code><br><code>min_wait = 3000 #用户等待时间下限</code><br><code>max_wait = 5000 #用户等待时间上限</code></p>
+<p>执行：<br>locust -f locust_taobao.py –host=<a href="https://www.taobao.com" target="_blank" rel="external">https://www.taobao.com</a></p>
+<p>提示：Starting web monitor at *.8089<br>Starting Locust 0.7.5</p>
+<p>说明已经启动成功，浏览器输入：<a href="http://120.76.139.13:8089即可看到设置页面,并监控" target="_blank" rel="external">http://120.76.139.13:8089即可看到设置页面,并监控</a></p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/08/locust01.png" alt=""></p>
+<p>Number of users to simulate：设置需要模拟的用户数量，这次只是为了演示，设置为10；</p>
+<p>Hatch rate：每秒需要启动的用户数量，这次只是为了演示，设置为2；</p>
+<p>点击『start swarming』，开始了性能测试：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/08/locust02.png" alt=""></p>
+<p>&nbsp;</p>
+<p>Type：请求的类型；</p>
+<p>Name：请求的url或者自定义的统计分组名字；</p>
+<p>requests：当前请求的数量；</p>
+<p>fails：当前请求失败的数量；</p>
+<p>Median：中间值，一半的服务器响应时间高于该值，而另一半的服务器响应时间低于该值（毫秒）；</p>
+<p>Average：所有请求的平均响应时间（毫秒）；</p>
+<p>Min：请求最小响应时间（毫秒）；</p>
+<p>Max：请求最大响应时间（毫秒）；</p>
+<p>Content Size：单个请求的大小（字节）；</p>
+<p>reqs/sec：每秒请求的个数；</p>
+<p>今天就先整理到这里，如果按照以上内容操作，对Locust的安装和性能测试的执行有了大概的了解。后续会不断更新……</p>
 
       
 
@@ -196,11 +236,37 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Locust</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/10/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/">展开全文 >></a>
         </p>
       
 
@@ -231,6 +297,959 @@
 
 
   
+    <article id="post-linux-e4-b8-8b-e4-bf-ae-e6-94-b9mysql-e7-9a-84root-e7-94-a8-e6-88-b7-e7-9a-84-e5-af-86-e7-a0-81" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/22/linux-e4-b8-8b-e4-bf-ae-e6-94-b9mysql-e7-9a-84root-e7-94-a8-e6-88-b7-e7-9a-84-e5-af-86-e7-a0-81/">Linux下修改Mysql的root用户的密码</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/22/linux-e4-b8-8b-e4-bf-ae-e6-94-b9mysql-e7-9a-84root-e7-94-a8-e6-88-b7-e7-9a-84-e5-af-86-e7-a0-81/" class="archive-article-date">
+  	<time datetime="2017-07-22T01:55:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span class="s1">首先，你必须要有操作系统的root权限了。要是连系统的root权限都没有的话，先考虑root系统再走下面的步骤。</span></p>
+<p><span class="s1"><strong>mysqld_safe –skip-grant-tables &amp;</strong></span></p>
+<p><span class="s1">&amp;，表示在后台运行，不再后台运行的话，就再打开一个终端咯。</span></p>
+<p><span class="s1"><strong>mysql</strong></span></p>
+<p><span class="s1">mysql&gt; use mysql;</span></p>
+<p><span class="s1">mysql&gt; UPDATE user SET password=password(“test123”) WHERE user=’root’;</span></p>
+<p><span class="s1">mysql&gt; flush privileges;</span></p>
+<p><span class="s1">mysql&gt; exit;</span></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/22/linux-e4-b8-8b-e4-bf-ae-e6-94-b9mysql-e7-9a-84root-e7-94-a8-e6-88-b7-e7-9a-84-e5-af-86-e7-a0-81/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-e6-9c-ac-e5-9c-b0-e6-95-b0-e6-8d-ae-e5-ba-93mysql-e5-ae-89-e8-a3-85-e5-92-8c-e4-bd-bf-e7-94-a8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/02/e6-9c-ac-e5-9c-b0-e6-95-b0-e6-8d-ae-e5-ba-93mysql-e5-ae-89-e8-a3-85-e5-92-8c-e4-bd-bf-e7-94-a8/">本地数据库mysql安装和使用</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/02/e6-9c-ac-e5-9c-b0-e6-95-b0-e6-8d-ae-e5-ba-93mysql-e5-ae-89-e8-a3-85-e5-92-8c-e4-bd-bf-e7-94-a8/" class="archive-article-date">
+  	<time datetime="2017-07-02T14:21:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>mac本地数据库mysql的安装：<br>mysql官方下载链接：<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">https://dev.mysql.com/downloads/mysql/</a><br>下载完并安装成功后，会有个默认的数据库账号密码：<br>root@localhost: waTADIuz0y=w</p>
+<p>安装好mysql服务后，打开『系统偏好设置』，点击MySQL图标,在弹出的框中，点击Start MySQL Server,进行启动(如果启动成功，按钮会变成Stop MySQL Server)</p>
+<p>在Terminal终端登录MySQL，输入：<br>TTZhangdeMacBook-Pro:~ admin$ PATH=”$PATH”:/usr/local/mysql/bin<br>TTZhangdeMacBook-Pro:~ admin$ mysql -u root -p<br>此时，会提示输入密码，输入刚刚默认给出的密码即可</p>
+<p>展示当前数据库下所有的库：<br>mysql&gt; show databases;<br>此时，可能会有报错提示：ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.<br>遇到这种情况，只要输入如下命令重新设置即可解决：<br>mysql&gt; SET PASSWORD = PASSWORD(‘123456’);</p>
+<p>重新执行：show databases; 即可展示出当前数据库下所有的库：</p>
+<p>mysql&gt; show databases;<br>+——————–+<br>| Database |<br>+——————–+<br>| information_schema |<br>| mysql |<br>| performance_schema |<br>| sys |<br>+——————–+<br>4 rows in set (0.00 sec)</p>
+<p>进入某一个库中，如进入sys这个库<br>mysql&gt; use sys;<br>Database changed</p>
+<p>查看sys库下所有的表：<br>mysql&gt; show tables;<br>+———————————————–+<br>| Tables_in_sys |<br>+———————————————–+<br>| host_summary |<br>| host_summary_by_file_io |<br>| host_summary_by_file_io_type |<br>| host_summary_by_stages |<br>| host_summary_by_statement_latency |<br>| host_summary_by_statement_type |<br>| innodb_buffer_stats_by_schema |<br>| innodb_buffer_stats_by_table |<br>| innodb_lock_waits |<br>| io_by_thread_by_latency |<br>| io_global_by_file_by_bytes |<br>| io_global_by_file_by_latency |<br>| io_global_by_wait_by_bytes |<br>| io_global_by_wait_by_latency |<br>| latest_file_io |<br>| memory_by_host_by_current_bytes |<br>| memory_by_thread_by_current_bytes |<br>| memory_by_user_by_current_bytes |<br>| memory_global_by_current_bytes |<br>| memory_global_total |<br>| metrics |<br>| processlist |<br>| ps_check_lost_instrumentation |<br>| schema_auto_increment_columns |<br>| schema_index_statistics |<br>| schema_object_overview |<br>| schema_redundant_indexes |<br>| schema_table_lock_waits |<br>| schema_table_statistics |<br>| schema_table_statistics_with_buffer |<br>| schema_tables_with_full_table_scans |<br>| schema_unused_indexes |<br>| session |<br>| session_ssl_status |<br>| statement_analysis |<br>| statements_with_errors_or_warnings |<br>| statements_with_full_table_scans |<br>| statements_with_runtimes_in_95th_percentile |<br>| statements_with_sorting |<br>| statements_with_temp_tables |<br>| sys_config |<br>| user_summary |<br>| user_summary_by_file_io |<br>| user_summary_by_file_io_type |<br>| user_summary_by_stages |<br>| user_summary_by_statement_latency |<br>| user_summary_by_statement_type |<br>| version |<br>| wait_classes_global_by_avg_latency |<br>| wait_classes_global_by_latency |<br>| waits_by_host_by_latency |<br>| waits_by_user_by_latency |<br>| waits_global_by_latency |<br>| x$host_summary |<br>| x$host_summary_by_file_io |<br>| x$host_summary_by_file_io_type |<br>| x$host_summary_by_stages |<br>| x$host_summary_by_statement_latency |<br>| x$host_summary_by_statement_type |<br>| x$innodb_buffer_stats_by_schema |<br>| x$innodb_buffer_stats_by_table |<br>| x$innodb_lock_waits |<br>| x$io_by_thread_by_latency |<br>| x$io_global_by_file_by_bytes |<br>| x$io_global_by_file_by_latency |<br>| x$io_global_by_wait_by_bytes |<br>| x$io_global_by_wait_by_latency |<br>| x$latest_file_io |<br>| x$memory_by_host_by_current_bytes |<br>| x$memory_by_thread_by_current_bytes |<br>| x$memory_by_user_by_current_bytes |<br>| x$memory_global_by_current_bytes |<br>| x$memory_global_total |<br>| x$processlist |<br>| x$ps_digest_95th_percentile_by_avg_us |<br>| x$ps_digest_avg_latency_distribution |<br>| x$ps_schema_table_statistics_io |<br>| x$schema_flattened_keys |<br>| x$schema_index_statistics |<br>| x$schema_table_lock_waits |<br>| x$schema_table_statistics |<br>| x$schema_table_statistics_with_buffer |<br>| x$schema_tables_with_full_table_scans |<br>| x$session |<br>| x$statement_analysis |<br>| x$statements_with_errors_or_warnings |<br>| x$statements_with_full_table_scans |<br>| x$statements_with_runtimes_in_95th_percentile |<br>| x$statements_with_sorting |<br>| x$statements_with_temp_tables |<br>| x$user_summary |<br>| x$user_summary_by_file_io |<br>| x$user_summary_by_file_io_type |<br>| x$user_summary_by_stages |<br>| x$user_summary_by_statement_latency |<br>| x$user_summary_by_statement_type |<br>| x$wait_classes_global_by_avg_latency |<br>| x$wait_classes_global_by_latency |<br>| x$waits_by_host_by_latency |<br>| x$waits_by_user_by_latency |<br>| x$waits_global_by_latency |<br>+———————————————–+<br>101 rows in set (0.00 sec)</p>
+<p>可以查看其中表中的数据：<br>mysql&gt; select * from host_summary;<br>+———–+————+——————-+———————–+————-+———-+—————–+———————+——————-+————–+—————-+————————+<br>| host | statements | statement_latency | statement_avg_latency | table_scans | file_ios | file_io_latency | current_connections | total_connections | unique_users | current_memory | total_memory_allocated |<br>+———–+————+——————-+———————–+————-+———-+—————–+———————+——————-+————–+—————-+————————+<br>| localhost | 115 | 49.54 ms | 430.78 us | 6 | 54 | 2.73 ms | 1 | 1 | 1 | 0 bytes | 0 bytes |<br>+———–+————+——————-+———————–+————-+———-+—————–+———————+——————-+————–+—————-+————————+<br>1 row in set (0.03 sec)</p>
+<p>如果需要查看MySQL端口号：<br>mysql&gt; show global variables like ‘port’;<br>+—————+——-+<br>| Variable_name | Value |<br>+—————+——-+<br>| port | 3306 |<br>+—————+——-+<br>1 row in set (0.01 sec)</p>
+<p>mysql&gt; CREATE DATABASE guest CHARACTER SET utf8;<br>Query OK, 1 row affected (0.00 sec)</p>
+<p>安装pymysql：<br>sudo pip install pymysql</p>
+<p>给电脑安装一个好用的查看数据库的插件吧，由于我是在mac上使用，所以使用插件：Valentina Studio ,windows上可使用Navicat</p>
+<p>安装PyMySQL：<br>TTZhangdeMacBook-Pro:~ admin$ git clone <a href="https://github.com/PyMySQL/PyMySQL" target="_blank" rel="external">https://github.com/PyMySQL/PyMySQL</a><br>TTZhangdeMacBook-Pro:~ admin$ cd PyMySQL/<br>TTZhangdeMacBook-Pro:PyMySQL admin$ python3 setup.py install</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/02/e6-9c-ac-e5-9c-b0-e6-95-b0-e6-8d-ae-e5-ba-93mysql-e5-ae-89-e8-a3-85-e5-92-8c-e4-bd-bf-e7-94-a8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-pycharm-e5-85-b3-e8-81-94github" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/02/pycharm-e5-85-b3-e8-81-94github/">PyCharm关联GitHub</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/02/pycharm-e5-85-b3-e8-81-94github/" class="archive-article-date">
+  	<time datetime="2017-07-02T13:33:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、terminal中分别输入git及ssh，检查命令是否都有，如果没有自行安装。</p>
+<p>2、在pycharm中设置github账号密码<br>Preferences–&gt;Version Control–&gt;GitHub,<br>需要填写：<br>Host:github.com<br>Login:xxxxx@gmail.com<br>Password：xxxxxx<br>点击test,弹出Success</p>
+<p>3、在Github账号中添加本机Mac的ssh keys<br>在Terminal输入以下命令，生成ssh keys：<br>ssh-keygen -t ras -C xxxx@gmail.com</p>
+<p>cd ~/.ssh</p>
+<p>ls</p>
+<p>ls之后可以看到一个文件id_ras.pub,把其中内容复制出来，登录github网站，settings—&gt;ssh keys新增key，Title随便写，key值为刚刚粘贴的内容。</p>
+<p>4、PyCharm向GitHib更新代码<br>向GitHib创建新的项目，VCS–&gt;Import into Version Control–&gt;Share Project on GitHib</p>
+<p>向GitHib更新提交代码，在PyCharm的工具栏有vcs绿色箭头向下、向上图标，一个update一个commit,或者快捷键command+k</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">PyCharm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/02/pycharm-e5-85-b3-e8-81-94github/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/26/python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c/">Python Django之路与您同行</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/26/python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c/" class="archive-article-date">
+  	<time datetime="2017-06-26T14:14:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近折腾了一个自己的个人博客：87testing.com，这样可以记录自己的学习、工作和生活。主要在这里写下自己的学习笔记、软件测试思考及读书感悟等，后续可能会系统的介绍一些python、django、移动端自动化测试、接口自动化测试、性能测试等。欢迎您的光临！</p>
+<p>要想深入测试，必须了解功能逻辑，对数据流及网站架构比较清楚，这点也说过多次，真的很重要，必须要体现在工作当中，养成习惯，绝对不要对自己测试过的功能模块其中的技术实现不清楚。这样测试路会不好走！！！</p>
+<p>—————————–华丽的分割线—————————-</p>
+<p>今天分享的内容为django，适合初学者，同样也慢慢对网站能够有些了解。以下内容是在mac下操作的(其他系统大同小异)，使用的python自带版本2.7。</p>
+<ul>
+<li><strong>mac下安装pip</strong><br>在终端Terminal里面输入sudo easy_install pip，回车，就开始进行下载安装，网络好的话几秒钟就安装好。</li>
+</ul>
+<p>安装成功后，终端Terminal中直接pip就出出现pip命令的说明信息，说明pip安装成功可以正常使用了。</p>
+<ul>
+<li><strong>安装Django</strong><br>终端Terminal中输入sudo pip install django，等待安装完成，如图：</li>
+</ul>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/wp-content/uploads/2017/06/Django安装.png" alt=""></p>
+<p>使用命令python -m django –version或者pip show django查看django版本信息，如图：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/wp-content/uploads/2017/06/查看django版本信息.png" alt=""></p>
+<ul>
+<li><strong>使用django创建一个项目，项目名称ceshijiagoushi</strong><br>django-admin startproject ceshijiagoushi</li>
+</ul>
+<p>新建好项目以后，使用PyCharm打开，也可以看到目录</p>
+<p>新建好后的目录说明：</p>
+<p><strong>ceshijiagoushi:</strong> 项目的容器。</p>
+<p><strong>manage.py: </strong>一个实用的命令行工具，可让你以各种方式与该 Django 项目进行交互。</p>
+<p><strong>ceshijiagoushi/init.py: </strong>一个空文件，告诉 Python 该目录是一个 Python 包。</p>
+<p><strong>ceshijiagoushi/settings.py: </strong>该 Django 项目的设置/配置。</p>
+<p><strong>ceshijiagoushi/urls.py: </strong>该 Django 项目的 URL 声明; 一份由 Django 驱动的网站”目录”。</p>
+<p><strong>ceshijiagoushi/wsgi.py: </strong>一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目。</p>
+<ul>
+<li><strong>在ceshijiagoushi项目的容器中创建一个testing应用</strong><br>python manage.py startapp testing</li>
+</ul>
+<p>应用创建完成后，运行项目：</p>
+<p>python manage.py runserver</p>
+<p>运行成功并正常启动，如图：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/django项目运行.png" alt=""></p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/django项目运行成功.png" alt=""><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""></p>
+<p>有可能会遇到的问题是8000端口被占用，可以将端口号改为8001，那么在重新启动时指定端口号：</p>
+<p>python manage.py runserver 127.0.0.1:8001</p>
+<p><strong>备注：</strong></p>
+<p>后续可能还会遇到8001端口被占用的提示，那么可以使用命令：</p>
+<p>lsof -i:8001查出端口被哪个程序占用，</p>
+<p>然后把端口对应的进程关掉：kill -9 pid(对应的进程号)</p>
+<ul>
+<li><strong>如果要在此项目的web页面上打印一句话出来，”Hello，ceshijiagoushi！”</strong><br>接下来需要配置几个地方：</li>
+</ul>
+<p>1.将testing应用添加到项目中，ceshijiagoushi/settings.py中新增testing：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/wp-content/uploads/2017/06/setting修改.png" alt=""></p>
+<p>2.ceshijiagoushi/urls.py，导入testing应用views文件、新增index/路径配置：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/wp-content/uploads/2017/06/urls修改.png" alt=""></p>
+<p>3.定义index函数，并通过HttpResponse类向浏览器返回字符串”Hello ceshijiagoushi!”</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/views修改.png" alt=""></p>
+<p>以上都修改完成后，启动项目，浏览器访问127.0.0.1:8001/index/ （在这里我启用了8001的端口）就看到打印结果了：</p>
+<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/printhello.png" alt=""></p>
+<p>通过上面我们已经知道怎么在页面打印出字符串：”Hello ceshijiagoushi!”</p>
+<ul>
+<li><strong>将字符串替换成html页面</strong><br>接下来将字符串替换成html页面，这样就可以不断的对页面进行优化了。</li>
+</ul>
+<p>首先，在testing目录中创建templates目录，然后在templates目录中创建index.html文件。修改下html文件，如图：</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/wp-content/uploads/2017/06/生产templateshtml.png" alt=""></p>
+<p>其次，views.py文件index函数中的HttpResponse类修改为render函数，request请求对象改成index.html</p>
+<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""></p>
+<p>再次访问<a href="http://127.0.0.1:8001/index/，页面就展示的index.html页面的内容了。" target="_blank" rel="external">http://127.0.0.1:8001/index/，页面就展示的index.html页面的内容了。</a></p>
+<p><strong>用户访问到显示html页面django处理得过程如下：</strong></p>
+<p>1. 用户通过浏览器请求一个页面</p>
+<p>2.请求到达Request Middlewares，中间件对request做一些预处理或者直接response请求</p>
+<p>3.URLConf通过urls.py文件和请求的URL找到相应的View</p>
+<p>4.View Middlewares被访问，它同样可以对request做一些处理或者直接返回response</p>
+<p>5.调用View中的函数</p>
+<p>6.View中的方法调用Django的render函数请求index.html，最终返回index.html中的内容。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">django</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/26/python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/23/e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95/">阿里云服务器目录权限问题解决方法</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/23/e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95/" class="archive-article-date">
+  	<time datetime="2017-06-23T05:22:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>刚做好的图片，上传到linux系统上就各种权限问题，很是烦恼，当时就想：哪里有问题~~~</p>
+<div id="js_article" class="rich_media"><br><div class="rich_media_inner"><br><div id="page-content" class="rich_media_area_primary"><br><div id="img-content"><br><div id="js_content" class="rich_media_content "><br><br>虽然这样当时是没有问题的，但是在安全性上是也就降低了，找了个时间找了一些资料，发现一个还比较好的<br><br>服务器上项目是放在/alidata/www/default这个文件夹下<br><br>如果使用root 用户上传项目，则全部默认所有者和组为root，但是我仔细看了一下默认的那几个文件的所有者和组都是www<br><br>根据文档和自己的思考，设置步骤如下：<br><br>1、把网站目录和文件所有者和组都设置为www<br><br><span style="color: #333333; line-height: 21.6px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 14px; background-color: inherit;">     </span><span style="color: black; line-height: 1.6; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; font-size: 16px; white-space: pre-wrap; background-color: inherit;">chown -R www:www /alidata/www/</span><span style="color: #006699; line-height: 1.6; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; font-size: 16px; font-weight: bold; white-space: pre-wrap; background-color: inherit;">default</span><span style="color: black; line-height: 1.6; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; font-size: 16px; white-space: pre-wrap; background-color: inherit;">  </span><br><br><span style="color: #333333; line-height: 21.6px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 14px; background-color: #ffffff;">2.设置网站目录权限为750，750是www这个用户对目录拥有读写执行的权限，这样www用户可以在任何目录下创建文件，用户组有有读执行权限，这样就有进入目录的权限，其它用户没有任何权限。</span><br><br>chmod 750 /alidata/www/default<br><br>cd /alidata/www/default<br><br>find -type d -exec chmod 750 {} \;<br><br><span style="color: #333333; line-height: 21.6px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 14px; background-color: #ffffff;">3.设置网站文件权限为640，640指只有www用户对网站文件有更改的权限，apache服务器只有读取文件的权限，无法更改文件，其它用户无任何权限。</span><br><br>find -not -type d -exec chmod 640 {} \;<br><br>4.需要针对个别目录来设置权限，以Thinkphp为例，它的Runtime 目录存储的有日志文件，还有与数据库做ORM映射的数据库表信息，这说明apache服务器要对这些目录<br><br>有访问的权限，并且对于线面的日志文件有写入的权限，那么这样就需要对于这些特殊目录设置。<br><br>   cd /alidata/www/default<br><br>find . -name “Runtime” -type d -exec chmod -R 770 {} \;<br><br>执行上面的命令请注意 “{}”与 “\”之间是有空格的，上面的-R参数是递归给Runtime 目录下面的目录和文件赋予 770 权限，当然了你会说日志文件是不需要执行权限的，<br><br>不过这里没关系，当你把日志文件删除掉之后，生成出来的文件是没执行权限的。因为当你把日志文件删除掉之后，那么生成日志文件的的用户和所有者都是www<br><br>这样整个站点你就可以通过这种方式管理起来了。文档参考：<a href="http://www.cnblogs.com/stackflow/p/3928407.html" target="_blank" rel="external">http://www.cnblogs.com/stackflow/p/3928407.html</a><br><br>使用过程中发现我用的百度编辑器还不正常，我想起来我的一些外部插件都放在根下public下了，并且上传图片会放到upload下<br><br>所以照葫芦画瓢public下插件和upload750权限，default目录下执行以下命令<br><br>   find . -name “Uploads” -type d -exec chmod -R 770 {} \;<br><br>find . -name “Public” -type d -exec chmod -R 770 {} \;<br><br><span style="color: #333333; line-height: 21.6px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 14px; background-color: #ffffff;">这样就搞定了~~~</span><br><br></div><br></div><br></div><br></div><br></div>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/23/e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/">MonkeyScript及Monkeyrunner介绍</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/" class="archive-article-date">
+  	<time datetime="2017-06-18T13:02:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>获取app包名：<br>adb logcat |grep START</p>
+<p>执行Monkey脚本的命令：<br>adb shell monkey -f &lt;scriptfile&gt; &lt;event-count&gt;</p>
+<p>1、Dispatch Trackball命令（轨迹球事件）</p>
+<p>Dispatch Trackball(long downtime,long eventide,<span style="color: #ff0000;">int action,float x,float y</span>,float pressure,float size,int metastate,float xprecision,float yprecision,int device,int edgeflags)<br>action 0代表按下，1代表弹起，x和y代表的坐标点</p>
+<p>2、DispatchPointer命令（点击事件）</p>
+<p>DispatchPointer(long downtime,long eventide,<span style="color: #ff0000;">int action,float x,float y</span>,float pressure,float size,int metastate,float xprecision,float yprecision,int device,int edgeflags)<br>action 0代表按下，1代表弹起，x和y代表的坐标点</p>
+<p>3、DispatchString(String text)(输入字符串事件)</p>
+<p>4、LaunchActivity命令（启动应用）</p>
+<p>LaunchActivity(package,Activity)</p>
+<p>5、UserWait命令（等待事件）</p>
+<p>UserWait(1000)</p>
+<p>6、DispatchPress命令（按下键值）</p>
+<p>DispatchPress(int keycode) #keycode 66 回车键</p>
+<p>举例：<br>1、启动app<br>2、点击输入框<br>3、输入查询词<br>4、点击搜索按钮<br>5、等待结果的出现<br>6、点击clear按钮</p>
+<p>#search.script，使用命令adb shell monkey -f search.script 2(注意脚本在电脑上，monkey在手机上跑，需要将脚本push到手机上：adb push serch.script /data/local/tmp;另外，在AndroidManifest.xml中的activity加入android:exported=”true”,最后，可使用sdk自带工具uiautomatorviewer获取坐标点)</p>
+<p><code>typ=user</code><br><code>count=10</code><br><code>speed=1.0</code><br><code>start data &amp;gt;&amp;gt;</code></p>
+<p><code>LaunchActivity(com.android.chrome,com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity)</code><br><code>UserWait(2000)</code><br><code>DispatchPointer(10,10,0,100,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,100,100,1,1,-1,1,1,0,0)</code><br><code>DispatchString(test)</code><br><code>UserWait(1000)</code><br><code>DispatchPress(66)</code><br><code>UserWait(1000)</code><br><code>DispatchPointer(10,10,0,300,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,300,100,1,1,-1,1,1,0,0)</code><br><code>UserWait(6000)</code><br><code>DispatchPointer(10,10,0,400,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,400,100,1,1,-1,1,1,0,0)</code></p>
+<p><strong>MonkeyRunner:</strong><br>1、MonkeyRunner API -alert(警示框)<br>void alert(string message,string title,string okTitle)</p>
+<p>#举例：demo.py 执行使用monkeyrunner demo.py<br><code>#!usr/bin/python</code><br><code>#_*_ UTF-8 _*_</code><br><code>from com.android.monkeyrunner import MonkeyRunner</code><br><code>MonkeyRunner.alert(&#39;Hello TT frends&#39;,&#39;This is title&#39;,&#39;OK&#39;)</code></p>
+<p>2、MonkeyRunner API -waitForConnection(等待设备连接，有多个device id，需要指明具体哪个设备)<br>WaitForConnection(float timeout,string deviceid)</p>
+<p>3、MonkeyDevice API - drag(拖动)<br>drag(tuple start,tuple end,float duration,integer steps)</p>
+<p>4、MonkeyDevice API - press(按键)<br>press(string keycode,dictionary type)<br>keycode名，Down、UP、DOWN_AND_UP</p>
+<p>5、MonkeyDevice API -startActivity(启动应用)<br>startActivity(package+’/‘+activity)</p>
+<p>6、MonkeyDevice API -touch(点击)<br>touch(integer x,integer y,integer type)<br>x坐标值，y坐标值，<br>type：DOWN,UP,DOWN_AND_UP</p>
+<p>7、MonkeyDevice API - type(输入)<br>type(string message)</p>
+<p>8、MonkeyDevice API - takeSnapshot(截屏)<br>MonkeyImage takeSnapshot()</p>
+<p>9、MonkeyImage API - sameAs(图像对比)<br>boolean sameAs(MonkeyImage other,float percent)</p>
+<p>10、MonkeyImage API - writetoFile(保存图像文件)<br>void writeToFile(string path,string format)</p>
+<p>#举例：实现在搜索框中输入查询词，并截图</p>
+<p><code>#!/usr/bin/python</code><br><code>#_*_ UTF-8 _*_</code><br><code>from com.android.monkeyrunner import MonkeyRunner,MonkeyDevice,MonkeyImage</code><br><code>#连接设备</code><br><code>device = MonkeyRunner.waitForConnection(3,&quot;emulator-5554&quot;)</code><br><code>#启动app</code><br><code>device.startActivity(&quot;com.android.chrome/com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity&quot;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击搜索框</code><br><code>device.touch(100,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#输入查询词</code><br><code>device.type(&#39;test&#39;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击回车键</code><br><code>device.press(&#39;KEYCODE_ENTER&#39;,&#39;DOWN_AND_UP&#39;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击搜索按钮</code><br><code>device.touch(400,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(5)</code><br><code>#截图</code><br><code>image = device.takeSnapshot()</code><br><code>image.writeToFile(&#39;./test.png&#39;,&#39;png&#39;)</code><br><code>#点击清除按钮</code><br><code>device.touch(300,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(3)</code></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">monkey</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">monkeyrunner</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">monkeyscript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-e8-ae-a9-e5-bf-83-e7-9b-ae-e4-b8-ad-e7-9a-84-e5-a4-a7-e8-b1-a1-ef-bc-8c-e6-8a-93-e7-b4-a7-e6-97-b6-e9-97-b4-e8-b5-b7-e9-a3-9e" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/17/e8-ae-a9-e5-bf-83-e7-9b-ae-e4-b8-ad-e7-9a-84-e5-a4-a7-e8-b1-a1-ef-bc-8c-e6-8a-93-e7-b4-a7-e6-97-b6-e9-97-b4-e8-b5-b7-e9-a3-9e/">让心目中的大象，抓紧时间起飞</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/17/e8-ae-a9-e5-bf-83-e7-9b-ae-e4-b8-ad-e7-9a-84-e5-a4-a7-e8-b1-a1-ef-bc-8c-e6-8a-93-e7-b4-a7-e6-97-b6-e9-97-b4-e8-b5-b7-e9-a3-9e/" class="archive-article-date">
+  	<time datetime="2017-06-17T06:04:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>避开创业陷阱：</strong><br>1、钱太多<br>2、技术控</p>
+<p><strong>创新的几大要诀：</strong><br>1、启航–小团队、创意冲刺、找到适合的投资；<br>2、打造产品–爱产品但别太爱、小心未经验证的想法、重视设计；<br>3、锁定客户–观察客户、倾听客户、不要迷信推荐率；<br>4、内部创新–重视员工的独特想法、从失败中获取洞见；<br>5、高速运转七法宝</p>
+<ul>
+<li>10倍以上改善（做出一个比预期产品好的多的产品）</li>
+<li>创造全新市场（比如摩拜等）</li>
+<li>颠覆现有市场</li>
+<li>抓住网络效应（用户发展用户）</li>
+<li>排他性经销权（市场垄断）</li>
+<li>长期用户（提高客户的转换成本）</li>
+<li>品牌</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/17/e8-ae-a9-e5-bf-83-e7-9b-ae-e4-b8-ad-e7-9a-84-e5-a4-a7-e8-b1-a1-ef-bc-8c-e6-8a-93-e7-b4-a7-e6-97-b6-e9-97-b4-e8-b5-b7-e9-a3-9e/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-e8-af-bb-e3-80-8a-e8-a3-82-e5-8f-98-e5-bc-8f-e5-88-9b-e4-b8-9a-e3-80-8b-e8-bf-99-e6-9c-ac-e4-b9-a6-e7-9a-84-e4-b8-80-e7-82-b9-e6-80-bb-e7-bb-93" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/e8-af-bb-e3-80-8a-e8-a3-82-e5-8f-98-e5-bc-8f-e5-88-9b-e4-b8-9a-e3-80-8b-e8-bf-99-e6-9c-ac-e4-b9-a6-e7-9a-84-e4-b8-80-e7-82-b9-e6-80-bb-e7-bb-93/">读《裂变式创业》这本书的一点总结</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/e8-af-bb-e3-80-8a-e8-a3-82-e5-8f-98-e5-bc-8f-e5-88-9b-e4-b8-9a-e3-80-8b-e8-bf-99-e6-9c-ac-e4-b9-a6-e7-9a-84-e4-b8-80-e7-82-b9-e6-80-bb-e7-bb-93/" class="archive-article-date">
+  	<time datetime="2017-06-11T13:51:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><span style="font-family: arial, helvetica, sans-serif;">互联网大潮汹涌来袭，传统企业增长乏力，互联网公司跨界冲击，转型之路迫在眉睫。虽然自己还未创业，听到宗毅的《裂变式创业》这本书后记录关键点，万一以后要用的上呢 :)</span></p>
+<p><span style="font-family: arial, helvetica, sans-serif;">裂变式创业的好处：</span><br><span style="font-family: arial, helvetica, sans-serif;">1、留住企业里想创业的优秀人才；</span><br><span style="font-family: arial, helvetica, sans-serif;">2、提高员工的工作积极性；</span><br><span style="font-family: arial, helvetica, sans-serif;">3、发掘公司里潜在的优秀员工；</span><br><span style="font-family: arial, helvetica, sans-serif;">4、企业领导者可以腾出时间和精力进行战略设计；</span></p>
+<p><span style="font-family: arial, helvetica, sans-serif;">竞选的好处：</span><br><span style="font-family: arial, helvetica, sans-serif;">1、公司所有员工都可以公平参选；</span><br><span style="font-family: arial, helvetica, sans-serif;">2、竞选胜出者需对公司盈亏负责；</span><br><span style="font-family: arial, helvetica, sans-serif;">3、调动更多的人去发散思维；</span></p>
+<p><span style="font-family: arial, helvetica, sans-serif;">用人民币选举的好处：</span><br><span style="font-family: arial, helvetica, sans-serif;">1、杜绝贿选和拉票；</span><br><span style="font-family: arial, helvetica, sans-serif;">2、选出德才兼备的人才；</span></p>
+<p><span style="font-family: arial, helvetica, sans-serif;">应届毕业生的加入竞选团队的重要性：</span><br><span style="font-family: arial, helvetica, sans-serif;">1、吸引大量优秀人才；</span><br><span style="font-family: arial, helvetica, sans-serif;">2、提供大量耳目一新的想法；</span></p>
+<p><span style="font-family: arial, helvetica, sans-serif;">带着私心做公益的好处：</span><br><span style="font-family: arial, helvetica, sans-serif;">1、提升公司的知名度；</span><br><span style="font-family: arial, helvetica, sans-serif;">2、帮助公司员工快速成长；</span></p>
+<p><span style="font-family: arial, helvetica, sans-serif;">如何管理90后员工：</span><br><span style="font-family: arial, helvetica, sans-serif;">1、让公司“玩起来”；</span><br><span style="font-family: arial, helvetica, sans-serif;">2、完善的晋升机制；</span></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">团队管理</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">创业</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/e8-af-bb-e3-80-8a-e8-a3-82-e5-8f-98-e5-bc-8f-e5-88-9b-e4-b8-9a-e3-80-8b-e8-bf-99-e6-9c-ac-e4-b9-a6-e7-9a-84-e4-b8-80-e7-82-b9-e6-80-bb-e7-bb-93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-e3-80-8e-e5-8d-b1-e6-9c-ba-e9-a2-86-e5-af-bc-e5-8a-9b-e3-80-8f-e5-91-8a-e8-af-89-e6-88-91-e4-bb-ac-e5-a6-82-e4-bd-95-e5-b8-a6-e5-a5-bd-e5-9b-a2-e9-98-9f" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/e3-80-8e-e5-8d-b1-e6-9c-ba-e9-a2-86-e5-af-bc-e5-8a-9b-e3-80-8f-e5-91-8a-e8-af-89-e6-88-91-e4-bb-ac-e5-a6-82-e4-bd-95-e5-b8-a6-e5-a5-bd-e5-9b-a2-e9-98-9f/">『危机领导力』告诉我们如何带好团队</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/e3-80-8e-e5-8d-b1-e6-9c-ba-e9-a2-86-e5-af-bc-e5-8a-9b-e3-80-8f-e5-91-8a-e8-af-89-e6-88-91-e4-bb-ac-e5-a6-82-e4-bd-95-e5-b8-a6-e5-a5-bd-e5-9b-a2-e9-98-9f/" class="archive-article-date">
+  	<time datetime="2017-06-11T09:35:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近一直在忙着年后的团队人员补充，文章更新有所停滞。接下来这篇文章，不管是带团队还是没有带团队，都适合看下。我们每个人在带领团队的过程当中都会遇到挫折，尤其是当你遇到严重的挫折的时候，甚至觉得自己已经绝望了，不知道该怎么把这个团队带出困境的时候，你需要看这样一本书，叫做《危机领导力》。</p>
+<p>&nbsp;</p>
+<p>《危机领导力》不是告诉你去怎样处理危机干预或者是公共危机的发生，而是如何带领你的团队走出困境，这本书的背景是来自一个非常著名的案例，这本书的作者曾今是海军陆战队队员，而且参加过战争，在他战争以后回到了地方成为了一个企业管理的顾问，他研究企业管理有个特别大的特征，他特别喜欢去研究极端的状况,研究了”AFR午夜漫步者”号参加悉尼到霍巴特帆船赛。</p>
+<p>&nbsp;</p>
+<p>悉尼至霍巴特帆船赛被誉为航海界的“巅峰征程”,由于多变的天气与海况，悉尼至霍巴特帆船赛被视作全球最艰难的航海比赛之一。在这项重量级航海赛中，各路英雄争锋角逐。在1998年的比赛中，一共有115艘船、1135名船员冲出起点线，但最后只有44艘船到达了终点。5艘参赛船沉没，7艘被遗弃在海上，25名船员被大浪冲下甲板，55名船员获救,6个经验丰富的船员丧生。救援出动了25架飞机、6艘船，参与者约有1000人，成为澳大利亚史上最大规模的搜救行动。</p>
+<p>&nbsp;</p>
+<p>这场悲剧掩盖了一个不为人知的故事：赛事总冠军“AFR午夜漫步者”号取得的惊人成就。这个团队从刚开始的不被看好到取得冠军，一定尤其独特的要素在里面。一个在风口浪尖上依靠团队合作获得胜利的事迹。所以，作者就跟踪采访了这个团队，并且他后来亲自参加了悉尼至霍巴特帆船赛，然后写出了这本书。是什么让领导者与团队可以在极度恶劣的环境下获得成功？在艰难险阻中要具备什么样的品质、采取什么样的行动才可取得胜利？最后总结出十条团队所应该具备的素质。</p>
+<p>&nbsp;</p>
+<p><strong>一、让团队成为明星</strong></p>
+<p>在”AFR午夜漫步者”号这个团队中，整个团队是一个明星，而不是某一个人的能力特别出众。如何让团队成为明星呢？</p>
+<p>&nbsp;</p>
+<p>1）挑选具有坚定信念的成员</p>
+<p>从一开始挑选队员的时候，就要选择那些坚定信念的队员，这些人参加悉尼至霍巴特帆船赛，都不是为了赚钱，都不是因为你给我巨额的佣金来帮你做这件事，而是我人生当中有一个理想，就是希望我能够跑完这场赛事，如果我能够在这场赛事中能够捧杯，我觉得人生当中会特别的棒，所以在挑人的时候没有用任何金钱的诱惑，他要的都是内心当中充满着动力的想做这件事情。这个给我们做企业、做团队都有很大的启发。要挑选那些具备信念的人，比如互联网公司加班多，愿意吃苦，有冲劲和干劲，愿意付出，老板能不喜欢吗？当然薪资能低了吗？</p>
+<p>2)选择多样性人才，形成互补，相互学习。</p>
+<p>挑选技术人才时也是如此，团队中的每个人都有自己的强项，项目合作过程中形成互补，做好项目的同时，在团队合作中还能相互吸取优点，整个团队及个人能够得到提升。</p>
+<p>3）最小化的等级与地位差别</p>
+<p>人和人之间没有特别强大的落差，没有见到船长说这是老大，并不意味着船长说话不算数。比如李云龙和他的士兵讲起话来没大没小，他的士兵还会经常找他要这要那，他就骂他们，就这么打打闹闹的一群人，李云龙说话肯定是算的，所以在这个团队里面，虽然等级和地位的差别并不大，但是能做到同甘共苦，减少特权。不需要在外在形象上或者办公室的大小上把自己和员工拉的特别的开。不需要穿着一个什么样的名贵的外衣，带着什么样的手表来证明自己的价值，而是我跟大家可以同甘共苦，再比如华为创始人任正非，现在出门还打车，不需要配专车，他就是一个愿意陪战士同甘共苦的领导者。减少地位上等级的差别，人们才更愿意跟你说话，才愿意告诉你真正的坏消息在哪。有人写文章反思三星爆炸的事，就是因为三星里面的等级拉的太开了，没有人敢跟老总汇报坏消息，因为老板看起来像是一个住在宫殿里的神，离的太远不敢接触，所以，要最小化等级和地位的差别。这个对管理者尤其注意，前段时间开会上面大老板抱怨没人去他办公室，从这个角度来说，我觉得应该需要反思，当然，不只是老板反思，对于员工来说也要反思。</p>
+<p>4）追求兄弟情谊</p>
+<p>有些人可能不需要特别多的感情，只需要把活干完就好。当然普通的团队这样做可以，但是如果你的团队面临悉尼到霍巴特这样的帆船比赛，或者面临向碟中谍那样完成的任务的时候，就一定要能够追求兄弟情谊。就是大家相互之间要视对方如生死兄弟，愿意为对方付出，愿意牺牲小我，去成全大我。那么这种兄弟之间的情谊培养是在生活中一点一滴的做出来的。换句话说，这我们的工作中，要相互帮助，不求回报的乐于帮助他人。建立兄弟之间的情谊。</p>
+<p>5）设立最佳贡献奖</p>
+<p>团队设立最能代表团队，付出最多的一个奖项，他们是由船员投票产生的。而作为团队管理来说，也应该适当的设立奖项。比如我们每月都有的项目发布奖（发布项目数及质量排名，进行激励）。</p>
+<p>6）打造外向型团队</p>
+<p>打造外向型团队，并不是组团与外部人对抗，而是如外部团队进行合作。就拿测试团队来说，要和开发、业务、产品等其他团队多沟通、交流，相互学习，从而提高产品质量。让自己的团队成为一个明星团队，而不是个人，这个需要我们思考，我们做到了吗？</p>
+<p>&nbsp;</p>
+<p><strong>二、不给失败留任何借口</strong></p>
+<p>保证准备工作都到位，从而创建一个团队检查清单。他们在准备比赛的时候把煤油炉都擦的干干净净，即使在比赛的过程中也要不停止的准备，当穿行进到一定程度他们会经常开会，会问哪些东西损耗了，下一步该怎么做，对于变化有准备，但同时也要学会灵活应对。其实在我们的工作当中也是如此，不要给失败留任何借口。比如，针对测试人员来说，对于用例的分析、设计要下足功夫，考虑到各种测试场景，前期准备工作要到位。测试过程中难免会有需求的变更，同时，针对变更也要做好充分准备，及时的补充用例。相信，这样会有很好的效果。</p>
+<p>&nbsp;</p>
+<p><strong>三、适度乐观，关注获胜场景</strong></p>
+<p>每个人心中都应该想象获胜的样子和场景。当有小的里程碑的时候就要不断的表扬大家，我们这个小目标已经达成。领导者要展现出积极乐观的态度。其实，在我们的工作中，可能也会存在有些领导就算发生了很多好事，他的眼睛也只关注我们做的不好的地方，说那个没做好，咱们一定要好好总结，当然做的不好的地方是要去不断的总结和后期的规避，但是一定要关注获胜的部分。每个人都需要他人的鼓励。</p>
+<p>&nbsp;</p>
+<p><strong>四、学习和创新的”工合”文化</strong></p>
+<p>一方面要能够战斗，另一方面要能够合作。人和人之间要有竞争和战斗的关系，同时他们也有着充分的合作关系。和其他船之间有着竞争关系也有合作关系，在这样的团队才有着不断的创新，竞争会带来创新，有问题大家都可以说公开激励的讨论，没有报复，没有打击，没有怀恨在心。比如，开发团队和测试团队在项目合作过程中肯定会存在各种问题，定期的去讨论团队中存在的问题，相互改进和提高。最终达到更好配合的目的。</p>
+<p>&nbsp;</p>
+<p><strong>五、学会评估风险，愿意驶进风暴</strong></p>
+<p>如果你不愿意驶进风暴，你就不可能得到冠军，就像做公司时，不愿遇到那些麻烦的事，那就只能做一个普通的公司。只有你愿意去挑战一个新型的市场能不能做起来的时候，你敢于冲进去，这就意味着你敢于驶入风暴。驶入风暴的前提是要做好充分的预估，要在船还没有出发之前，对所有的人进行评判，进行能力极限的测试。所以，他们是进行了很多次实验的测试，船长清楚的知道每一个人能力的极限，清楚的知道船所承载能力的极限。</p>
+<p>&nbsp;</p>
+<p><strong>六、保持联络</strong></p>
+<p>每次大浪来的时候，他们会敲船甲板，让底下的人知道大浪要来了，为什么这个事很重要，我们要知道团队当中不是所有人都能看到大浪的，我们在管理团队的时候也是一样，不是所有人看到的信息和老板都是一样的，但是老板不警告所有的人，老板如果不把这些信息分享给所有的人，这些人就会觉得自己被扔在一边，而那些在船舱里面的人为什么要知道大浪一定会来呢，因为他们要抓住身边固定的东西，避免在船舱里面受伤。所以，保持联络是一个团队在危机的时候依然非常重要的一件事情。</p>
+<p>&nbsp;</p>
+<p><strong>七、填补空缺，共同掌舵</strong></p>
+<p>掌舵的人驾着帆船一天一夜都没有睡觉，这时候所有的人都认为他应该休息了，但是他坚持不休息，他觉得自己没问题，这个时候他的弟弟就出来，强制的把他扔到舱里让他去休息，然后他弟弟来掌舵。掌舵对于整个团队来说很重要，团队中要有能即使填补掌舵的空缺的成员。做团队一定要有自动补缺的意识。同时，掌舵的人愿意换成弟弟去掌舵，来自于对弟弟的信任，领导也要学会放手，如果领导永远不放手的话，这个团队想替补都替补不上来。</p>
+<p>&nbsp;</p>
+<p><strong>八、正视问题</strong></p>
+<p>在这个过程中不可能永远都是一帆风顺的，不可能永远都没有争执的，当出现了问题后有一个最重要原则叫解决而不是抱怨。在工作当中，难免会有争执，解决问题是第一位，要正视能力差别，团队中允许有能力高低，但是大家要正视这件事，我们不能够假装没有这样的差别，因为我们的目的是为了做事，而不是为了照顾大家的情绪。实际工作中，我们可能也会遇到，每个人所做的任务不同，项目不同，难度不同，要坦然面对，正视能力，想办法提高自己。</p>
+<p>&nbsp;</p>
+<p><strong>九、适应力要强</strong></p>
+<p>考验一个团队是否是最重要团队，最主要一个指标是从挫折当中恢复的速度。顶尖的团队也是一样的，发生问题是正常的，问题发生以后能够快速的恢复过来才是最重要的。有多快的速度反弹，是衡量一个团队卓越程度的指标。</p>
+<p>&nbsp;</p>
+<p><strong>十、永不放弃，总会有出路</strong></p>
+<p>他们做的最坏的打算，实在不行了就朝海岸边开，但是不到最后一刻，他们是不会下这个决定的。只要你的目标方向在哪，就永远的一直寻找目标的方案，总有一刻会找到。工作和学习中，也是一样，只要永不放弃，你的工作会很出色，你想学习的东西就一定能达到你当初的目的。</p>
+<p>&nbsp;</p>
+<p>实在的工作中，自己的团队，或者自己所带领的团队，是否可以利用这十个方法，调整我们团队之间的关系，然后，把我们的团队打造成一个能够应对危机走出困境的高质量的团队。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">团队管理</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/e3-80-8e-e5-8d-b1-e6-9c-ba-e9-a2-86-e5-af-bc-e5-8a-9b-e3-80-8f-e5-91-8a-e8-af-89-e6-88-91-e4-bb-ac-e5-a6-82-e4-bd-95-e5-b8-a6-e5-a5-bd-e5-9b-a2-e9-98-9f/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -326,6 +1345,86 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CDN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">charles</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">关键对话</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">职场沟通</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">创业</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">monkey</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">monkeyrunner</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">monkeyscript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">django</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Locust</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
