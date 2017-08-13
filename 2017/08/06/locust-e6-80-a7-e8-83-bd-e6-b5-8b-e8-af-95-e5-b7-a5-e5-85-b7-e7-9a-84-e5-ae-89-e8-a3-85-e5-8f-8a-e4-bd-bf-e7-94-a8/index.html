@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/08/locust01.png">
 <meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/08/locust02.png">
-<meta property="og:updated_time" content="2017-08-13T02:47:14.000Z">
+<meta property="og:updated_time" content="2017-08-13T07:40:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Locust性能测试工具的安装及使用">
 <meta name="twitter:description" content="一、安装Locust 安装Locust之前先安装的库：gevent库：第三方库，gevent为python提供了比较完善的协程支持。使用gevent,可以获得极高的并发性能。 pip install gevent==1.1.2 flask库：Flask是一个使用 Python 编写的轻量级 Web 应用框架。 pip install flask==0.10.1 requests库:用python写">
@@ -195,6 +195,7 @@
 <p>pip install six==1.10.0</p>
 <p>pyzmq库：Pyzmq是zeromq的Python绑定。</p>
 <p>pip install pyzmq==15.2.0</p>
+<a id="more"></a>
 <p>安装库的过程中可能会遇到一些报错信息：<br>ReadTimeoutError: HTTPSConnectionPool(host=’pypi.python.org’, port=443): Read timed out.<br>解决方案：<br>更新pip版本到pip官网下载：<a href="https://pypi.python.org/simple/pip/" target="_blank" rel="external">https://pypi.python.org/simple/pip/</a><br>比如下载pip-9.0.1-py2.py3-none-any.whl<br>pip install pip-9.0.1-py2.py3-none-any.whl<br>如果还报错再执行：<br>pip –default-timeout=100 install -U pip</p>
 <p>其他第三方库都安装完成后，接下来再安装locust：</p>
 <p>pip install locustio</p>
