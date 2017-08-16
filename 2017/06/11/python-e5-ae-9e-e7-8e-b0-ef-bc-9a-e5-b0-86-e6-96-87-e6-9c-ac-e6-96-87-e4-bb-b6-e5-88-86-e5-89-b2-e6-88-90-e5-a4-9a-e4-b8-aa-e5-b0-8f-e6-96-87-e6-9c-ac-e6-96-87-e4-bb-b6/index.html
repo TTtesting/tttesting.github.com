@@ -16,18 +16,18 @@
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
 <meta property="og:description" content="前两天有个朋友说，想实现一个文本文件按照固定行数进行分割成多个文本文件，却不知如何实现。如果数据量小手动分割下就好了，如果数据量很大的话手动完成实在太耗费人力了，也不现实。那么就需要借助脚本去实现。既然有朋友想简单的完成这个任务，那么不如记录下来，给需要的朋友提供方便。 &amp;nbsp; 下面我就使用python进行脚本的实现和操作，当然用其他语言都能实现，大家可根据对语言的熟悉程度进行自主选择，如果">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/fenge1.jpeg">
-<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/fenge2.jpeg">
-<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/fenge3.jpeg">
-<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/fenge4.jpeg">
-<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/fenge5.jpeg">
-<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/fenge6.jpeg">
-<meta property="og:image" content="http://www.87testing.com/wp-content/uploads/2017/06/fenge7.jpeg">
-<meta property="og:updated_time" content="2017-08-13T02:47:14.000Z">
+<meta property="og:image" content="http://www.87testing.com/assets/blogimg/fenge1.png">
+<meta property="og:image" content="http://www.87testing.com/assets/blogimg/fenge2.png">
+<meta property="og:image" content="http://www.87testing.com/assets/blogimg/fenge3.png">
+<meta property="og:image" content="http://www.87testing.com/assets/blogimg/fenge4.png">
+<meta property="og:image" content="http://www.87testing.com/assets/blogimg/fenge5.png">
+<meta property="og:image" content="http://www.87testing.com/assets/blogimg/fenge6.png">
+<meta property="og:image" content="http://www.87testing.com/assets/blogimg/fenge7.png">
+<meta property="og:updated_time" content="2017-08-16T03:13:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python实现：将文本文件分割成多个小文本文件">
 <meta name="twitter:description" content="前两天有个朋友说，想实现一个文本文件按照固定行数进行分割成多个文本文件，却不知如何实现。如果数据量小手动分割下就好了，如果数据量很大的话手动完成实在太耗费人力了，也不现实。那么就需要借助脚本去实现。既然有朋友想简单的完成这个任务，那么不如记录下来，给需要的朋友提供方便。 &amp;nbsp; 下面我就使用python进行脚本的实现和操作，当然用其他语言都能实现，大家可根据对语言的熟悉程度进行自主选择，如果">
-<meta name="twitter:image" content="http://www.87testing.com/wp-content/uploads/2017/06/fenge1.jpeg">
+<meta name="twitter:image" content="http://www.87testing.com/assets/blogimg/fenge1.png">
   
     <link rel="alternative" href="/atom.xml" title="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。" type="application/atom+xml">
   
@@ -179,23 +179,23 @@
 <p>&nbsp;</p>
 <p>下面我就使用python进行脚本的实现和操作，当然用其他语言都能实现，大家可根据对语言的熟悉程度进行自主选择，如果有朋友还没有达到编写代码的能力的话，那么最起码对语言环境的使用要会，只要达到这些，就可以完成如下工作。演示如下：</p>
 <p>比如我们要对A.txt文件进行分割，按照5行一分割，分割成多个txt文件。</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge1.jpeg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge1.png" alt=""></p>
 <p>&nbsp;</p>
 <p>A.txt文件为要分割的测试数据，我创建了21条数据，如下：</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge2.jpeg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge2.png" alt=""></p>
 <p>&nbsp;</p>
 <p>每五行一分割的话就是5个txt文件，下面为实现的python脚本：split.py</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge3.jpeg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge3.png" alt=""></p>
 <p>&nbsp;</p>
 <p>执行脚本：python split.py</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge4.jpeg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge4.png" alt=""></p>
 <p>&nbsp;</p>
 <p>查看执行结果:</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge5.jpeg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge5.png" alt=""></p>
 <p>&nbsp;</p>
 <p>再看下0.txt和4.txt的内容：</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge6.jpeg" alt=""></p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/fenge7.jpeg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge6.png" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge7.png" alt=""></p>
 <p>就这样21条数据就被分割成了5个文本文件，同样数据量大的情况下，只需要修改脚本中的LIMIT（一个txt文件要分割的条数），当然文件格式不仅限于txt，csv等都可以，有兴趣的朋友不妨试试看。</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -491,10 +491,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">关键对话</a>
               </li>
              
@@ -503,11 +499,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">创业</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Locust</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,18 +532,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">monkeyscript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Locust</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
               </li>
              
               <li class="article-tag-list-item">

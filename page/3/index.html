@@ -485,35 +485,35 @@
       
         <p>现在基本大部分网站都使用了https，所以要想抓到https的请求，首要任务是先有工具：charles、fiddler，先介绍下charles针对https请求的抓取方法，此方法兼容windows和mac用户（mac用户方法类似，如果有必要，请关注微信公众号：测试架构师，留言给我。后续我会专门再做整理）。</p>
 <p>1、 windows下安装charles，看到此文章的用户相信都已经安装了charles，如果还真的没安装，麻烦就自行搜索，进行安装了，打开charles（我使用的charles版本是3.11.4），再继续浏览。</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles001.png" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles001.png" alt=""></p>
 <p>2、 ok，charles已准备完成，接下来就要配置charles证书：</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles002.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles002.jpg" alt=""></p>
 <p>之后会弹出安装证书：</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles003.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles003.jpg" alt=""></p>
 <p>点击安装，一路下一步，直到提示“导入成功”</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles004.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles004.jpg" alt=""></p>
 <p>此时证书还是不被信任的，让不信任变成信任：打开IE浏览器—&gt;工具—&gt;Internet选项—&gt;内容—&gt;证书—&gt;把中级证书颁发机构中的charles证书导出来—&gt;再把导出来的证书导入到受信任的根证书颁发机构中。这样就ok了。</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles005.jpg" alt=""></p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles006.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles005.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles006.jpg" alt=""></p>
 <p>3、 在移动设备上配置手机代理并安装证书</p>
 <p>在手机上设置代理：设置—&gt;无线网络，设置服务器ip和端口号：</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles007.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles007.jpg" alt=""></p>
 <p>然后，手机安装证书：</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles008.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles008.jpg" alt=""></p>
 <p>会弹出一个提示框，如下：</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles009.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles009.jpg" alt=""></p>
 <p>然后手机浏览器输入如上地址：<a href="http://charlesproxy.com/getssl" target="_blank" rel="external">http://charlesproxy.com/getssl</a>会弹出如下页面：</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles010.png" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles010.png" alt=""></p>
 <p>点击安装即可，安装完成后就变成已验证，如下：</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles011.png" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles011.png" alt=""></p>
 <p>下面以访问百度wap站点为例：</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles012.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles012.jpg" alt=""></p>
 <p>上图看到，访问百度wap站点还是看不到https的请求数据，下面还需要再继续配置：</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles013.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles013.jpg" alt=""></p>
 <p>点击SSL Proxying Settings，弹出下面的框，输入Host填写要抓取的ip或域名，port填写443即可。</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles014.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles014.jpg" alt=""></p>
 <p>设置完成后，重新方位百度wap站点就可以抓取到https请求了</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/charles015.jpg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/charles015.jpg" alt=""></p>
 <p>如果以上还没解决，请关注我的微信公众号：测试架构师，后台留言找到我！</p>
 
       
@@ -618,13 +618,13 @@
 <p><strong>二、CDN工作流程</strong></p>
 <p>&nbsp;</p>
 <p>用户访问未使用CDN缓存网站的过程为：</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/cdn1.jpeg" alt=""><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkJDQzA1MTVGNkE2MjExRTRBRjEzODVCM0Q0NEVFMjFBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkJDQzA1MTYwNkE2MjExRTRBRjEzODVCM0Q0NEVFMjFBIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QkNDMDUxNUQ2QTYyMTFFNEFGMTM4NUIzRDQ0RUUyMUEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QkNDMDUxNUU2QTYyMTFFNEFGMTM4NUIzRDQ0RUUyMUEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6p+a6fAAAAD0lEQVR42mJ89/Y1QIABAAWXAsgVS/hWAAAAAElFTkSuQmCC" alt=""></p>
+<p><img src="http://www.87testing.com/assets/imgblog/cdn1.png" alt=""><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkJDQzA1MTVGNkE2MjExRTRBRjEzODVCM0Q0NEVFMjFBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkJDQzA1MTYwNkE2MjExRTRBRjEzODVCM0Q0NEVFMjFBIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QkNDMDUxNUQ2QTYyMTFFNEFGMTM4NUIzRDQ0RUUyMUEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QkNDMDUxNUU2QTYyMTFFNEFGMTM4NUIzRDQ0RUUyMUEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6p+a6fAAAAD0lEQVR42mJ89/Y1QIABAAWXAsgVS/hWAAAAAElFTkSuQmCC" alt=""></p>
 <p>用户在浏览网站的时候，浏览器能够在本地保存网站中的图片或者资源文件，这样用户再次访问该网站的时候，浏览器就不用再下载全部的资源文件，减少了下载量意味着提高了页面加载的速度。</p>
 <p>&nbsp;</p>
 <p>CDN网络是在用户和服务器之间增加Cache层，主要是通过接管DNS实现,将用户的请求引导到Cache上获得源服务器的数据</p>
 <p>下面让我们看看访问使用CDN缓存后的网站的过程：</p>
 <p>&nbsp;</p>
-<p><img src="http://www.87testing.com/wp-content/uploads/2017/06/cdn2.jpeg" alt=""></p>
+<p><img src="http://www.87testing.com/assets/imgblog/cdn2.png" alt=""></p>
 <p>一般来说CDN节点会包括nginx和cache两部分，nginx作负载均衡，cache作为缓存，用户请求到CDN节点后，如果cache中没有缓存用户的内容（包括真的没有或者是过期时间到了），这时候CDN节点会去源站去请求用户所需的资源，拿到数据后CDN节点会做两件事情，把数据返回给用户，并且把数据缓存在cache，这样同样的请求就可以从cache取，不需要回源了。另外你要注意，当前的CDN不会让源站来推送数据的，都是第一次去源站取，采用拉数据的方式。</p>
 <p>&nbsp;</p>
 <p>对于测试人员，需要确认下网站所加载的图片等资源是否都走了CDN，看下是否为CDN域名地址，网站提速不可缺少的一部分。</p>
@@ -904,10 +904,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">关键对话</a>
               </li>
              
@@ -916,11 +912,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">创业</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Locust</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -933,18 +945,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">monkeyscript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Locust</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
               </li>
              
               <li class="article-tag-list-item">
