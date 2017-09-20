@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://youxitest.com">
-  <title>Archives: 2017 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
+  <title>测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:type" content="website">
+  <meta name="description" content="最近确实也有些忙，原来都是利用周末的时间写东西，现在周末的时间被占满，照顾小孩。只能忙中找空，写点东西。    最近正好使用ab性能测试工具测了一个项目，主要用来做并发测试，需求是控制水军用户的并发数，通过nginx配置控制并发量（针对异常ip–双ip），所以为了能够快速上线，就选择了ab工具。觉得ab工具多多少少还是可以快速的运用到工作当中，所以有必要写出来分享给需要的同行。主要介绍下使">
+<meta property="og:type" content="article">
 <meta property="og:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:url" content="http://youxitest.com/archives/2017/page/3/index.html">
+<meta property="og:url" content="http://youxitest.com/2017/09/20/apache-ab/index.html">
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta property="og:description" content="最近确实也有些忙，原来都是利用周末的时间写东西，现在周末的时间被占满，照顾小孩。只能忙中找空，写点东西。    最近正好使用ab性能测试工具测了一个项目，主要用来做并发测试，需求是控制水军用户的并发数，通过nginx配置控制并发量（针对异常ip–双ip），所以为了能够快速上线，就选择了ab工具。觉得ab工具多多少少还是可以快速的运用到工作当中，所以有必要写出来分享给需要的同行。主要介绍下使">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-20T14:58:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta name="twitter:description" content="聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
+<meta name="twitter:description" content="最近确实也有些忙，原来都是利用周末的时间写东西，现在周末的时间被占满，照顾小孩。只能忙中找空，写点东西。    最近正好使用ab性能测试工具测了一个项目，主要用来做并发测试，需求是控制水军用户的并发数，通过nginx配置控制并发量（针对异常ip–双ip），所以为了能够快速上线，就选择了ab工具。觉得ab工具多多少少还是可以快速的运用到工作当中，所以有必要写出来分享给需要的同行。主要介绍下使">
   
     <link rel="alternative" href="/atom.xml" title="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。" type="application/atom+xml">
   
@@ -145,272 +146,186 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-apache-ab" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p style="line-height: 2em;"><br>    <span style="font-family: helvetica, arial, freesans, clean, sans-serif; font-size: 13.34px; background-color: rgb(248, 248, 248);">最近确实也有些忙，原来都是利用周末的时间写东西，现在周末的时间被占满，照顾小孩。只能忙中找空，写点东西。</span><br></p><br><p style="line-height: 2em;"><br>    <span style="font-family: helvetica, arial, freesans, clean, sans-serif; font-size: 13.34px; background-color: rgb(248, 248, 248);">最近正好使用ab性能测试工具测了一个项目，主要用来做并发测试，需求是控制水军用户的并发数，通过nginx配置控制并发量（针对异常ip–双ip），所以为了能够快速上线，就选择了ab工具。觉得ab工具多多少少还是可以快速的运用到工作当中，所以有必要写出来分享给需要的同行。主要介绍下使用ab工具并发发送get和post请求，比如日常工具中做并发测试可以使用（针对活动等相关库存的并发测试）</span><br></p>
+
+<p>###linux下安装ab性能测试工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install httpd-tools</div></pre></td></tr></table></figure></p>
+<p>安装完成后，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 100 -c 30 http://m.1768.com/?act=index&amp;st=login</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>######备注：<br></p>
+<font color="#0A0A0A" size="2">2.2.2.2为模拟的ip</font>
+
+</blockquote>
+<p>查看nginx访问日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">m.1768.com 21.58.201.31 - - [18/Sep/2017:18:57:43 +0800] &quot;GET /?act=index&amp;st=login HTTP/1.0&quot; 200 266 &quot;-&quot; &quot;ApacheBench/2.3&quot; 2.2.2.2,47.94.13.33</div></pre></td></tr></table></figure></p>
+<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">[root@iZ9q9Z /]# ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 100 -c 30 http://m.1768.com/?</div><div class="line">act=index&amp;st=login</div><div class="line">[1] 4515</div><div class="line">[root@iZ9otb9Z /]# This is ApacheBench, Version 2.3 &lt;$Revision: 1430300 $&gt;</div><div class="line">Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/</div><div class="line">Licensed to The Apache Software Foundation, http://www.apache.org/</div><div class="line"></div><div class="line">Benchmarking 10test7-admin.stg3.1768.com (be patient).....done</div><div class="line"></div><div class="line"></div><div class="line">Server Software:        nginx</div><div class="line">Server Hostname:        m.1768.com</div><div class="line">Server Port:            80</div><div class="line"></div><div class="line">Document Path:          /?act=index    #请求的资源</div><div class="line">Document Length:        0 bytes     #文档返回的长度，不包括相应的头</div><div class="line"></div><div class="line">Concurrency Level:      30          #并发数</div><div class="line">Time taken for tests:   0.609 seconds   #总请求时长</div><div class="line">Complete requests:      100            #总请求数</div><div class="line">Failed requests:        0           #失败的请求数</div><div class="line">Write errors:           0          #错误</div><div class="line">Non-2xx responses:      100</div><div class="line">Total transferred:      45900 bytes   #总共传输数据量 </div><div class="line">HTML transferred:       0 bytes</div><div class="line">Requests per second:    164.18 [#/sec] (mean)   #平均每秒的请求数，重要指标：相当于LR中的每秒事务数，后面的括号中mean表示这是一个平均值</div><div class="line">Time per request:       182.725 [ms] (mean)    #平均每个请求消耗的时间，重要指标：LR中的平均事务响应时间</div><div class="line">Time per request:       6.091 [ms] (mean, across all concurrent requests)   #上面的请求除以并发数，即服务器平均请求响应时间 在并发量为1时 用户等待时间相同  </div><div class="line">Transfer rate:          73.59 [Kbytes/sec] received   #平均每秒多少K，即传输速率</div><div class="line"></div><div class="line">Connection Times (ms)</div><div class="line">              min  mean[+/-sd] median   max</div><div class="line">Connect:       28   32   1.7     32      36</div><div class="line">Processing:    70  106  25.5    100     169</div><div class="line">Waiting:       70  106  25.5    100     169</div><div class="line">Total:        100  138  25.7    134     202</div><div class="line"></div><div class="line">Percentage of the requests served within a certain time (ms)</div><div class="line">  50%    134        #50%的请求都在134ms内完成</div><div class="line">  66%    143</div><div class="line">  75%    153</div><div class="line">  80%    163</div><div class="line">  90%    180</div><div class="line">  95%    188</div><div class="line">  98%    193</div><div class="line">  99%    202</div><div class="line"> 100%    202 (longest request)</div></pre></td></tr></table></figure></p>
+<p>具体每个参数的含义可以参考如下地址，里面有很详细的介绍。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://www.jb51.net/article/59469.htm</div></pre></td></tr></table></figure></p>
+<p>##举例</p>
+<hr>
+<p>###get请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 100 -c 10 -C &quot;Cookie: appId=3793; track_u_3793=CS1111QXZ591F5C6066AACC1B57273B8; popbeforelogin=aToxOw%3D%3D; Hm_lvt_a52c9eb6cde4f51aa1212ed955bc723c=1504493440,1504503826,1504580247,1505092652; Hm_lpvt_a52c9eb6cde4f51aa1212ed955bc723c=1505121635; YOUXISID=88811fde2b2d2648ae4b4ddefa7da6f28530cb2a; is_visitor=0; point_games_flag_v9_game_circus_5252037600830=2037600830; exchangeReturnUrl=%2F%3Fact%3Dgame_collection; ucenter=newucenter; newucenter_nologout=1; tExchangeBackUrl=newucenter; PHPSESSID=5vqp5j4knn6mldjqt2fovc3ad5; track_u_3783=37yoo; track_u=37yoo; point_games_flag_v9_pinballwap_5252037600830=2037600830; gameHistoryRecord=a%3A3%3A%7Bi%3A0%3Bi%3A3697%3Bi%3A1%3Bi%3A3783%3Bi%3A2%3Bi%3A3793%3B%7D; tExchangeBacToGame=%2F%3Fact%3Dpinballwap; loginReturnUrl=%2F%3Fact%3Dpinballwap%26track_u%3D37yoo; Hm_lvt_be49684f9d9c2de3c96227f9e25c261b=1503630548,1505359432; Hm_lpvt_be49684f9d9c2de3c96227f9e25c261b=1505375090; Hm_lvt_70e5a3dba732ce8be082655aff6ff1e6=1503455932,1504839932,1505186995; Hm_lpvt_70e5a3dba732ce8be082655aff6ff1e6=1505375091&quot; &quot;http://m.1768.com/?act=pinballwap&amp;act=pinballwap&amp;st=play_once&amp;amount=500&amp;newer=1&amp;rndnum=599719&quot;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>######备注：<br>1.cookie内容一定要加个双引号；<br><br>2.请求url加双引号；</p>
+</blockquote>
+<hr>
+<p>###post请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 1000 -c 100 -C &quot;Cookie: appId=3793; track_u_3793=CS1111QXZ591F5C6066AACC1B57273B8; popbeforelogin=aToxOw%3D%3D; track_u_3783=37yoo; YOUXISID=14fe43e78bd2e7e41934ac8e9fc809ed881af5fd; is_visitor=0; exchangeReturnUrl=%2F%3Fact%3Dgame_collection; track_u=37yoo; ucenter=newucenter; newucenter_nologout=1; tExchangeBackUrl=newucenter; point_games_flag_v9_game_circus_5252037600830=2037600830; PHPSESSID=5vqp5j4knn6mldjqt2fovc3ad5; gameHistoryRecord=a%3A3%3A%7Bi%3A0%3Bi%3A3783%3Bi%3A1%3Bi%3A3697%3Bi%3A2%3Bi%3A3793%3B%7D; tExchangeBacToGame=%2F%3Fact%3Dgame_circus; loginReturnUrl=%2F%3Fact%3Dgame_circus; Hm_lvt_be49684f9d9c2de3c96227f9e25c261b=1503630548,1505359432; Hm_lpvt_be49684f9d9c2de3c96227f9e25c261b=1505469850; Hm_lvt_70e5a3dba732ce8be082655aff6ff1e6=1503455932,1504839932,1505186995; Hm_lpvt_70e5a3dba732ce8be082655aff6ff1e6=1505469852&quot; -p /root/circus.txt -T application/x-www-form-urlencoded &quot;http://m.1768.com/?index.php&quot;</div></pre></td></tr></table></figure>
+<p>######circus.txt文件中保存的参数格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">act=game_circus&amp;st=start&amp;amount=1300&amp;isNewUser=0&amp;autoBetFlag=0</div></pre></td></tr></table></figure></p>
+<p>执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">[root@iz2zfd6z ~]# ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 1000 -c 100 -C &quot;Cookie: appId=3793; track_u_3793=CS1111QXZ591F5C6066AACC1B57273B8; popbeforelogin=aToxOw%3D%3D; track_u_3783=37yoo; YOUXISID=14fe43e78bd2e7e41934ac8e9fc809ed881af5fd; is_visitor=0; exchangeReturnUrl=%2F%3Fact%3Dgame_collection; track_u=37yoo; ucenter=newucenter; newucenter_nologout=1; tExchangeBackUrl=newucenter; point_games_flag_v9_game_circus_5252037600830=2037600830; PHPSESSID=5vqp5j4knn6mldjqt2fovc3ad5; gameHistoryRecord=a%3A3%3A%7Bi%3A0%3Bi%3A3783%3Bi%3A1%3Bi%3A3697%3Bi%3A2%3Bi%3A3793%3B%7D; tExchangeBacToGame=%2F%3Fact%3Dgame_circus; loginReturnUrl=%2F%3Fact%3Dgame_circus; Hm_lvt_be49684f9d9c2de3c96227f9e25c261b=1503630548,1505359432; Hm_lpvt_be49684f9d9c2de3c96227f9e25c261b=1505469850; Hm_lvt_70e5a3dba732ce8be082655aff6ff1e6=1503455932,1504839932,1505186995; Hm_lpvt_70e5a3dba732ce8be082655aff6ff1e6=1505469852&quot; -p /root/circus.txt -T application/x-www-form-urlencoded &quot;http://m.1768.com/?index.php&quot;</div><div class="line">This is ApacheBench, Version 2.3 &lt;$Revision: 1430300 $&gt;</div><div class="line">Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/</div><div class="line">Licensed to The Apache Software Foundation, http://www.apache.org/</div><div class="line"></div><div class="line">Benchmarking 10test7-wap.stg3.1768.com (be patient)</div><div class="line">Completed 100 requests</div><div class="line">Completed 200 requests</div><div class="line">Completed 300 requests</div><div class="line">Completed 400 requests</div><div class="line">Completed 500 requests</div><div class="line">Completed 600 requests</div><div class="line">Completed 700 requests</div><div class="line">Completed 800 requests</div><div class="line">Completed 900 requests</div><div class="line">Completed 1000 requests</div><div class="line">Finished 1000 requests</div><div class="line"></div><div class="line"></div><div class="line">Server Software:        nginx</div><div class="line">Server Hostname:        10test7-wap.stg3.1768.com</div><div class="line">Server Port:            80</div><div class="line"></div><div class="line">Document Path:          /?index.php</div><div class="line">Document Length:        267 bytes</div><div class="line"></div><div class="line">Concurrency Level:      100</div><div class="line">Time taken for tests:   13.657 seconds</div><div class="line">Complete requests:      1000</div><div class="line">Failed requests:        993</div><div class="line">   (Connect: 0, Receive: 0, Length: 993, Exceptions: 0)</div><div class="line">Write errors:           0</div><div class="line">Total transferred:      365377 bytes</div><div class="line">Total body sent:        1098000</div><div class="line">HTML transferred:       102377 bytes</div><div class="line">Requests per second:    73.22 [#/sec] (mean)</div><div class="line">Time per request:       1365.722 [ms] (mean)</div><div class="line">Time per request:       13.657 [ms] (mean, across all concurrent requests)</div><div class="line">Transfer rate:          26.13 [Kbytes/sec] received</div><div class="line">                        78.51 kb/s sent</div><div class="line">                        104.64 kb/s total</div><div class="line"></div><div class="line">Connection Times (ms)</div><div class="line">              min  mean[+/-sd] median   max</div><div class="line">Connect:       25   45 125.7     29    1037</div><div class="line">Processing:   115  911 1246.9    637    8654</div><div class="line">Waiting:      115  911 1246.9    637    8654</div><div class="line">Total:        146  957 1248.8    675    8683</div><div class="line"></div><div class="line">Percentage of the requests served within a certain time (ms)</div><div class="line">  50%    675</div><div class="line">  66%    834</div><div class="line">  75%   1028</div><div class="line">  80%   1117</div><div class="line">  90%   1476</div><div class="line">  95%   3128</div><div class="line">  98%   7552</div><div class="line">  99%   7636</div><div class="line"> 100%   8683 (longest request)</div></pre></td></tr></table></figure>
+<p> #####至于用作性能分析建议还是使用LR，有兴趣也可以对性能结果进行分析。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/zfbshoukuan.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://tttesting.github.io/assets/blogimg/wxshoukuan.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/11/e8-af-bb-e3-80-8a-e8-a3-82-e5-8f-98-e5-bc-8f-e5-88-9b-e4-b8-9a-e3-80-8b-e8-bf-99-e6-9c-ac-e4-b9-a6-e7-9a-84-e4-b8-80-e7-82-b9-e6-80-bb-e7-bb-93/" class="archive-article-date">
-  	<time datetime="2017-06-11T13:51:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/11/e8-af-bb-e3-80-8a-e8-a3-82-e5-8f-98-e5-bc-8f-e5-88-9b-e4-b8-9a-e3-80-8b-e8-bf-99-e6-9c-ac-e4-b9-a6-e7-9a-84-e4-b8-80-e7-82-b9-e6-80-bb-e7-bb-93/">读《裂变式创业》这本书的一点总结</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">团队管理</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">创业</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://youxitest.com/2017/09/20/apache-ab/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/11/e3-80-8e-e5-8d-b1-e6-9c-ba-e9-a2-86-e5-af-bc-e5-8a-9b-e3-80-8f-e5-91-8a-e8-af-89-e6-88-91-e4-bb-ac-e5-a6-82-e4-bd-95-e5-b8-a6-e5-a5-bd-e5-9b-a2-e9-98-9f/" class="archive-article-date">
-  	<time datetime="2017-06-11T09:35:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/16/github-blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">github_blog</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/11/e3-80-8e-e5-8d-b1-e6-9c-ba-e9-a2-86-e5-af-bc-e5-8a-9b-e3-80-8f-e5-91-8a-e8-af-89-e6-88-91-e4-bb-ac-e5-a6-82-e4-bd-95-e5-b8-a6-e5-a5-bd-e5-9b-a2-e9-98-9f/">『危机领导力』告诉我们如何带好团队</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">团队管理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/11/bug-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/" class="archive-article-date">
-  	<time datetime="2017-06-11T09:30:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/11/bug-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/">BUG，带给我的思考</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/11/e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/" class="archive-article-date">
-  	<time datetime="2017-06-11T09:17:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/11/e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/">关键对话，带给我的思考</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">关键对话</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">职场沟通</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/11/charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3/" class="archive-article-date">
-  	<time datetime="2017-06-11T09:16:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/11/charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3/">Charles抓取https请求详解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">charles</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">https</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://youxitest.com/2017/09/20/apache-ab/", 
+    sourceId: "apache-ab",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2017/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/2017/">1</a><a class="page-number" href="/archives/2017/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/2017/page/4/">4</a><a class="page-number" href="/archives/2017/page/5/">5</a><a class="page-number" href="/archives/2017/page/6/">6</a><a class="extend next" rel="next" href="/archives/2017/page/4/">Next &raquo;</a>
-    </nav>
   
+
+  
+
 
 
           </div>
@@ -437,8 +352,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
