@@ -147,6 +147,95 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-apache-ab" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/20/apache-ab/">get、post请求使用ab工具如何做并发测试？</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/20/apache-ab/" class="archive-article-date">
+  	<time datetime="2017-09-20T15:13:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p style="line-height: 2em;"><br>    <span style="font-family: helvetica, arial, freesans, clean, sans-serif; font-size: 13.34px; background-color: rgb(248, 248, 248);">最近确实也有些忙，原来都是利用周末的时间写东西，现在周末的时间被占满，照顾小孩。只能忙中找空，写点东西。</span><br></p><br><p style="line-height: 2em;"><br>    <span style="font-family: helvetica, arial, freesans, clean, sans-serif; font-size: 13.34px; background-color: rgb(248, 248, 248);">最近正好使用ab性能测试工具测了一个项目，主要用来做并发测试，需求是控制水军用户的并发数，通过nginx配置控制并发量（针对异常ip–双ip），所以为了能够快速上线，就选择了ab工具。觉得ab工具多多少少还是可以快速的运用到工作当中，所以有必要写出来分享给需要的同行。主要介绍下使用ab工具并发发送get和post请求，比如日常工具中做并发测试可以使用（针对活动等相关库存的并发测试）</span><br></p>
+
+<p>###linux下安装ab性能测试工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install httpd-tools</div></pre></td></tr></table></figure></p>
+<p>安装完成后，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 100 -c 30 http://m.1768.com/?act=index&amp;st=login</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>######备注：<br></p>
+<font color="#0A0A0A" size="2">2.2.2.2为模拟的ip</font>
+
+</blockquote>
+<p>查看nginx访问日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">m.1768.com 21.58.201.31 - - [18/Sep/2017:18:57:43 +0800] &quot;GET /?act=index&amp;st=login HTTP/1.0&quot; 200 266 &quot;-&quot; &quot;ApacheBench/2.3&quot; 2.2.2.2,47.94.13.33</div></pre></td></tr></table></figure></p>
+<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">[root@iZ9q9Z /]# ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 100 -c 30 http://m.1768.com/?</div><div class="line">act=index&amp;st=login</div><div class="line">[1] 4515</div><div class="line">[root@iZ9otb9Z /]# This is ApacheBench, Version 2.3 &lt;$Revision: 1430300 $&gt;</div><div class="line">Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/</div><div class="line">Licensed to The Apache Software Foundation, http://www.apache.org/</div><div class="line"></div><div class="line">Benchmarking 10test7-admin.stg3.1768.com (be patient).....done</div><div class="line"></div><div class="line"></div><div class="line">Server Software:        nginx</div><div class="line">Server Hostname:        m.1768.com</div><div class="line">Server Port:            80</div><div class="line"></div><div class="line">Document Path:          /?act=index    #请求的资源</div><div class="line">Document Length:        0 bytes     #文档返回的长度，不包括相应的头</div><div class="line"></div><div class="line">Concurrency Level:      30          #并发数</div><div class="line">Time taken for tests:   0.609 seconds   #总请求时长</div><div class="line">Complete requests:      100            #总请求数</div><div class="line">Failed requests:        0           #失败的请求数</div><div class="line">Write errors:           0          #错误</div><div class="line">Non-2xx responses:      100</div><div class="line">Total transferred:      45900 bytes   #总共传输数据量 </div><div class="line">HTML transferred:       0 bytes</div><div class="line">Requests per second:    164.18 [#/sec] (mean)   #平均每秒的请求数，重要指标：相当于LR中的每秒事务数，后面的括号中mean表示这是一个平均值</div><div class="line">Time per request:       182.725 [ms] (mean)    #平均每个请求消耗的时间，重要指标：LR中的平均事务响应时间</div><div class="line">Time per request:       6.091 [ms] (mean, across all concurrent requests)   #上面的请求除以并发数，即服务器平均请求响应时间 在并发量为1时 用户等待时间相同  </div><div class="line">Transfer rate:          73.59 [Kbytes/sec] received   #平均每秒多少K，即传输速率</div><div class="line"></div><div class="line">Connection Times (ms)</div><div class="line">              min  mean[+/-sd] median   max</div><div class="line">Connect:       28   32   1.7     32      36</div><div class="line">Processing:    70  106  25.5    100     169</div><div class="line">Waiting:       70  106  25.5    100     169</div><div class="line">Total:        100  138  25.7    134     202</div><div class="line"></div><div class="line">Percentage of the requests served within a certain time (ms)</div><div class="line">  50%    134        #50%的请求都在134ms内完成</div><div class="line">  66%    143</div><div class="line">  75%    153</div><div class="line">  80%    163</div><div class="line">  90%    180</div><div class="line">  95%    188</div><div class="line">  98%    193</div><div class="line">  99%    202</div><div class="line"> 100%    202 (longest request)</div></pre></td></tr></table></figure></p>
+<p>具体每个参数的含义可以参考如下地址，里面有很详细的介绍。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://www.jb51.net/article/59469.htm</div></pre></td></tr></table></figure></p>
+<p>##举例</p>
+<hr>
+<p>###get请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 100 -c 10 -C &quot;Cookie: appId=3793; track_u_3793=CS1111QXZ591F5C6066AACC1B57273B8; popbeforelogin=aToxOw%3D%3D; Hm_lvt_a52c9eb6cde4f51aa1212ed955bc723c=1504493440,1504503826,1504580247,1505092652; Hm_lpvt_a52c9eb6cde4f51aa1212ed955bc723c=1505121635; YOUXISID=88811fde2b2d2648ae4b4ddefa7da6f28530cb2a; is_visitor=0; point_games_flag_v9_game_circus_5252037600830=2037600830; exchangeReturnUrl=%2F%3Fact%3Dgame_collection; ucenter=newucenter; newucenter_nologout=1; tExchangeBackUrl=newucenter; PHPSESSID=5vqp5j4knn6mldjqt2fovc3ad5; track_u_3783=37yoo; track_u=37yoo; point_games_flag_v9_pinballwap_5252037600830=2037600830; gameHistoryRecord=a%3A3%3A%7Bi%3A0%3Bi%3A3697%3Bi%3A1%3Bi%3A3783%3Bi%3A2%3Bi%3A3793%3B%7D; tExchangeBacToGame=%2F%3Fact%3Dpinballwap; loginReturnUrl=%2F%3Fact%3Dpinballwap%26track_u%3D37yoo; Hm_lvt_be49684f9d9c2de3c96227f9e25c261b=1503630548,1505359432; Hm_lpvt_be49684f9d9c2de3c96227f9e25c261b=1505375090; Hm_lvt_70e5a3dba732ce8be082655aff6ff1e6=1503455932,1504839932,1505186995; Hm_lpvt_70e5a3dba732ce8be082655aff6ff1e6=1505375091&quot; &quot;http://m.1768.com/?act=pinballwap&amp;act=pinballwap&amp;st=play_once&amp;amount=500&amp;newer=1&amp;rndnum=599719&quot;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>######备注：<br>1.cookie内容一定要加个双引号；<br><br>2.请求url加双引号；</p>
+</blockquote>
+<hr>
+<p>###post请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 1000 -c 100 -C &quot;Cookie: appId=3793; track_u_3793=CS1111QXZ591F5C6066AACC1B57273B8; popbeforelogin=aToxOw%3D%3D; track_u_3783=37yoo; YOUXISID=14fe43e78bd2e7e41934ac8e9fc809ed881af5fd; is_visitor=0; exchangeReturnUrl=%2F%3Fact%3Dgame_collection; track_u=37yoo; ucenter=newucenter; newucenter_nologout=1; tExchangeBackUrl=newucenter; point_games_flag_v9_game_circus_5252037600830=2037600830; PHPSESSID=5vqp5j4knn6mldjqt2fovc3ad5; gameHistoryRecord=a%3A3%3A%7Bi%3A0%3Bi%3A3783%3Bi%3A1%3Bi%3A3697%3Bi%3A2%3Bi%3A3793%3B%7D; tExchangeBacToGame=%2F%3Fact%3Dgame_circus; loginReturnUrl=%2F%3Fact%3Dgame_circus; Hm_lvt_be49684f9d9c2de3c96227f9e25c261b=1503630548,1505359432; Hm_lpvt_be49684f9d9c2de3c96227f9e25c261b=1505469850; Hm_lvt_70e5a3dba732ce8be082655aff6ff1e6=1503455932,1504839932,1505186995; Hm_lpvt_70e5a3dba732ce8be082655aff6ff1e6=1505469852&quot; -p /root/circus.txt -T application/x-www-form-urlencoded &quot;http://m.1768.com/?index.php&quot;</div></pre></td></tr></table></figure>
+<p>######circus.txt文件中保存的参数格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">act=game_circus&amp;st=start&amp;amount=1300&amp;isNewUser=0&amp;autoBetFlag=0</div></pre></td></tr></table></figure></p>
+<p>执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">[root@iz2zfd6z ~]# ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 1000 -c 100 -C &quot;Cookie: appId=3793; track_u_3793=CS1111QXZ591F5C6066AACC1B57273B8; popbeforelogin=aToxOw%3D%3D; track_u_3783=37yoo; YOUXISID=14fe43e78bd2e7e41934ac8e9fc809ed881af5fd; is_visitor=0; exchangeReturnUrl=%2F%3Fact%3Dgame_collection; track_u=37yoo; ucenter=newucenter; newucenter_nologout=1; tExchangeBackUrl=newucenter; point_games_flag_v9_game_circus_5252037600830=2037600830; PHPSESSID=5vqp5j4knn6mldjqt2fovc3ad5; gameHistoryRecord=a%3A3%3A%7Bi%3A0%3Bi%3A3783%3Bi%3A1%3Bi%3A3697%3Bi%3A2%3Bi%3A3793%3B%7D; tExchangeBacToGame=%2F%3Fact%3Dgame_circus; loginReturnUrl=%2F%3Fact%3Dgame_circus; Hm_lvt_be49684f9d9c2de3c96227f9e25c261b=1503630548,1505359432; Hm_lpvt_be49684f9d9c2de3c96227f9e25c261b=1505469850; Hm_lvt_70e5a3dba732ce8be082655aff6ff1e6=1503455932,1504839932,1505186995; Hm_lpvt_70e5a3dba732ce8be082655aff6ff1e6=1505469852&quot; -p /root/circus.txt -T application/x-www-form-urlencoded &quot;http://m.1768.com/?index.php&quot;</div><div class="line">This is ApacheBench, Version 2.3 &lt;$Revision: 1430300 $&gt;</div><div class="line">Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/</div><div class="line">Licensed to The Apache Software Foundation, http://www.apache.org/</div><div class="line"></div><div class="line">Benchmarking 10test7-wap.stg3.1768.com (be patient)</div><div class="line">Completed 100 requests</div><div class="line">Completed 200 requests</div><div class="line">Completed 300 requests</div><div class="line">Completed 400 requests</div><div class="line">Completed 500 requests</div><div class="line">Completed 600 requests</div><div class="line">Completed 700 requests</div><div class="line">Completed 800 requests</div><div class="line">Completed 900 requests</div><div class="line">Completed 1000 requests</div><div class="line">Finished 1000 requests</div><div class="line"></div><div class="line"></div><div class="line">Server Software:        nginx</div><div class="line">Server Hostname:        10test7-wap.stg3.1768.com</div><div class="line">Server Port:            80</div><div class="line"></div><div class="line">Document Path:          /?index.php</div><div class="line">Document Length:        267 bytes</div><div class="line"></div><div class="line">Concurrency Level:      100</div><div class="line">Time taken for tests:   13.657 seconds</div><div class="line">Complete requests:      1000</div><div class="line">Failed requests:        993</div><div class="line">   (Connect: 0, Receive: 0, Length: 993, Exceptions: 0)</div><div class="line">Write errors:           0</div><div class="line">Total transferred:      365377 bytes</div><div class="line">Total body sent:        1098000</div><div class="line">HTML transferred:       102377 bytes</div><div class="line">Requests per second:    73.22 [#/sec] (mean)</div><div class="line">Time per request:       1365.722 [ms] (mean)</div><div class="line">Time per request:       13.657 [ms] (mean, across all concurrent requests)</div><div class="line">Transfer rate:          26.13 [Kbytes/sec] received</div><div class="line">                        78.51 kb/s sent</div><div class="line">                        104.64 kb/s total</div><div class="line"></div><div class="line">Connection Times (ms)</div><div class="line">              min  mean[+/-sd] median   max</div><div class="line">Connect:       25   45 125.7     29    1037</div><div class="line">Processing:   115  911 1246.9    637    8654</div><div class="line">Waiting:      115  911 1246.9    637    8654</div><div class="line">Total:        146  957 1248.8    675    8683</div><div class="line"></div><div class="line">Percentage of the requests served within a certain time (ms)</div><div class="line">  50%    675</div><div class="line">  66%    834</div><div class="line">  75%   1028</div><div class="line">  80%   1117</div><div class="line">  90%   1476</div><div class="line">  95%   3128</div><div class="line">  98%   7552</div><div class="line">  99%   7636</div><div class="line"> 100%   8683 (longest request)</div></pre></td></tr></table></figure>
+<p> #####至于用作性能分析建议还是使用LR，有兴趣也可以对性能结果进行分析。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/20/apache-ab/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
     <article id="post-locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -473,11 +562,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">PyCharm</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">PyCharm</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
@@ -499,161 +588,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/07/02/pycharm-e5-85-b3-e8-81-94github/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/26/python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c/">Python Django之路与您同行</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/26/python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c/" class="archive-article-date">
-  	<time datetime="2017-06-26T14:14:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近折腾了一个自己的个人博客：87testing.com，这样可以记录自己的学习、工作和生活。主要在这里写下自己的学习笔记、软件测试思考及读书感悟等，后续可能会系统的介绍一些python、django、移动端自动化测试、接口自动化测试、性能测试等。欢迎您的光临！</p>
-<p>要想深入测试，必须了解功能逻辑，对数据流及网站架构比较清楚，这点也说过多次，真的很重要，必须要体现在工作当中，养成习惯，绝对不要对自己测试过的功能模块其中的技术实现不清楚。这样测试路会不好走！！！</p>
-<p>—————————–华丽的分割线—————————-</p>
-<p>今天分享的内容为django，适合初学者，同样也慢慢对网站能够有些了解。以下内容是在mac下操作的(其他系统大同小异)，使用的python自带版本2.7。</p>
-<ul>
-<li><strong>mac下安装pip</strong><br>在终端Terminal里面输入sudo easy_install pip，回车，就开始进行下载安装，网络好的话几秒钟就安装好。</li>
-</ul>
-<p>安装成功后，终端Terminal中直接pip就出出现pip命令的说明信息，说明pip安装成功可以正常使用了。</p>
-<ul>
-<li><strong>安装Django</strong><br>终端Terminal中输入sudo pip install django，等待安装完成，如图：</li>
-</ul>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/assets/blogimg/Django001.png" alt=""></p>
-<p>使用命令python -m django –version或者pip show django查看django版本信息，如图：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/assets/blogimg/Django002.png" alt=""></p>
-<ul>
-<li><strong>使用django创建一个项目，项目名称ceshijiagoushi</strong><br>django-admin startproject ceshijiagoushi</li>
-</ul>
-<p>新建好项目以后，使用PyCharm打开，也可以看到目录</p>
-<p>新建好后的目录说明：</p>
-<p><strong>ceshijiagoushi:</strong> 项目的容器。</p>
-<p><strong>manage.py: </strong>一个实用的命令行工具，可让你以各种方式与该 Django 项目进行交互。</p>
-<p><strong>ceshijiagoushi/init.py: </strong>一个空文件，告诉 Python 该目录是一个 Python 包。</p>
-<p><strong>ceshijiagoushi/settings.py: </strong>该 Django 项目的设置/配置。</p>
-<p><strong>ceshijiagoushi/urls.py: </strong>该 Django 项目的 URL 声明; 一份由 Django 驱动的网站”目录”。</p>
-<p><strong>ceshijiagoushi/wsgi.py: </strong>一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目。</p>
-<ul>
-<li><strong>在ceshijiagoushi项目的容器中创建一个testing应用</strong><br>python manage.py startapp testing</li>
-</ul>
-<p>应用创建完成后，运行项目：</p>
-<p>python manage.py runserver</p>
-<p>运行成功并正常启动，如图：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/Django003.png" alt=""></p>
-<p><img src="http://www.87testing.com/assets/blogimg/Django004.png" alt=""><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""></p>
-<p>有可能会遇到的问题是8000端口被占用，可以将端口号改为8001，那么在重新启动时指定端口号：</p>
-<p>python manage.py runserver 127.0.0.1:8001</p>
-<p><strong>备注：</strong></p>
-<p>后续可能还会遇到8001端口被占用的提示，那么可以使用命令：</p>
-<p>lsof -i:8001查出端口被哪个程序占用，</p>
-<p>然后把端口对应的进程关掉：kill -9 pid(对应的进程号)</p>
-<ul>
-<li><strong>如果要在此项目的web页面上打印一句话出来，”Hello，ceshijiagoushi！”</strong><br>接下来需要配置几个地方：</li>
-</ul>
-<p>1.将testing应用添加到项目中，ceshijiagoushi/settings.py中新增testing：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/assets/blogimg/setting.png" alt=""></p>
-<p>2.ceshijiagoushi/urls.py，导入testing应用views文件、新增index/路径配置：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/assets/blogimg/urls.png" alt=""></p>
-<p>3.定义index函数，并通过HttpResponse类向浏览器返回字符串”Hello ceshijiagoushi!”</p>
-<p><img src="http://www.87testing.com/assets/blogimg/views.png" alt=""></p>
-<p>以上都修改完成后，启动项目，浏览器访问127.0.0.1:8001/index/ （在这里我启用了8001的端口）就看到打印结果了：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/printhello.png" alt=""></p>
-<p>通过上面我们已经知道怎么在页面打印出字符串：”Hello ceshijiagoushi!”</p>
-<ul>
-<li><strong>将字符串替换成html页面</strong><br>接下来将字符串替换成html页面，这样就可以不断的对页面进行优化了。</li>
-</ul>
-<p>首先，在testing目录中创建templates目录，然后在templates目录中创建index.html文件。修改下html文件，如图：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/assets/blogimg/templateshtml.png" alt=""></p>
-<p>其次，views.py文件index函数中的HttpResponse类修改为render函数，request请求对象改成index.html</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""></p>
-<p>再次访问<a href="http://127.0.0.1:8001/index/，页面就展示的index.html页面的内容了。" target="_blank" rel="external">http://127.0.0.1:8001/index/，页面就展示的index.html页面的内容了。</a></p>
-<p><strong>用户访问到显示html页面django处理得过程如下：</strong></p>
-<p>1. 用户通过浏览器请求一个页面</p>
-<p>2.请求到达Request Middlewares，中间件对request做一些预处理或者直接response请求</p>
-<p>3.URLConf通过urls.py文件和请求的URL找到相应的View</p>
-<p>4.View Middlewares被访问，它同样可以对request做一些处理或者直接返回response</p>
-<p>5.调用View中的函数</p>
-<p>6.View中的方法调用Django的render函数请求index.html，最终返回index.html中的内容。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">django</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/26/python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c/">展开全文 >></a>
         </p>
       
 
@@ -781,6 +715,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">charles</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
@@ -801,14 +743,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">charles</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
               </li>
              
@@ -821,15 +755,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Locust</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -845,7 +779,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">django</a>
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -853,7 +787,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+                <a href="javascript:void(0)" class="js-tag color2">django</a>
               </li>
             
             <div class="clearfix"></div>
