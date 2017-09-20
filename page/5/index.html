@@ -147,127 +147,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-e6-8e-a5-e5-8f-a3-e6-b5-8b-e8-af-95-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e5-bf-85-e5-a4-87-e6-8a-80-e8-83-bd" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/11/e6-8e-a5-e5-8f-a3-e6-b5-8b-e8-af-95-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e5-bf-85-e5-a4-87-e6-8a-80-e8-83-bd/">接口测试-测试人员必备技能</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/11/e6-8e-a5-e5-8f-a3-e6-b5-8b-e8-af-95-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e5-bf-85-e5-a4-87-e6-8a-80-e8-83-bd/" class="archive-article-date">
-  	<time datetime="2017-06-11T07:52:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>接口测试，其实并没有那么可怕，但是作为测试人员也是必不可少的技能。</p>
-<p>&nbsp;</p>
-<p>接口分为：内部接口和外部接口。</p>
-<p>&nbsp;</p>
-<ul>
-<li>内部接口：是浏览器与服务器的接口。这个很容易理解，web开发一般分前端和后端，前端开发人员用html/css/javascript等技术。后端开发人员用php/java/python等各种语言。用户输入的数据是输入到前端页面上。怎样把这些数据传递到后台呢？通过http协议的get、post请求来实现前后端的数据传递。这也可以认为是接口测试，这通常称之为内部接口。</li>
-<li>外部接口：大部分都是服务端与服务端之间的调用接口。比如淘宝、京东等购物网站，在进行付款时，可以选择支付宝、微信、网银等支付方式，那这些支付宝、微信支付、网银等久提供了对外服务的接口，这就是外部接口<br>&nbsp;</li>
-</ul>
-<p>不管是内部接口还是外部接口，都要引起重视，今天先说下内部接口测试，不要因为测试人员的忽视，导致接口有bug，相信大家也看过一个bug在45分钟损失4亿多美元的真实例子，作为测试人员也要为我们所测试的应用保质保量，风险降到最低，是我们的责任也是我们的义务。</p>
-<p>&nbsp;</p>
-<p>1、http常用的请求方法：</p>
-<ul>
-<li>get–从指定的资源请求数据</li>
-<li>b.post–向指定的资源提交要被处理的数据</li>
-<li>c.put–向指定的资源修改数据</li>
-<li>d.delete–向指定的资源删除数据<br>通常我们用的最多的请求方式：get和post参数到相应的URL。</li>
-</ul>
-<p>&nbsp;</p>
-<p>2、测试步骤：</p>
-<ul>
-<li>编写接口调用程序（一般可自己搞个表单提交或使用其他测试工具，如postman等）</li>
-<li>模拟输入参数</li>
-<li>检查接口输出<br>&nbsp;</li>
-</ul>
-<p>3、测试技能要求：</p>
-<ul>
-<li>能写接口调用程序</li>
-<li>懂json，能分析结果输出</li>
-<li>熟悉应用功能涉及到数据存取部分，能了解具体流程<br>&nbsp;</li>
-</ul>
-<p>4、数据准备：</p>
-<ul>
-<li>正向用例：符合业务逻辑的数据</li>
-<li>特殊字符，如：&lt;、&gt;、&amp;、=、%、空格等。重点是&amp;、=、空格，这些字符在post、get请求中是关键字，如果没有进行转义，就会报错</li>
-<li>空参数。如果参数为必选，不传该参数，会有何结果</li>
-<li>参数类型错误。如需要输入整形，实际输入字符型，会有何结果</li>
-<li>参数类型错误。如需要输入整型，实际输入字符型，小数，负数，会有何结果</li>
-<li>字符串长度超长，会有何结果</li>
-<li>用户可输入的参数，是否能SQL注入<br>&nbsp;</li>
-</ul>
-<p>5、结果检查：</p>
-<ul>
-<li>输出结果是否符合逻辑。原本正确的操作，是否返回true。原本异常的操作，是否能显示正确的错误提示</li>
-<li>输出结果字段值是否正确，是否按照约定都正常输出</li>
-</ul>
-<p>&nbsp;<br>&nbsp;</p>
-<p>接口测试其实没那么难的，只要用心学，都是可以达到的。后续再专门介绍外部接口测试以及支付相关测试，今天就写到这里。真心祝愿每一位读者升职加薪！😄</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/11/e6-8e-a5-e5-8f-a3-e6-b5-8b-e8-af-95-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e5-bf-85-e5-a4-87-e6-8a-80-e8-83-bd/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
     <article id="post-fiddler-e6-98-be-e7-a4-ba-e6-9c-8d-e5-8a-a1-e5-99-a8ip-e6-9c-80-e7-ae-80-e5-8d-95-e7-9a-84-e6-96-b9-e6-b3-95" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -674,6 +553,121 @@ FiddlerObject.UI.lvSessions.AddBoundColumn(&quot;Server IP&quot;, 120, &quot;X-H
 
 
   
+    <article id="post-qq-e5-a5-bd-e5-8f-8b-e5-9c-a8-e7-ba-bf-e7-a6-bb-e7-ba-bf-ef-bc-8c-e6-80-8e-e4-b9-88-e6-b5-8b-e8-af-95-ef-bc-9f" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/10/qq-e5-a5-bd-e5-8f-8b-e5-9c-a8-e7-ba-bf-e7-a6-bb-e7-ba-bf-ef-bc-8c-e6-80-8e-e4-b9-88-e6-b5-8b-e8-af-95-ef-bc-9f/">QQ好友在线/离线，怎么测试？</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/10/qq-e5-a5-bd-e5-8f-8b-e5-9c-a8-e7-ba-bf-e7-a6-bb-e7-ba-bf-ef-bc-8c-e6-80-8e-e4-b9-88-e6-b5-8b-e8-af-95-ef-bc-9f/" class="archive-article-date">
+  	<time datetime="2017-06-10T12:54:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>即时通讯是目前internet上最为流行的通讯方式，各种各样的即时通讯软件也层出不穷，那么今天主要针对QQ好友在线状态/QQ群友在线状态功能出发，一起思考其中的实现原理以及我们如何去测试此功能？</p>
+<p>&nbsp;</p>
+<p>当大家在使用QQ的时候，是否和我一样有如下疑问：</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>在好友列表中为什么可以实时的看到qq好友的在线、离线等状态？</p>
+<p>在QQ群的群友列表中能看到当前群友的在线、离线等状态，是如何实现的？</p>
+<p>作为测试工程师究竟该如何去测试里面用到的技术？<br>&nbsp;</p>
+</blockquote>
+<p>我带着这些问题，去搜集了一些资料进行了解、学习和总结后，现分享给大家。</p>
+<p>关于QQ好友在线/离线状态我所理解的流程是：</p>
+<blockquote>
+<p>当用户A登录成功时，服务器要把用户A的在线状态（online）写到缓存（高可用的缓存集群里）；userid-A—》login—》server—》set status in cache（userid：online）</p>
+<p>当用户A下线（登出）时，服务器要找到用户A的缓存将在线状态（online）变成离线状态（offline）；userid-A—》loginout—》server—》update status in cache（userid-A：offline）</p>
+<p>其他所有用户的状态都会存储在缓存中，所以当用户A登录时，从数据库中查出用户A的好友，再从缓存中查出这些好友所对应的在线状态，从而用户A可以看出哪些好友在线哪些好友离线；</p>
+<p>userid-A—》my friends status—》get friends userids in DB —》get userids status in cache（userid1:online，userid2:offline，userid3:offline，userid4:online……）<br>&nbsp;</p>
+</blockquote>
+<p>针对上面的流程主要考虑的测试点如下：</p>
+<blockquote>
+<p>无缓存情况下，用户A登录时，写入缓存正常（缓存大家应该都了解过，比如memcache、redis等如何查看缓存？不会的同学可以咨询也可自己查下相关资料）</p>
+<p>当用户退出登录时，缓存中对应的value被置为offline；</p>
+<p>缓存存的有效期校验；</p>
+<p>用户A的好友用户B下线/上线时，状态是否显示正确；</p>
+<p>用户A的多个好友中有在线有离线的，当用户A查看好友状态时，状态显示是否正确；</p>
+<p>当redis连接异常或超时时，应该如何处理；<br>等等…大家可以想想需要测试的功能点，要了解开发实现的过程，尽可能的去覆盖测试点。</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>写到这里，其实其中还有一个重要的点：比如用户A的好友用户B在线，突然，用户B离线了，那么用户A能否立即看到好友由在线变成离线呢？这也是我们测试人员需要考虑的功能点！到底是不是实时的我也不能确定，如果有人知道的话可以分享下。如果对实时性要求较高，可以采用推送的方式同步，如果实时性要求不太高的话，可以采用轮询拉取的方式进行同步。</p>
+<p>&nbsp;</p>
+<p>再普及下轮询拉取方式和推送方式，如下：</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>什么是轮询拉取方式<br>举例说明：用户userid-A要看到好友的在线状态的话，比如就要每分钟轮询向服务器拉取全部好友的在线状态。缺点就是：有一分钟的延迟，同时当好友的状态期间没有变化时也请求服务器拉取产生大量的无效请求暂用服务器的资源。这种方式可能大家在工作中也经常用到，不断的轮询获取服务器的信息。</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>什么是推送的方式<br>继续举例说明：还是用户userid-A要看到好友用户userid-B在线状态的话，当用户userid-B下线时，由在线变成离线（更新缓存为offline），同时要将这个状态改变的通知推送给用户userid-B的在线反向好友。这样就变成实时了，但是缺点就是：在线好友量大的话，任何一个用户状态的改变会扩散很多实时通知，需要考虑承载能力。</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>大家可以思考下，QQ群友的在线同步应该是怎样的流程呢？到底是使用轮询的方式还是推送的方式呢？后续如果有时间的话可以继续讨论。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/10/qq-e5-a5-bd-e5-8f-8b-e5-9c-a8-e7-ba-bf-e7-a6-bb-e7-ba-bf-ef-bc-8c-e6-80-8e-e4-b9-88-e6-b5-8b-e8-af-95-ef-bc-9f/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -767,14 +761,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">charles</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CDN</a>
               </li>
              
@@ -799,6 +785,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">charles</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
               </li>
              
@@ -811,15 +805,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Locust</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -835,7 +829,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+                <a href="javascript:void(0)" class="js-tag color2">django</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -843,7 +837,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">django</a>
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
               </li>
             
             <div class="clearfix"></div>
