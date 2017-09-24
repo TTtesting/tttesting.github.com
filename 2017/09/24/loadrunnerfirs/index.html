@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://youxitest.com">
-  <title>MonkeyScript及Monkeyrunner介绍 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
+  <title>如何学习LoadRunner性能测试？ | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="获取app包名：adb logcat |grep START 执行Monkey脚本的命令：adb shell monkey -f &amp;lt;scriptfile&amp;gt; &amp;lt;event-count&amp;gt; 1、Dispatch Trackball命令（轨迹球事件） Dispatch Trackball(long downtime,long eventide,int action,float x,">
-<meta name="keywords" content="monkey,monkeyrunner,monkeyscript">
+  <meta name="description" content="最近组内同事针对性能测试LR的脚本部分做了介绍，是个不错的分享。会后反思自己也有很长一段时间没做性能测试了，根据以往的经验，有必要做些整理和补充，本文主要介绍一些Loadrunner性能测试的学习方法、思路、流程以及测试过程中需要注意的点。脚本相关的介绍在这篇文章就不过多描述了，有兴趣的朋友网上进行查找，资料也相对比较丰富。 一、Loadrunner初步了解 关于Loadrunner的学习，初期重">
+<meta name="keywords" content="LoadRunner">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MonkeyScript及Monkeyrunner介绍">
-<meta property="og:url" content="http://youxitest.com/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/index.html">
+<meta property="og:title" content="如何学习LoadRunner性能测试？">
+<meta property="og:url" content="http://youxitest.com/2017/09/24/loadrunnerfirs/index.html">
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
-<meta property="og:description" content="获取app包名：adb logcat |grep START 执行Monkey脚本的命令：adb shell monkey -f &amp;lt;scriptfile&amp;gt; &amp;lt;event-count&amp;gt; 1、Dispatch Trackball命令（轨迹球事件） Dispatch Trackball(long downtime,long eventide,int action,float x,">
+<meta property="og:description" content="最近组内同事针对性能测试LR的脚本部分做了介绍，是个不错的分享。会后反思自己也有很长一段时间没做性能测试了，根据以往的经验，有必要做些整理和补充，本文主要介绍一些Loadrunner性能测试的学习方法、思路、流程以及测试过程中需要注意的点。脚本相关的介绍在这篇文章就不过多描述了，有兴趣的朋友网上进行查找，资料也相对比较丰富。 一、Loadrunner初步了解 关于Loadrunner的学习，初期重">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-13T02:47:14.000Z">
+<meta property="og:updated_time" content="2017-09-24T08:23:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MonkeyScript及Monkeyrunner介绍">
-<meta name="twitter:description" content="获取app包名：adb logcat |grep START 执行Monkey脚本的命令：adb shell monkey -f &amp;lt;scriptfile&amp;gt; &amp;lt;event-count&amp;gt; 1、Dispatch Trackball命令（轨迹球事件） Dispatch Trackball(long downtime,long eventide,int action,float x,">
+<meta name="twitter:title" content="如何学习LoadRunner性能测试？">
+<meta name="twitter:description" content="最近组内同事针对性能测试LR的脚本部分做了介绍，是个不错的分享。会后反思自己也有很长一段时间没做性能测试了，根据以往的经验，有必要做些整理和补充，本文主要介绍一些Loadrunner性能测试的学习方法、思路、流程以及测试过程中需要注意的点。脚本相关的介绍在这篇文章就不过多描述了，有兴趣的朋友网上进行查找，资料也相对比较丰富。 一、Loadrunner初步了解 关于Loadrunner的学习，初期重">
   
     <link rel="alternative" href="/atom.xml" title="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。" type="application/atom+xml">
   
@@ -147,56 +147,75 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-loadrunnerfirs" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      MonkeyScript及Monkeyrunner介绍
+      如何学习LoadRunner性能测试？
     </h1>
   
 
         
-        <a href="/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/" class="archive-article-date">
-  	<time datetime="2017-06-18T13:02:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-18</time>
+        <a href="/2017/09/24/loadrunnerfirs/" class="archive-article-date">
+  	<time datetime="2017-09-24T08:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>获取app包名：<br>adb logcat |grep START</p>
-<p>执行Monkey脚本的命令：<br>adb shell monkey -f &lt;scriptfile&gt; &lt;event-count&gt;</p>
-<p>1、Dispatch Trackball命令（轨迹球事件）</p>
-<p>Dispatch Trackball(long downtime,long eventide,<span style="color: #ff0000;">int action,float x,float y</span>,float pressure,float size,int metastate,float xprecision,float yprecision,int device,int edgeflags)<br>action 0代表按下，1代表弹起，x和y代表的坐标点</p>
-<p>2、DispatchPointer命令（点击事件）</p>
-<p>DispatchPointer(long downtime,long eventide,<span style="color: #ff0000;">int action,float x,float y</span>,float pressure,float size,int metastate,float xprecision,float yprecision,int device,int edgeflags)<br>action 0代表按下，1代表弹起，x和y代表的坐标点</p>
-<p>3、DispatchString(String text)(输入字符串事件)</p>
-<p>4、LaunchActivity命令（启动应用）</p>
-<p>LaunchActivity(package,Activity)</p>
-<p>5、UserWait命令（等待事件）</p>
-<p>UserWait(1000)</p>
-<p>6、DispatchPress命令（按下键值）</p>
-<p>DispatchPress(int keycode) #keycode 66 回车键</p>
-<p>举例：<br>1、启动app<br>2、点击输入框<br>3、输入查询词<br>4、点击搜索按钮<br>5、等待结果的出现<br>6、点击clear按钮</p>
-<p>#search.script，使用命令adb shell monkey -f search.script 2(注意脚本在电脑上，monkey在手机上跑，需要将脚本push到手机上：adb push serch.script /data/local/tmp;另外，在AndroidManifest.xml中的activity加入android:exported=”true”,最后，可使用sdk自带工具uiautomatorviewer获取坐标点)</p>
-<p><code>typ=user</code><br><code>count=10</code><br><code>speed=1.0</code><br><code>start data &amp;gt;&amp;gt;</code></p>
-<p><code>LaunchActivity(com.android.chrome,com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity)</code><br><code>UserWait(2000)</code><br><code>DispatchPointer(10,10,0,100,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,100,100,1,1,-1,1,1,0,0)</code><br><code>DispatchString(test)</code><br><code>UserWait(1000)</code><br><code>DispatchPress(66)</code><br><code>UserWait(1000)</code><br><code>DispatchPointer(10,10,0,300,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,300,100,1,1,-1,1,1,0,0)</code><br><code>UserWait(6000)</code><br><code>DispatchPointer(10,10,0,400,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,400,100,1,1,-1,1,1,0,0)</code></p>
-<p><strong>MonkeyRunner:</strong><br>1、MonkeyRunner API -alert(警示框)<br>void alert(string message,string title,string okTitle)</p>
-<p>#举例：demo.py 执行使用monkeyrunner demo.py<br><code>#!usr/bin/python</code><br><code>#_*_ UTF-8 _*_</code><br><code>from com.android.monkeyrunner import MonkeyRunner</code><br><code>MonkeyRunner.alert(&#39;Hello TT frends&#39;,&#39;This is title&#39;,&#39;OK&#39;)</code></p>
-<p>2、MonkeyRunner API -waitForConnection(等待设备连接，有多个device id，需要指明具体哪个设备)<br>WaitForConnection(float timeout,string deviceid)</p>
-<p>3、MonkeyDevice API - drag(拖动)<br>drag(tuple start,tuple end,float duration,integer steps)</p>
-<p>4、MonkeyDevice API - press(按键)<br>press(string keycode,dictionary type)<br>keycode名，Down、UP、DOWN_AND_UP</p>
-<p>5、MonkeyDevice API -startActivity(启动应用)<br>startActivity(package+’/‘+activity)</p>
-<p>6、MonkeyDevice API -touch(点击)<br>touch(integer x,integer y,integer type)<br>x坐标值，y坐标值，<br>type：DOWN,UP,DOWN_AND_UP</p>
-<p>7、MonkeyDevice API - type(输入)<br>type(string message)</p>
-<p>8、MonkeyDevice API - takeSnapshot(截屏)<br>MonkeyImage takeSnapshot()</p>
-<p>9、MonkeyImage API - sameAs(图像对比)<br>boolean sameAs(MonkeyImage other,float percent)</p>
-<p>10、MonkeyImage API - writetoFile(保存图像文件)<br>void writeToFile(string path,string format)</p>
-<p>#举例：实现在搜索框中输入查询词，并截图</p>
-<p><code>#!/usr/bin/python</code><br><code>#_*_ UTF-8 _*_</code><br><code>from com.android.monkeyrunner import MonkeyRunner,MonkeyDevice,MonkeyImage</code><br><code>#连接设备</code><br><code>device = MonkeyRunner.waitForConnection(3,&quot;emulator-5554&quot;)</code><br><code>#启动app</code><br><code>device.startActivity(&quot;com.android.chrome/com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity&quot;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击搜索框</code><br><code>device.touch(100,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#输入查询词</code><br><code>device.type(&#39;test&#39;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击回车键</code><br><code>device.press(&#39;KEYCODE_ENTER&#39;,&#39;DOWN_AND_UP&#39;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击搜索按钮</code><br><code>device.touch(400,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(5)</code><br><code>#截图</code><br><code>image = device.takeSnapshot()</code><br><code>image.writeToFile(&#39;./test.png&#39;,&#39;png&#39;)</code><br><code>#点击清除按钮</code><br><code>device.touch(300,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(3)</code></p>
+        <p>最近组内同事针对性能测试LR的脚本部分做了介绍，是个不错的分享。会后反思自己也有很长一段时间没做性能测试了，根据以往的经验，有必要做些整理和补充，本文主要介绍一些Loadrunner性能测试的学习方法、思路、流程以及测试过程中需要注意的点。脚本相关的介绍在这篇文章就不过多描述了，有兴趣的朋友网上进行查找，资料也相对比较丰富。</p>
+<p><strong>一、Loadrunner初步了解</strong></p>
+<p>关于Loadrunner的学习，初期重点关注Vuser Generator的使用，需掌握以下内容，再去实战操作基本就不难了。</p>
+<ul>
+<li>录制脚本的基本步骤；</li>
+<li>理解基础函数的含义：lr_start_transaction(),lr_end_transaction(),web_reg_find(),web_url(),web_submit_form();</li>
+<li>会看输出窗口中的Replay log；</li>
+<li>Vuser-Run Time Setting中Run logic\log\Think Time的设置；</li>
+<li>脚本的迭代；</li>
+<li>手动写脚本，掌握基本函数；</li>
+<li>Loadrunner参数的设置；</li>
+</ul>
+<p>针对我们目前的项目基本上是做HTTP/HTTPS协议的压测，大家手上有项目时，可以通过录制了解一下整个HTTP请求及响应的情况，学习一下Loadrunner内置的函数。</p>
+<p>另外参数设置、迭代、关联函数等等希望大家查一下资料弄懂，实践一下不同方式有什么不同。</p>
+<p><strong>二、性能指标</strong></p>
+<p>在做性能测试之前，简单说下性能指标：</p>
+<p>响应时间</p>
+<p>针对页面操作，响应时间小于2秒，用户会感觉系统较快较满意；响应时间在2~5秒，用户可以接受，但对速度有些不满；响应时间超过5秒，用户将无法接受。作为优秀的项目当然越快越好，我们在做压测的时候，一般希望响应时间在1秒以内，<br>针对系统内部调用的接口响应时间更要快，具体情况视具体接口而定。</p>
+<p>吞吐量</p>
+<p>通常需要结合业务部门的市场目标而定。</p>
+<p>服务器资源占用</p>
+<p>CPU占用率、内存使用率不能过高；Cache命中率不能过低。<br><br><br><a id="more"></a><br><strong>三、性能测试流程</strong></p>
+<p>制定性能测试目标–&gt;选择性能测试工具–&gt;设计性能测试–&gt;执行性能测试脚本–&gt;监控分析系统–&gt;性能调优<br>1、目标：<br>如，系统需满足500个用户在线、20个用户并发操作发帖的情况下，发帖响应时间不超过2秒，系统资源使用率不超过30%。<br>2、选择性能测试工具：<br>可选择LR、Locust、jmeter等主流测试工具，这篇文章主要介绍LR相关。<br>3、性能测试准备：<br>测试脚本开发、负载的生成规则及监控方式、测试环境的搭建。</p>
+<p>性能测试准备过程中需要注意的点：</p>
+<blockquote>
+<ul>
+<li>确认压测前SQL Review已通过；</li>
+<li>确认压测环境已成功搭建，压测服务器上单独部署一套程序代码；</li>
+<li>明确域名及需要绑定的host；</li>
+<li>搞清楚需要压测的业务及场景（也可以理解为测试用例）；</li>
+<li>清楚输入参数及服务端返回信息；</li>
+<li>明确需要参数化的输入值，明确“请求成功的服务端返回码”；</li>
+</ul>
+</blockquote>
+<p>4、负载过程、负载后对数据进行分析，这个分析需要众多专家共同协作，找出数据背后的问题，确定性能瓶颈。</p>
+<p>5、确定瓶颈后，进行软硬件调优，调优完成重复之前的步骤。</p>
+<p>执行性能测试过程中需要注意：</p>
+<blockquote>
+<ul>
+<li><p>需要与数据库交互的压测，事务pass不代表实际操作一定成功，首先确保脚本中的检查点要写正确，其次务必查询一下数据库是否有相应操作。</p>
+</li>
+<li><p>场景测试的前10分钟，随时关注一下TPS、响应时间，若TPS过低或响应时间太慢，当机立断停止场景运行，找一下运行慢的原因，若不是脚本设置原因，找一下开发同学反馈问题，待开发调优后再压测，避免浪费时间。</p>
+</li>
+<li><p>若无以上问题，场景测试的前1小时，关注一下曲线波动情况，若有明显下降或上下波动很明显，请联系开发同学查原因。</p>
+</li>
+<li><p>若1小时已通过，可以连续跑稳定性测试，12小时或更长，当然中间有时间也要关注一下曲线图是否有异常。</p>
+</li>
+</ul>
+</blockquote>
 
       
 
@@ -241,32 +260,13 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">monkey</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">monkeyrunner</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">monkeyscript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">LoadRunner</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -316,7 +316,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://youxitest.com/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://youxitest.com/2017/09/24/loadrunnerfirs/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -330,18 +330,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/23/e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          阿里云服务器目录权限问题解决方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/06/17/e8-ae-a9-e5-bf-83-e7-9b-ae-e4-b8-ad-e7-9a-84-e5-a4-a7-e8-b1-a1-ef-bc-8c-e6-8a-93-e7-b4-a7-e6-97-b6-e9-97-b4-e8-b5-b7-e9-a3-9e/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">让心目中的大象，抓紧时间起飞</div>
+    <a href="/2017/09/20/apache-ab/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">get、post请求使用ab工具如何做并发测试？</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -372,8 +363,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://youxitest.com/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/", 
-    sourceId: "monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d",
+    url: "http://youxitest.com/2017/09/24/loadrunnerfirs/", 
+    sourceId: "loadrunnerfirs",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };

@@ -147,6 +147,104 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-loadrunnerfirs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/24/loadrunnerfirs/">如何学习LoadRunner性能测试？</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/24/loadrunnerfirs/" class="archive-article-date">
+  	<time datetime="2017-09-24T08:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近组内同事针对性能测试LR的脚本部分做了介绍，是个不错的分享。会后反思自己也有很长一段时间没做性能测试了，根据以往的经验，有必要做些整理和补充，本文主要介绍一些Loadrunner性能测试的学习方法、思路、流程以及测试过程中需要注意的点。脚本相关的介绍在这篇文章就不过多描述了，有兴趣的朋友网上进行查找，资料也相对比较丰富。</p>
+<p><strong>一、Loadrunner初步了解</strong></p>
+<p>关于Loadrunner的学习，初期重点关注Vuser Generator的使用，需掌握以下内容，再去实战操作基本就不难了。</p>
+<ul>
+<li>录制脚本的基本步骤；</li>
+<li>理解基础函数的含义：lr_start_transaction(),lr_end_transaction(),web_reg_find(),web_url(),web_submit_form();</li>
+<li>会看输出窗口中的Replay log；</li>
+<li>Vuser-Run Time Setting中Run logic\log\Think Time的设置；</li>
+<li>脚本的迭代；</li>
+<li>手动写脚本，掌握基本函数；</li>
+<li>Loadrunner参数的设置；</li>
+</ul>
+<p>针对我们目前的项目基本上是做HTTP/HTTPS协议的压测，大家手上有项目时，可以通过录制了解一下整个HTTP请求及响应的情况，学习一下Loadrunner内置的函数。</p>
+<p>另外参数设置、迭代、关联函数等等希望大家查一下资料弄懂，实践一下不同方式有什么不同。</p>
+<p><strong>二、性能指标</strong></p>
+<p>在做性能测试之前，简单说下性能指标：</p>
+<p>响应时间</p>
+<p>针对页面操作，响应时间小于2秒，用户会感觉系统较快较满意；响应时间在2~5秒，用户可以接受，但对速度有些不满；响应时间超过5秒，用户将无法接受。作为优秀的项目当然越快越好，我们在做压测的时候，一般希望响应时间在1秒以内，<br>针对系统内部调用的接口响应时间更要快，具体情况视具体接口而定。</p>
+<p>吞吐量</p>
+<p>通常需要结合业务部门的市场目标而定。</p>
+<p>服务器资源占用</p>
+<p>CPU占用率、内存使用率不能过高；Cache命中率不能过低。<br><br><br>
+        
+          <a class="article-more-a" href="/2017/09/24/loadrunnerfirs/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">LoadRunner</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/24/loadrunnerfirs/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
     <article id="post-apache-ab" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -509,103 +607,6 @@
 
 
   
-    <article id="post-pycharm-e5-85-b3-e8-81-94github" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/02/pycharm-e5-85-b3-e8-81-94github/">PyCharm关联GitHub</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/02/pycharm-e5-85-b3-e8-81-94github/" class="archive-article-date">
-  	<time datetime="2017-07-02T13:33:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1、terminal中分别输入git及ssh，检查命令是否都有，如果没有自行安装。</p>
-<p>2、在pycharm中设置github账号密码<br>Preferences–&gt;Version Control–&gt;GitHub,<br>需要填写：<br>Host:github.com<br>Login:xxxxx@gmail.com<br>Password：xxxxxx<br>点击test,弹出Success</p>
-<p>3、在Github账号中添加本机Mac的ssh keys<br>在Terminal输入以下命令，生成ssh keys：<br>ssh-keygen -t ras -C xxxx@gmail.com</p>
-<p>cd ~/.ssh</p>
-<p>ls</p>
-<p>ls之后可以看到一个文件id_ras.pub,把其中内容复制出来，登录github网站，settings—&gt;ssh keys新增key，Title随便写，key值为刚刚粘贴的内容。</p>
-<p>4、PyCharm向GitHib更新代码<br>向GitHib创建新的项目，VCS–&gt;Import into Version Control–&gt;Share Project on GitHib</p>
-<p>向GitHib更新提交代码，在PyCharm的工具栏有vcs绿色箭头向下、向上图标，一个update一个commit,或者快捷键command+k</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">PyCharm</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/02/pycharm-e5-85-b3-e8-81-94github/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -703,15 +704,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -744,6 +745,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
               </li>
              
               <li class="article-tag-list-item">
