@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
 <meta property="og:description" content="最近确实也有些忙，原来都是利用周末的时间写东西，现在周末的时间被占满，照顾小孩。只能忙中找空，写点东西。    最近正好使用ab性能测试工具测了一个项目，主要用来做并发测试，需求是控制水军用户的并发数，通过nginx配置控制并发量（针对异常ip–双ip），所以为了能够快速上线，就选择了ab工具。觉得ab工具多多少少还是可以快速的运用到工作当中，所以有必要写出来分享给需要的同行。主要介绍下使">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-24T03:47:34.000Z">
+<meta property="og:updated_time" content="2017-09-24T03:54:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="get、post请求使用ab工具如何做并发测试？">
 <meta name="twitter:description" content="最近确实也有些忙，原来都是利用周末的时间写东西，现在周末的时间被占满，照顾小孩。只能忙中找空，写点东西。    最近正好使用ab性能测试工具测了一个项目，主要用来做并发测试，需求是控制水军用户的并发数，通过nginx配置控制并发量（针对异常ip–双ip），所以为了能够快速上线，就选择了ab工具。觉得ab工具多多少少还是可以快速的运用到工作当中，所以有必要写出来分享给需要的同行。主要介绍下使">
@@ -178,6 +178,7 @@
 <p>查看nginx访问日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">m.1768.com 21.58.201.31 - - [18/Sep/2017:18:57:43 +0800] &quot;GET /?act=index&amp;st=login HTTP/1.0&quot; 200 266 &quot;-&quot; &quot;ApacheBench/2.3&quot; 2.2.2.2,47.94.13.33</div></pre></td></tr></table></figure></p>
 <p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">[root@iZ9q9Z /]# ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 100 -c 30 http://m.1768.com/?</div><div class="line">act=index&amp;st=login</div><div class="line">[1] 4515</div><div class="line">[root@iZ9otb9Z /]# This is ApacheBench, Version 2.3 &lt;$Revision: 1430300 $&gt;</div><div class="line">Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/</div><div class="line">Licensed to The Apache Software Foundation, http://www.apache.org/</div><div class="line"></div><div class="line">Benchmarking 10test7-admin.stg3.1768.com (be patient).....done</div><div class="line"></div><div class="line"></div><div class="line">Server Software:        nginx</div><div class="line">Server Hostname:        m.1768.com</div><div class="line">Server Port:            80</div><div class="line"></div><div class="line">Document Path:          /?act=index    #请求的资源</div><div class="line">Document Length:        0 bytes     #文档返回的长度，不包括相应的头</div><div class="line"></div><div class="line">Concurrency Level:      30          #并发数</div><div class="line">Time taken for tests:   0.609 seconds   #总请求时长</div><div class="line">Complete requests:      100            #总请求数</div><div class="line">Failed requests:        0           #失败的请求数</div><div class="line">Write errors:           0          #错误</div><div class="line">Non-2xx responses:      100</div><div class="line">Total transferred:      45900 bytes   #总共传输数据量 </div><div class="line">HTML transferred:       0 bytes</div><div class="line">Requests per second:    164.18 [#/sec] (mean)   #平均每秒的请求数，重要指标：相当于LR中的每秒事务数，后面的括号中mean表示这是一个平均值</div><div class="line">Time per request:       182.725 [ms] (mean)    #平均每个请求消耗的时间，重要指标：LR中的平均事务响应时间</div><div class="line">Time per request:       6.091 [ms] (mean, across all concurrent requests)   #上面的请求除以并发数，即服务器平均请求响应时间 在并发量为1时 用户等待时间相同  </div><div class="line">Transfer rate:          73.59 [Kbytes/sec] received   #平均每秒多少K，即传输速率</div><div class="line"></div><div class="line">Connection Times (ms)</div><div class="line">              min  mean[+/-sd] median   max</div><div class="line">Connect:       28   32   1.7     32      36</div><div class="line">Processing:    70  106  25.5    100     169</div><div class="line">Waiting:       70  106  25.5    100     169</div><div class="line">Total:        100  138  25.7    134     202</div><div class="line"></div><div class="line">Percentage of the requests served within a certain time (ms)</div><div class="line">  50%    134        #50%的请求都在134ms内完成</div><div class="line">  66%    143</div><div class="line">  75%    153</div><div class="line">  80%    163</div><div class="line">  90%    180</div><div class="line">  95%    188</div><div class="line">  98%    193</div><div class="line">  99%    202</div><div class="line"> 100%    202 (longest request)</div></pre></td></tr></table></figure></p>
 <p>具体每个参数的含义可以参考如下地址，里面有很详细的介绍。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://www.jb51.net/article/59469.htm</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>举例</p>
 <hr>
 <p><code>get请求</code></p>
@@ -433,15 +434,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -461,6 +462,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">创业</a>
               </li>
              
@@ -469,15 +474,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -486,14 +483,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">django</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -506,6 +495,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">monkeyscript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">django</a>
               </li>
             
             <div class="clearfix"></div>
