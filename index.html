@@ -147,6 +147,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-linux-log-cy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/13/linux-log-cy/">linux环境下查看日志常用命令</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/13/linux-log-cy/" class="archive-article-date">
+  	<time datetime="2017-10-13T00:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>linux环境下查看日志必不可少，简单整理了一些常用的命令，若有需要可直接拿来使用，如果还有其他觉得不错的需要补充的，请在微信公众号测试架构师后 台回复给我，谢谢！</p>
+<p>tail -f 87testing.log#默认查看最新10条日志记录并实时刷新</p>
+<p>tail 87testing.log -n 100 #查看最新100条日志记录</p>
+<p>tail -f 87testing.log -n 100 #查看最新100条日志记录并实时刷新</p>
+<p>tail 87testing.log -n +100 #查看从第100行开始，后面的所有日志记录</p>
+<p>head 87testing.log -n 100 #查看前面100行日志记录</p>
+<p>cat -n 87testing.log |grep “关键词” #查看到关键词相关日志及行号</p>
+<p>cat -n 87testing.log |grep “关键词” |more #分页显示，按空格键可翻页</p>
+<p>cat 87testing.log | tail -n +200 | head -n 100 #从200开始，显示200行到299行的日志记录</p>
+<p>sed -n ‘200,299p 87testing.log #从200开始，显示200行到299行的日志记录</p>
+<p>sed -n ‘/2017-10-11 00:00:00/,/2017-10-11 01:23:23/p’ 87testing.log #查看某一时间段内的日志记录（两个日期必须在日志中存在，不然会是失效）</p>
+<p>tail -f 87testing.log |grep –color=auto -i 关键词 #实时日志记录中，将关键词设置高亮</p>
+<p>tail -f 87testing.log |grep -v 关键词 #反向查找，查询实时日志中不包含关键词的行的日志记录</p>
+<p>grep 关键词 -B2 -A1 87testing.log #查询日志文件中，关键词所在行及前2行后1行的日志记录</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/13/linux-log-cy/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
     <article id="post-loadrunnerfirs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -519,97 +607,9 @@
 
 
   
-    <article id="post-e6-9c-ac-e5-9c-b0-e6-95-b0-e6-8d-ae-e5-ba-93mysql-e5-ae-89-e8-a3-85-e5-92-8c-e4-bd-bf-e7-94-a8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/02/e6-9c-ac-e5-9c-b0-e6-95-b0-e6-8d-ae-e5-ba-93mysql-e5-ae-89-e8-a3-85-e5-92-8c-e4-bd-bf-e7-94-a8/">本地数据库mysql安装和使用</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/02/e6-9c-ac-e5-9c-b0-e6-95-b0-e6-8d-ae-e5-ba-93mysql-e5-ae-89-e8-a3-85-e5-92-8c-e4-bd-bf-e7-94-a8/" class="archive-article-date">
-  	<time datetime="2017-07-02T14:21:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>mac本地数据库mysql的安装：<br>mysql官方下载链接：<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">https://dev.mysql.com/downloads/mysql/</a><br>下载完并安装成功后，会有个默认的数据库账号密码：<br>root@localhost: waTADIuz0y=w</p>
-<p>安装好mysql服务后，打开『系统偏好设置』，点击MySQL图标,在弹出的框中，点击Start MySQL Server,进行启动(如果启动成功，按钮会变成Stop MySQL Server)</p>
-<p>在Terminal终端登录MySQL，输入：<br>TTZhangdeMacBook-Pro:~ admin$ PATH=”$PATH”:/usr/local/mysql/bin<br>TTZhangdeMacBook-Pro:~ admin$ mysql -u root -p<br>此时，会提示输入密码，输入刚刚默认给出的密码即可</p>
-<p>展示当前数据库下所有的库：<br>mysql&gt; show databases;<br>此时，可能会有报错提示：ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.<br>遇到这种情况，只要输入如下命令重新设置即可解决：<br>mysql&gt; SET PASSWORD = PASSWORD(‘123456’);</p>
-<p>重新执行：show databases; 即可展示出当前数据库下所有的库：</p>
-<p>mysql&gt; show databases;<br>+——————–+<br>| Database |<br>+——————–+<br>| information_schema |<br>| mysql |<br>| performance_schema |<br>| sys |<br>+——————–+<br>4 rows in set (0.00 sec)</p>
-<p>进入某一个库中，如进入sys这个库<br>mysql&gt; use sys;<br>Database changed</p>
-<p>查看sys库下所有的表：<br>mysql&gt; show tables;<br>+———————————————–+<br>| Tables_in_sys |<br>+———————————————–+<br>| host_summary |<br>| host_summary_by_file_io |<br>| host_summary_by_file_io_type |<br>| host_summary_by_stages |<br>| host_summary_by_statement_latency |<br>| host_summary_by_statement_type |<br>| innodb_buffer_stats_by_schema |<br>| innodb_buffer_stats_by_table |<br>| innodb_lock_waits |<br>| io_by_thread_by_latency |<br>| io_global_by_file_by_bytes |<br>| io_global_by_file_by_latency |<br>| io_global_by_wait_by_bytes |<br>| io_global_by_wait_by_latency |<br>| latest_file_io |<br>| memory_by_host_by_current_bytes |<br>| memory_by_thread_by_current_bytes |<br>| memory_by_user_by_current_bytes |<br>| memory_global_by_current_bytes |<br>| memory_global_total |<br>| metrics |<br>| processlist |<br>| ps_check_lost_instrumentation |<br>| schema_auto_increment_columns |<br>| schema_index_statistics |<br>| schema_object_overview |<br>| schema_redundant_indexes |<br>| schema_table_lock_waits |<br>| schema_table_statistics |<br>| schema_table_statistics_with_buffer |<br>| schema_tables_with_full_table_scans |<br>| schema_unused_indexes |<br>| session |<br>| session_ssl_status |<br>| statement_analysis |<br>| statements_with_errors_or_warnings |<br>| statements_with_full_table_scans |<br>| statements_with_runtimes_in_95th_percentile |<br>| statements_with_sorting |<br>| statements_with_temp_tables |<br>| sys_config |<br>| user_summary |<br>| user_summary_by_file_io |<br>| user_summary_by_file_io_type |<br>| user_summary_by_stages |<br>| user_summary_by_statement_latency |<br>| user_summary_by_statement_type |<br>| version |<br>| wait_classes_global_by_avg_latency |<br>| wait_classes_global_by_latency |<br>| waits_by_host_by_latency |<br>| waits_by_user_by_latency |<br>| waits_global_by_latency |<br>| x$host_summary |<br>| x$host_summary_by_file_io |<br>| x$host_summary_by_file_io_type |<br>| x$host_summary_by_stages |<br>| x$host_summary_by_statement_latency |<br>| x$host_summary_by_statement_type |<br>| x$innodb_buffer_stats_by_schema |<br>| x$innodb_buffer_stats_by_table |<br>| x$innodb_lock_waits |<br>| x$io_by_thread_by_latency |<br>| x$io_global_by_file_by_bytes |<br>| x$io_global_by_file_by_latency |<br>| x$io_global_by_wait_by_bytes |<br>| x$io_global_by_wait_by_latency |<br>| x$latest_file_io |<br>| x$memory_by_host_by_current_bytes |<br>| x$memory_by_thread_by_current_bytes |<br>| x$memory_by_user_by_current_bytes |<br>| x$memory_global_by_current_bytes |<br>| x$memory_global_total |<br>| x$processlist |<br>| x$ps_digest_95th_percentile_by_avg_us |<br>| x$ps_digest_avg_latency_distribution |<br>| x$ps_schema_table_statistics_io |<br>| x$schema_flattened_keys |<br>| x$schema_index_statistics |<br>| x$schema_table_lock_waits |<br>| x$schema_table_statistics |<br>| x$schema_table_statistics_with_buffer |<br>| x$schema_tables_with_full_table_scans |<br>| x$session |<br>| x$statement_analysis |<br>| x$statements_with_errors_or_warnings |<br>| x$statements_with_full_table_scans |<br>| x$statements_with_runtimes_in_95th_percentile |<br>| x$statements_with_sorting |<br>| x$statements_with_temp_tables |<br>| x$user_summary |<br>| x$user_summary_by_file_io |<br>| x$user_summary_by_file_io_type |<br>| x$user_summary_by_stages |<br>| x$user_summary_by_statement_latency |<br>| x$user_summary_by_statement_type |<br>| x$wait_classes_global_by_avg_latency |<br>| x$wait_classes_global_by_latency |<br>| x$waits_by_host_by_latency |<br>| x$waits_by_user_by_latency |<br>| x$waits_global_by_latency |<br>+———————————————–+<br>101 rows in set (0.00 sec)</p>
-<p>可以查看其中表中的数据：<br>mysql&gt; select * from host_summary;<br>+———–+————+——————-+———————–+————-+———-+—————–+———————+——————-+————–+—————-+————————+<br>| host | statements | statement_latency | statement_avg_latency | table_scans | file_ios | file_io_latency | current_connections | total_connections | unique_users | current_memory | total_memory_allocated |<br>+———–+————+——————-+———————–+————-+———-+—————–+———————+——————-+————–+—————-+————————+<br>| localhost | 115 | 49.54 ms | 430.78 us | 6 | 54 | 2.73 ms | 1 | 1 | 1 | 0 bytes | 0 bytes |<br>+———–+————+——————-+———————–+————-+———-+—————–+———————+——————-+————–+—————-+————————+<br>1 row in set (0.03 sec)</p>
-<p>如果需要查看MySQL端口号：<br>mysql&gt; show global variables like ‘port’;<br>+—————+——-+<br>| Variable_name | Value |<br>+—————+——-+<br>| port | 3306 |<br>+—————+——-+<br>1 row in set (0.01 sec)</p>
-<p>mysql&gt; CREATE DATABASE guest CHARACTER SET utf8;<br>Query OK, 1 row affected (0.00 sec)</p>
-<p>安装pymysql：<br>sudo pip install pymysql</p>
-<p>给电脑安装一个好用的查看数据库的插件吧，由于我是在mac上使用，所以使用插件：Valentina Studio ,windows上可使用Navicat</p>
-<p>安装PyMySQL：<br>TTZhangdeMacBook-Pro:~ admin$ git clone <a href="https://github.com/PyMySQL/PyMySQL" target="_blank" rel="external">https://github.com/PyMySQL/PyMySQL</a><br>TTZhangdeMacBook-Pro:~ admin$ cd PyMySQL/<br>TTZhangdeMacBook-Pro:PyMySQL admin$ python3 setup.py install</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/02/e6-9c-ac-e5-9c-b0-e6-95-b0-e6-8d-ae-e5-ba-93mysql-e5-ae-89-e8-a3-85-e5-92-8c-e4-bd-bf-e7-94-a8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -704,7 +704,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -716,11 +720,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -745,6 +745,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
