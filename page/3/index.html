@@ -147,6 +147,204 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/23/e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95/">阿里云服务器目录权限问题解决方法</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/23/e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95/" class="archive-article-date">
+  	<time datetime="2017-06-23T05:22:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>刚做好的图片，上传到linux系统上就各种权限问题，很是烦恼，当时就想：哪里有问题~~~</p>
+<div id="js_article" class="rich_media"><br><div class="rich_media_inner"><br><div id="page-content" class="rich_media_area_primary"><br><div id="img-content"><br><div id="js_content" class="rich_media_content "><br><br>虽然这样当时是没有问题的，但是在安全性上是也就降低了，找了个时间找了一些资料，发现一个还比较好的<br><br>服务器上项目是放在/alidata/www/default这个文件夹下<br><br>如果使用root 用户上传项目，则全部默认所有者和组为root，但是我仔细看了一下默认的那几个文件的所有者和组都是www<br><br>根据文档和自己的思考，设置步骤如下：<br><br>1、把网站目录和文件所有者和组都设置为www<br><br><span style="color: #333333; line-height: 21.6px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 14px; background-color: inherit;">     </span><span style="color: black; line-height: 1.6; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; font-size: 16px; white-space: pre-wrap; background-color: inherit;">chown -R www:www /alidata/www/</span><span style="color: #006699; line-height: 1.6; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; font-size: 16px; font-weight: bold; white-space: pre-wrap; background-color: inherit;">default</span><span style="color: black; line-height: 1.6; font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif; font-size: 16px; white-space: pre-wrap; background-color: inherit;">  </span><br><br><span style="color: #333333; line-height: 21.6px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 14px; background-color: #ffffff;">2.设置网站目录权限为750，750是www这个用户对目录拥有读写执行的权限，这样www用户可以在任何目录下创建文件，用户组有有读执行权限，这样就有进入目录的权限，其它用户没有任何权限。</span><br><br>chmod 750 /alidata/www/default<br><br>cd /alidata/www/default<br><br>find -type d -exec chmod 750 {} \;<br><br><span style="color: #333333; line-height: 21.6px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 14px; background-color: #ffffff;">3.设置网站文件权限为640，640指只有www用户对网站文件有更改的权限，apache服务器只有读取文件的权限，无法更改文件，其它用户无任何权限。</span><br><br>find -not -type d -exec chmod 640 {} \;<br><br>4.需要针对个别目录来设置权限，以Thinkphp为例，它的Runtime 目录存储的有日志文件，还有与数据库做ORM映射的数据库表信息，这说明apache服务器要对这些目录<br><br>有访问的权限，并且对于线面的日志文件有写入的权限，那么这样就需要对于这些特殊目录设置。<br><br>   cd /alidata/www/default<br><br>find . -name “Runtime” -type d -exec chmod -R 770 {} \;<br><br>执行上面的命令请注意 “{}”与 “\”之间是有空格的，上面的-R参数是递归给Runtime 目录下面的目录和文件赋予 770 权限，当然了你会说日志文件是不需要执行权限的，<br><br>不过这里没关系，当你把日志文件删除掉之后，生成出来的文件是没执行权限的。因为当你把日志文件删除掉之后，那么生成日志文件的的用户和所有者都是www<br><br>这样整个站点你就可以通过这种方式管理起来了。文档参考：<a href="http://www.cnblogs.com/stackflow/p/3928407.html" target="_blank" rel="external">http://www.cnblogs.com/stackflow/p/3928407.html</a><br><br>使用过程中发现我用的百度编辑器还不正常，我想起来我的一些外部插件都放在根下public下了，并且上传图片会放到upload下<br><br>所以照葫芦画瓢public下插件和upload750权限，default目录下执行以下命令<br><br>   find . -name “Uploads” -type d -exec chmod -R 770 {} \;<br><br>find . -name “Public” -type d -exec chmod -R 770 {} \;<br><br><span style="color: #333333; line-height: 21.6px; font-family: verdana, 'ms song', 宋体, Arial, 微软雅黑, Helvetica, sans-serif; font-size: 14px; background-color: #ffffff;">这样就搞定了~~~</span><br><br></div><br></div><br></div><br></div><br></div>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/23/e9-98-bf-e9-87-8c-e4-ba-91-e6-9c-8d-e5-8a-a1-e5-99-a8-e7-9b-ae-e5-bd-95-e6-9d-83-e9-99-90-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-96-b9-e6-b3-95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/">MonkeyScript及Monkeyrunner介绍</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/" class="archive-article-date">
+  	<time datetime="2017-06-18T13:02:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>获取app包名：<br>adb logcat |grep START</p>
+<p>执行Monkey脚本的命令：<br>adb shell monkey -f &lt;scriptfile&gt; &lt;event-count&gt;</p>
+<p>1、Dispatch Trackball命令（轨迹球事件）</p>
+<p>Dispatch Trackball(long downtime,long eventide,<span style="color: #ff0000;">int action,float x,float y</span>,float pressure,float size,int metastate,float xprecision,float yprecision,int device,int edgeflags)<br>action 0代表按下，1代表弹起，x和y代表的坐标点</p>
+<p>2、DispatchPointer命令（点击事件）</p>
+<p>DispatchPointer(long downtime,long eventide,<span style="color: #ff0000;">int action,float x,float y</span>,float pressure,float size,int metastate,float xprecision,float yprecision,int device,int edgeflags)<br>action 0代表按下，1代表弹起，x和y代表的坐标点</p>
+<p>3、DispatchString(String text)(输入字符串事件)</p>
+<p>4、LaunchActivity命令（启动应用）</p>
+<p>LaunchActivity(package,Activity)</p>
+<p>5、UserWait命令（等待事件）</p>
+<p>UserWait(1000)</p>
+<p>6、DispatchPress命令（按下键值）</p>
+<p>DispatchPress(int keycode) #keycode 66 回车键</p>
+<p>举例：<br>1、启动app<br>2、点击输入框<br>3、输入查询词<br>4、点击搜索按钮<br>5、等待结果的出现<br>6、点击clear按钮</p>
+<p>#search.script，使用命令adb shell monkey -f search.script 2(注意脚本在电脑上，monkey在手机上跑，需要将脚本push到手机上：adb push serch.script /data/local/tmp;另外，在AndroidManifest.xml中的activity加入android:exported=”true”,最后，可使用sdk自带工具uiautomatorviewer获取坐标点)</p>
+<p><code>typ=user</code><br><code>count=10</code><br><code>speed=1.0</code><br><code>start data &amp;gt;&amp;gt;</code></p>
+<p><code>LaunchActivity(com.android.chrome,com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity)</code><br><code>UserWait(2000)</code><br><code>DispatchPointer(10,10,0,100,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,100,100,1,1,-1,1,1,0,0)</code><br><code>DispatchString(test)</code><br><code>UserWait(1000)</code><br><code>DispatchPress(66)</code><br><code>UserWait(1000)</code><br><code>DispatchPointer(10,10,0,300,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,300,100,1,1,-1,1,1,0,0)</code><br><code>UserWait(6000)</code><br><code>DispatchPointer(10,10,0,400,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,400,100,1,1,-1,1,1,0,0)</code></p>
+<p><strong>MonkeyRunner:</strong><br>1、MonkeyRunner API -alert(警示框)<br>void alert(string message,string title,string okTitle)</p>
+<p>#举例：demo.py 执行使用monkeyrunner demo.py<br><code>#!usr/bin/python</code><br><code>#_*_ UTF-8 _*_</code><br><code>from com.android.monkeyrunner import MonkeyRunner</code><br><code>MonkeyRunner.alert(&#39;Hello TT frends&#39;,&#39;This is title&#39;,&#39;OK&#39;)</code></p>
+<p>2、MonkeyRunner API -waitForConnection(等待设备连接，有多个device id，需要指明具体哪个设备)<br>WaitForConnection(float timeout,string deviceid)</p>
+<p>3、MonkeyDevice API - drag(拖动)<br>drag(tuple start,tuple end,float duration,integer steps)</p>
+<p>4、MonkeyDevice API - press(按键)<br>press(string keycode,dictionary type)<br>keycode名，Down、UP、DOWN_AND_UP</p>
+<p>5、MonkeyDevice API -startActivity(启动应用)<br>startActivity(package+’/‘+activity)</p>
+<p>6、MonkeyDevice API -touch(点击)<br>touch(integer x,integer y,integer type)<br>x坐标值，y坐标值，<br>type：DOWN,UP,DOWN_AND_UP</p>
+<p>7、MonkeyDevice API - type(输入)<br>type(string message)</p>
+<p>8、MonkeyDevice API - takeSnapshot(截屏)<br>MonkeyImage takeSnapshot()</p>
+<p>9、MonkeyImage API - sameAs(图像对比)<br>boolean sameAs(MonkeyImage other,float percent)</p>
+<p>10、MonkeyImage API - writetoFile(保存图像文件)<br>void writeToFile(string path,string format)</p>
+<p>#举例：实现在搜索框中输入查询词，并截图</p>
+<p><code>#!/usr/bin/python</code><br><code>#_*_ UTF-8 _*_</code><br><code>from com.android.monkeyrunner import MonkeyRunner,MonkeyDevice,MonkeyImage</code><br><code>#连接设备</code><br><code>device = MonkeyRunner.waitForConnection(3,&quot;emulator-5554&quot;)</code><br><code>#启动app</code><br><code>device.startActivity(&quot;com.android.chrome/com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity&quot;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击搜索框</code><br><code>device.touch(100,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#输入查询词</code><br><code>device.type(&#39;test&#39;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击回车键</code><br><code>device.press(&#39;KEYCODE_ENTER&#39;,&#39;DOWN_AND_UP&#39;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击搜索按钮</code><br><code>device.touch(400,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(5)</code><br><code>#截图</code><br><code>image = device.takeSnapshot()</code><br><code>image.writeToFile(&#39;./test.png&#39;,&#39;png&#39;)</code><br><code>#点击清除按钮</code><br><code>device.touch(300,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(3)</code></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">monkey</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">monkeyrunner</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">monkeyscript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
     <article id="post-e8-ae-a9-e5-bf-83-e7-9b-ae-e4-b8-ad-e7-9a-84-e5-a4-a7-e8-b1-a1-ef-bc-8c-e6-8a-93-e7-b4-a7-e6-97-b6-e9-97-b4-e8-b5-b7-e9-a3-9e" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -465,322 +663,6 @@
 
 
   
-    <article id="post-bug-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/11/bug-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/">BUG，带给我的思考</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/11/bug-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/" class="archive-article-date">
-  	<time datetime="2017-06-11T09:30:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天打开EverNote时，翻到了四年前在anjuke时做的一些bug分析总结。现在回过头看看也是有些价值所在，挑选出部分bug分享，希望能有所启发。</p>
-<p><strong>一、</strong></p>
-<p>iOS新房APP4.4由于在91市场进行试点时，量大的crash召回。具体情况如下：</p>
-<p><em>*</em> -[__NSArrayM objectAtIndex:]: index 20 beyond bounds [0 .. 19]</p>
-<p><em>*</em> -[__NSArrayM objectAtIndex:]: index 40 beyond bounds [0 .. 39]</p>
-<p><em>*</em> -[__NSArrayM objectAtIndex:]: index 60 beyond bounds [0 .. 59]</p>
-<p><em>*</em> -[__NSArrayM objectAtIndex:]: index 80 beyond bounds [0 .. 79]</p>
-<p>&nbsp;</p>
-<p><strong>复现过程：</strong></p>
-<p>1.根据ama上的log记录用户行为进行多次复现操作时，没能复现出此问题。</p>
-<p>2.后来开发说可能是列表的问题，当时改过老功能代码，然后我就从列表找起，最后复现出此crash。</p>
-<p>&nbsp;</p>
-<p><strong>操作步骤：</strong></p>
-<p>1.新房–地图找房–点击小区标点（超过20套）；</p>
-<p>2.小区房源列表，加载出数据后，把网络切为无效网络；</p>
-<p>3.再滑动列表加载更多，弹出加载失败提示框，点击取消，再进行滑动列表；</p>
-<p>&nbsp;</p>
-<p><strong>结果：</strong></p>
-<p>再进行滑动列表时发生crash。</p>
-<p>&nbsp;</p>
-<p><strong>根本原因：</strong></p>
-<p>请求参数city id、page、pagesize，列表里有个逻辑是总数&gt;page x pagesize显示出加载更多，总数&lt;=page x pagesize不显示加载更多。举例：总数=25，第一页显示1x20=20个，此时切换成无效网络，请求第二页时，page自动+1，page x pagesize=2x20=40,实际上加载失败了还是20个，此时“加载更多”需要显示在41行，但是只有21行，所以发生crash。</p>
-<p>&nbsp;</p>
-<p><strong>解决方法：</strong></p>
-<p>修改为总数与缓存进行比对，比如总数=25，第一页显示1x20=20个，此时切换成无效网络，请求第二页时，总数与缓存的20个进行比对，就不会出现此crash。</p>
-<p>&nbsp;</p>
-<p><strong>总结</strong>：</p>
-<p>1.在RC阶段修改一个bug，动了底层代码导致，测试不知情。（bug一定要搞清楚产生的原因和如何修复）</p>
-<p>2.作为QA这个bug当时验证的时候应该在多检查一下相关的功能，毕竟是改的老功能的地方不排除有带出新bug的可能，虽然不一定就能发现那个问题，但是这个习惯还是要养成。</p>
-<p>3.另外开发过程中这种对新列表和单页的网络情况都要做判断包括两种网络（无网络和无效网络） 。</p>
-<p>&nbsp;</p>
-<p><strong>二、</strong></p>
-<p>&nbsp;</p>
-<p>量大crash日志：</p>
-<p><em>*</em> -[NSPlaceholderString initWithString:]: nil argument</p>
-<p><strong>复现过程：</strong></p>
-<p>1.线上发现该问题</p>
-<p>2.开发通过log定位到问题的方法和原因：  使用到了initWithString方法，当cityid取到的城市name为空值时，传入到该方法中应用crash</p>
-<p>3.未想到在何种步骤下cityid会拿到空的name名称，先在模拟器上模拟城市name为空值传入的情况，确认该情况报的crash确实和线上一致</p>
-<p>4.追究真机上重现步骤，开发给出各种设想（城市名称表坏了、用户越狱了、定位到的城市为未开通城市从安居客拿到cityid但新房没开通…），逻辑上均说不通</p>
-<p>5.根据开发的设想和bug产生的原因，我们最终在真机上找到重现步骤（开始以为跟定位有关系，最终逐个排除step，确定下key step）</p>
-<p>&nbsp;</p>
-<p><strong>操作步骤：</strong></p>
-<p>1.全新启动app，进入首页；</p>
-<p>2.假如首页显示的当前城市是“北京”，此时，不要做任何操作，直接再切换一次城市“北京”；</p>
-<p>3.再进行切换新房tab；</p>
-<p>&nbsp;</p>
-<p><strong>结果：</strong></p>
-<p>点击新房tab时发生crash；</p>
-<p>&nbsp;</p>
-<p><strong>根本原因：</strong></p>
-<p>1.代码中有一个逻辑cityid等其他一些筛选条件，再切换城市时，会被清掉，另外外面还有一套逻辑是：当切换的城市与当前城市相同时，缓存数据（cityid，page等）被清掉了，但是没有重新赋cityid，导致cityid为空。</p>
-<p>2.使用了initWithString方法，当cityid取到的城市为空值时，传入到该方法中应用crash（方法使用问题，此方法本身缺陷）。</p>
-<p>&nbsp;</p>
-<p><strong>解决方法：</strong></p>
-<p>1.当切换的城市与当前的城市相同时，不清除缓存数据。</p>
-<p>2.不使用initWithString方法，改成苹果系统中的方法lblCityName.text方法，如</p>
-<p>if (self.filter.cityID) {</p>
-<p>if ([[RTCityManager sharedInstance] cityNameForCityID:self.filter.cityID] == nil) {</p>
-<p>//            [[RTCityManager sharedInstance] setSelectedCityID:@”11”];</p>
-<p>lblCityName.text = @”城市未开通”;</p>
-<p>}</p>
-<p>else</p>
-<p>lblCityName.text = [[RTCityManager sharedInstance] cityNameForCityID:self.filter.cityID];</p>
-<p>}</p>
-<p>另外当cityid真的为空时，又打了一个补丁，城市显示为“未开通”</p>
-<p>&nbsp;</p>
-<p><strong>总结：</strong></p>
-<p>1.此问题之前一直隐藏的问题，当时的表现是按照上面操作，提示加载失败，当时以为是网络问题，而很容易被忽略掉。</p>
-<p>2.如果不能复现出此问题，先根据初步判断进行在模拟器上模拟一些情况进行是否与线上crash报的错误一致，从而再进一步进行问题的定位。</p>
-<p>3.之前在户型选择的时候曾出现过类似问题，再有选择项时，一定要对重复选择项多做测试。</p>
-<p>4.在使用initWithString等方法的时候一定要考虑一些边界情况，对一些空的情况做下处理。</p>
-<p>5.之前4.3版本上存在过渠道包打错渠道包的问题，在打渠道包时，一定要注意是QA最后测试的版本。这个以后也要引起注意。</p>
-<p>6.在RC阶段，如果没有大的问题一定不要轻易的动底层代码，如果问题严重一定要动底层代码的话QA一定要了解清楚可能影响的模块，进行评估风险。</p>
-<p>&nbsp;</p>
-<p><strong>三、</strong></p>
-<p>&nbsp;</p>
-<p><strong>bug描述：</strong>iOS新房4.5：连续18次进入新房地图找房时，发生crash。</p>
-<p>&nbsp;</p>
-<p><strong>复现过程：</strong></p>
-<p>1.daily build的最后两天发现的此问题，然后就提了一个偶发bug：新盘首页锁屏放置了大概10分钟左右，解锁后进入地图找房，地图无法显示；</p>
-<p>2.两天内出现了3-4次，应该会有必现的规律，找开发确认此问题，当时的猜测是（进入地图找房请求数据的时候卡住了，api的问题等等）；</p>
-<p>3.接下来从地图入手，新盘地图找房和新房地图找房来回切换，让开发连接真机调试的时候发现问题所在</p>
-<p>&nbsp;</p>
-<p><strong>操作步骤</strong>：</p>
-<p>新房tab–地图找房–返回（连续操作18次–iphone5）</p>
-<p>&nbsp;</p>
-<p><strong>根本原因：</strong></p>
-<p>在新房地图找房返回时，没有内存没有及时回收。</p>
-<p>&nbsp;</p>
-<p><strong>总结：</strong></p>
-<p>今后在测试中对于一些新加的功能模块，或改动较大的模块，适当的进行一些类似压力的测试（观察内存和cpu的使用情况）。</p>
-<p>&nbsp;</p>
-<p><strong>当时的一点思考总结：</strong></p>
-<p>&nbsp;</p>
-<p>1.当你在和开发人员确认问题的时候，一定要搞清楚原因，特别是bug如何产生和如何修复的。</p>
-<p>&nbsp;</p>
-<p>2.项目合作时，要更加的主动（比如在发包的时候，可能邮件描述的不清楚，要主动去确认，修改了那些东西？底层的东西有没有动，如果动了可能那些模块会受到影响等等），多沟通多确认。</p>
-<p>&nbsp;</p>
-<p>3.花一点时间去挑战偶发的crash等奇怪现象，其实bug正常来看的话都有必现的步骤。</p>
-<p>&nbsp;</p>
-<p>4.多看代码（在空闲的时候多去看看代码，了解了解具体的逻辑是怎么样的）</p>
-<p>&nbsp;</p>
-<p>以上内容不敢说对所有的人都有所用，但是应该能对部分人有所帮助和启发。</p>
-<p>&nbsp;</p>
-<p><strong>对于测试人员来说一定要注意：</strong></p>
-<p>&nbsp;</p>
-<p>1.当我们去做某一个项目时，一定要搞清楚架构、功能等是如何实现的，系统之间是如何交互的，使用到哪些技术，等等（不懂多问、多查资料，多思考，多总结）；</p>
-<p>&nbsp;</p>
-<p>2.测试前准备：数据准备、流程图、接口、数据库、兼容性等都梳理清楚，搞明白透彻，测试前分析到位；</p>
-<p>&nbsp;</p>
-<p>3.用例设计：按照步骤2的分析进行用例的编写，除了正常的流程外，多考虑其中的异常场景。说到这里，可能会有朋友说，小需求我哪里有时间写测试用例，时间那么紧急。用例一定要写，小需求也要把测试点写出来，如果没有测试点，怎么去测？如何能更好的保证质量？</p>
-<p>&nbsp;</p>
-<p>4.用例评审：保证三方（产品、研发、测试）需求的统一性，另外，尽可能的达到用例的全面性，对遗漏的用例做补充。</p>
-<p>&nbsp;</p>
-<p><div><br><strong><font color="#FF0000"></font></strong>要做到：<strong>不懂多问、多沟通、多查资料、多思考、多总结。</strong><br></div><br>&nbsp;</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/11/bug-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/11/e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/">关键对话，带给我的思考</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/11/e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/" class="archive-article-date">
-  	<time datetime="2017-06-11T09:17:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在生活当中经常会遇到很多情况，第一、升职加薪、面试、第一次去相亲等等，这都可以理解为关键对话。第二、对话双方的情绪很激烈，两个人都在大声的嚷嚷和争论，这时候也是关键对话。第三、双方的意见存在很大的分歧，比如，你希望你的孩子不要玩游戏，而你的孩子非要玩游戏。以上三种都称之为关键对话。</p>
-<p>&nbsp;</p>
-<p>有没有自己反思过关键时候掉链子的情况，每次谈完话就想，我当时说这个就好了，我怎么忘了这事呢！为什么会在关键时候掉链子？当面临公众演讲的时候，当面临与领导谈话的时候，当跟开发或者产品争论的时候，都会变得嘴有些笨，该说的话都没有说出来。一般人处理关键对话两种不好的结局：要么得罪对方，自己变得特别失态，失去风度；还有一种状况是，算了，假装没发生，避而不谈。那么有没有做的很好呢？要对对方保持百分之一百的尊重，同时要做到百分之一百的坦诚。</p>
-<p>&nbsp;</p>
-<p>从心开始。做一个关键对话之前要做一些准备，先把自己的心态调整好，让自己的心平静下来再与对方进行对话。生气的时候不要与别人沟通，当你生气的时候智商为零，特别高兴的时候不要随便答应给别人东西，彩票中了分你一半，真中了结果会分么？我们总以为苦恼是由他人导致的，这种思维方式会让你的情绪不受控制，并且不由自主的想要伤害对方，或者自认倒霉。其实只有改变自己才能改变结果。要知道你永远都有着选择的权利，没有能够伤害你，除非你自己允许。做到这一点，你才能努力考虑如何去解决问题，而不是伤害或被伤害。</p>
-<p>&nbsp;</p>
-<p>在对话前学会问自己几个问题：</p>
-<p>1、这次对话我的目标是什么？</p>
-<p>2、这次对话我希望为对方达成的目标是什么？</p>
-<p>3、这次对话之后我希望为我们俩的关系达成一个什么样的目标？</p>
-<p>4、为了达成这些目标我应该怎么做？</p>
-<p>&nbsp;</p>
-<p>当我们把这几个问题问完，这就是关键对话的引导性思维。比如，你的孩子喜欢天天玩游戏，说他怎么都没用，发脾气没收手机都没用，来做一场关键对话：</p>
-<p>&nbsp;</p>
-<p>1、这次对话的目标：希望通过这场对话帮助他减少打游戏时间，能够让他更专注学习；</p>
-<p>2、这次对话我希望为对方达成的目标是什么：我希望让对方感觉到爸妈是爱他的，能够感觉到爸妈是替他着想的，并且找到一个平衡打游戏和学习的方法；</p>
-<p>3、这次对话之后我希望为我们俩的关系达成一个什么样的目标：通过这次对话，跟孩子的关系变得更加融洽，让孩子感受到对他无条件的爱；</p>
-<p>4、应该怎么做：比如应该先表达关心和爱，应该先表达理解，应该告诉他说爸爸小时候也特别喜欢打游戏，那么为什么爸爸要跟你谈这个事，咱们应该怎么做。</p>
-<p>&nbsp;</p>
-<p>另外，<strong>对于测试人员来说，也存在不少关键对话。这里就拿与产品、开发对话举例：</strong></p>
-<p>假如，产品给你一个需求，产品三言两语的简单说下什么需求，开发leader认为这个需求很简单，不需要再次核对，就交给小弟去做了，但是作为测试人员的我们可能认为其中有不少需要注意的地方，还是需要一起理下需求和技术实现，达成一致，同时保证质量且能够按时交付上线。结果，做了三四天实现的功能并不是产品所需，又打回重做，这样前期就浪费了不少时间和资源，造成的后果是，必须要上线了，重新定方案，开发leader亲自做，最后通过加班也如期上线了。其实通过这个小的需求当中项目相关人员还是存在不少问题的。</p>
-<p>&nbsp;</p>
-<p>测试人员还是要坚持自己的原则，对于不明确或者存在风险的地方，主动与产品、开发从产品需求和技术实现上达成一致，只有这样才能更好的为测试做准备，设计好测试分析和用例，提前规避风险。那么针对这个案例就可以参考关键对话：</p>
-<p>1、这次对话的目标：希望产品需求和技术实现达成一致；</p>
-<p>2、这次对话我希望为对方达成的目标是什么：满足产品需求，理清技术方案，避免不必要的时间和资源浪费；</p>
-<p>3、这次对话之后我希望为我们俩的关系达成一个什么样的目标：通过这次对话，与产品、开发关系更融洽，让他们感受到对产品的质量负责；</p>
-<p>4、应该怎么做：召集产品、开发一起理清需求和技术方案的讨论，测试人员提前准备好疑惑点，最后经过讨论达成一致，并评估出提测时间和上线时间，做好会议纪要发给大家。</p>
-<p>&nbsp;</p>
-<p><strong>关键对话中需要注意：</strong></p>
-<p>1、从心开始（调整心态，自己首先摆脱暴力或沉默的状态，寻找双赢的可能）</p>
-<p>2、注意观察（除了内容，还要关注谈话的氛围）</p>
-<p>3、保证安全（如果对方情绪出现问题，想办法让对方觉得安全）</p>
-<p>4、控制想法（不要轻易的觉得受到冒犯或者不公平，公平不重要，解决问题才重要）</p>
-<p>5、陈述观点（输出事实，表达观点，对比说明）</p>
-<p>6、了解动机（帮助对方调整情绪）</p>
-<p>&nbsp;</p>
-<p>可以尝试着用在工作和生活当中，希望对你能有所帮助！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">关键对话</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">职场沟通</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/11/e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -878,14 +760,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
@@ -894,7 +768,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -914,15 +800,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -938,6 +824,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">monkey</a>
               </li>
              
@@ -947,14 +841,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">monkeyscript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
