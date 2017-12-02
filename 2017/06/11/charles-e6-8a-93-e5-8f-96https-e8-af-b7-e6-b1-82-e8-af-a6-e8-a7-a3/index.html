@@ -8,7 +8,7 @@
   <link rel="dns-prefetch" href="http://youxitest.com">
   <title>Charles抓取https请求详解 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="现在基本大部分网站都使用了https，所以要想抓到https的请求，首要任务是先有工具：charles、fiddler，先介绍下charles针对https请求的抓取方法，此方法兼容windows和mac用户（mac用户方法类似，如果有必要，请关注微信公众号：测试架构师，留言给我。后续我会专门再做整理）。 1、 windows下安装charles，看到此文章的用户相信都已经安装了charles，如">
+  <meta name="description" content="现在基本大部分网站都使用了https，所以要想抓到https的请求，首要任务是先有工具：charles、fiddler，先介绍下charles针对https请求的抓取方法，此方法兼容windows和mac用户（mac用户方法类似，如果有必要，请关注微信公众号：测试架构师，留言给我。后续我会专门再做整理）。 1、 win">
 <meta name="keywords" content="charles,https">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Charles抓取https请求详解">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://www.87testing.com/assets/blogimg/charles013.jpg">
 <meta property="og:image" content="http://www.87testing.com/assets/blogimg/charles014.jpg">
 <meta property="og:image" content="http://www.87testing.com/assets/blogimg/charles015.jpg">
-<meta property="og:updated_time" content="2017-08-16T03:06:43.000Z">
+<meta property="og:updated_time" content="2017-12-02T11:28:58.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Charles抓取https请求详解">
 <meta name="twitter:description" content="现在基本大部分网站都使用了https，所以要想抓到https的请求，首要任务是先有工具：charles、fiddler，先介绍下charles针对https请求的抓取方法，此方法兼容windows和mac用户（mac用户方法类似，如果有必要，请关注微信公众号：测试架构师，留言给我。后续我会专门再做整理）。 1、 windows下安装charles，看到此文章的用户相信都已经安装了charles，如">
@@ -176,7 +176,7 @@
 
         
         <a href="/2017/06/11/charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3/" class="archive-article-date">
-  	<time datetime="2017-06-11T09:16:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+  	<time datetime="2017-06-11T17:16:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
 </a>
         
       </header>
@@ -202,7 +202,7 @@
 <p><img src="http://www.87testing.com/assets/blogimg/charles008.jpg" alt=""></p>
 <p>会弹出一个提示框，如下：</p>
 <p><img src="http://www.87testing.com/assets/blogimg/charles009.jpg" alt=""></p>
-<p>然后手机浏览器输入如上地址：<a href="http://charlesproxy.com/getssl" target="_blank" rel="external">http://charlesproxy.com/getssl</a>会弹出如下页面：</p>
+<p>然后手机浏览器输入如上地址：<a href="http://charlesproxy.com/getssl" target="_blank" rel="noopener">http://charlesproxy.com/getssl</a>会弹出如下页面：</p>
 <p><img src="http://www.87testing.com/assets/blogimg/charles010.png" alt=""></p>
 <p>点击安装即可，安装完成后就变成已验证，如下：</p>
 <p><img src="http://www.87testing.com/assets/blogimg/charles011.png" alt=""></p>
@@ -491,6 +491,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
@@ -499,19 +503,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -531,7 +531,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,11 +539,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,11 +563,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">

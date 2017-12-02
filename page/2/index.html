@@ -147,6 +147,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-apache-ab" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/20/apache-ab/">get、post请求使用ab工具如何做并发测试？</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/20/apache-ab/" class="archive-article-date">
+  	<time datetime="2017-09-20T23:13:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p style="line-height: 2em;"><br>    <span style="font-family: helvetica, arial, freesans, clean, sans-serif; font-size: 13.34px; background-color: rgb(248, 248, 248);">最近确实也有些忙，原来都是利用周末的时间写东西，现在周末的时间被占满，照顾小孩。只能忙中找空，写点东西。</span><br></p><br><p style="line-height: 2em;"><br>    <span style="font-family: helvetica, arial, freesans, clean, sans-serif; font-size: 13.34px; background-color: rgb(248, 248, 248);">最近正好使用ab性能测试工具测了一个项目，主要用来做并发测试，需求是控制水军用户的并发数，通过nginx配置控制并发量（针对异常ip–双ip），所以为了能够快速上线，就选择了ab工具。觉得ab工具多多少少还是可以快速的运用到工作当中，所以有必要写出来分享给需要的同行。主要介绍下使用ab工具并发发送get和post请求，比如日常工具中做并发测试可以使用（针对活动等相关库存的并发测试）</span><br></p>
+
+<p><code>linux下安装ab性能测试工具</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install httpd-tools</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 100 -c 30 http://m.1768.com/?act=index&amp;st=login</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>备注</code>：<br></p>
+<font color="#0A0A0A" size="2">2.2.2.2为模拟的ip</font>
+
+</blockquote>
+<p>查看nginx访问日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m.1768.com 21.58.201.31 - - [18/Sep/2017:18:57:43 +0800] &quot;GET /?act=index&amp;st=login HTTP/1.0&quot; 200 266 &quot;-&quot; &quot;ApacheBench/2.3&quot; 2.2.2.2,47.94.13.33</span><br></pre></td></tr></table></figure></p>
+<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ9q9Z /]# ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 100 -c 30 http://m.1768.com/?</span><br><span class="line">act=index&amp;st=login</span><br><span class="line">[1] 4515</span><br><span class="line">[root@iZ9otb9Z /]# This is ApacheBench, Version 2.3 &lt;$Revision: 1430300 $&gt;</span><br><span class="line">Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/</span><br><span class="line">Licensed to The Apache Software Foundation, http://www.apache.org/</span><br><span class="line"></span><br><span class="line">Benchmarking 10test7-admin.stg3.1768.com (be patient).....done</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Server Software:        nginx</span><br><span class="line">Server Hostname:        m.1768.com</span><br><span class="line">Server Port:            80</span><br><span class="line"></span><br><span class="line">Document Path:          /?act=index    #请求的资源</span><br><span class="line">Document Length:        0 bytes     #文档返回的长度，不包括相应的头</span><br><span class="line"></span><br><span class="line">Concurrency Level:      30          #并发数</span><br><span class="line">Time taken for tests:   0.609 seconds   #总请求时长</span><br><span class="line">Complete requests:      100            #总请求数</span><br><span class="line">Failed requests:        0           #失败的请求数</span><br><span class="line">Write errors:           0          #错误</span><br><span class="line">Non-2xx responses:      100</span><br><span class="line">Total transferred:      45900 bytes   #总共传输数据量 </span><br><span class="line">HTML transferred:       0 bytes</span><br><span class="line">Requests per second:    164.18 [#/sec] (mean)   #平均每秒的请求数，重要指标：相当于LR中的每秒事务数，后面的括号中mean表示这是一个平均值</span><br><span class="line">Time per request:       182.725 [ms] (mean)    #平均每个请求消耗的时间，重要指标：LR中的平均事务响应时间</span><br><span class="line">Time per request:       6.091 [ms] (mean, across all concurrent requests)   #上面的请求除以并发数，即服务器平均请求响应时间 在并发量为1时 用户等待时间相同  </span><br><span class="line">Transfer rate:          73.59 [Kbytes/sec] received   #平均每秒多少K，即传输速率</span><br><span class="line"></span><br><span class="line">Connection Times (ms)</span><br><span class="line">              min  mean[+/-sd] median   max</span><br><span class="line">Connect:       28   32   1.7     32      36</span><br><span class="line">Processing:    70  106  25.5    100     169</span><br><span class="line">Waiting:       70  106  25.5    100     169</span><br><span class="line">Total:        100  138  25.7    134     202</span><br><span class="line"></span><br><span class="line">Percentage of the requests served within a certain time (ms)</span><br><span class="line">  50%    134        #50%的请求都在134ms内完成</span><br><span class="line">  66%    143</span><br><span class="line">  75%    153</span><br><span class="line">  80%    163</span><br><span class="line">  90%    180</span><br><span class="line">  95%    188</span><br><span class="line">  98%    193</span><br><span class="line">  99%    202</span><br><span class="line"> 100%    202 (longest request)</span><br></pre></td></tr></table></figure></p>
+<p>具体每个参数的含义可以参考如下地址，里面有很详细的介绍。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.jb51.net/article/59469.htm</span><br></pre></td></tr></table></figure></p>
+        
+          <a class="article-more-a" href="/2017/09/20/apache-ab/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/20/apache-ab/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
     <article id="post-locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -160,7 +237,7 @@
 
         
         <a href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/" class="archive-article-date">
-  	<time datetime="2017-08-06T15:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
+  	<time datetime="2017-08-06T23:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
 </a>
         
       </header>
@@ -264,7 +341,7 @@
 
         
         <a href="/2017/07/22/linux-e4-b8-8b-e4-bf-ae-e6-94-b9mysql-e7-9a-84root-e7-94-a8-e6-88-b7-e7-9a-84-e5-af-86-e7-a0-81/" class="archive-article-date">
-  	<time datetime="2017-07-22T01:55:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-22</time>
+  	<time datetime="2017-07-22T09:55:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-22</time>
 </a>
         
       </header>
@@ -357,14 +434,14 @@
 
         
         <a href="/2017/07/02/e6-9c-ac-e5-9c-b0-e6-95-b0-e6-8d-ae-e5-ba-93mysql-e5-ae-89-e8-a3-85-e5-92-8c-e4-bd-bf-e7-94-a8/" class="archive-article-date">
-  	<time datetime="2017-07-02T14:21:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-02</time>
+  	<time datetime="2017-07-02T22:21:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>mac本地数据库mysql的安装：<br>mysql官方下载链接：<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">https://dev.mysql.com/downloads/mysql/</a><br>下载完并安装成功后，会有个默认的数据库账号密码：<br>root@localhost: waTADIuz0y=w</p>
+        <p>mac本地数据库mysql的安装：<br>mysql官方下载链接：<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/mysql/</a><br>下载完并安装成功后，会有个默认的数据库账号密码：<br>root@localhost: waTADIuz0y=w</p>
 <p>安装好mysql服务后，打开『系统偏好设置』，点击MySQL图标,在弹出的框中，点击Start MySQL Server,进行启动(如果启动成功，按钮会变成Stop MySQL Server)</p>
 <p>在Terminal终端登录MySQL，输入：<br>TTZhangdeMacBook-Pro:~ admin$ PATH=”$PATH”:/usr/local/mysql/bin<br>TTZhangdeMacBook-Pro:~ admin$ mysql -u root -p<br>此时，会提示输入密码，输入刚刚默认给出的密码即可</p>
 <p>展示当前数据库下所有的库：<br>mysql&gt; show databases;<br>此时，可能会有报错提示：ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.<br>遇到这种情况，只要输入如下命令重新设置即可解决：<br>mysql&gt; SET PASSWORD = PASSWORD(‘123456’);</p>
@@ -377,7 +454,7 @@
 <p>mysql&gt; CREATE DATABASE guest CHARACTER SET utf8;<br>Query OK, 1 row affected (0.00 sec)</p>
 <p>安装pymysql：<br>sudo pip install pymysql</p>
 <p>给电脑安装一个好用的查看数据库的插件吧，由于我是在mac上使用，所以使用插件：Valentina Studio ,windows上可使用Navicat</p>
-<p>安装PyMySQL：<br>TTZhangdeMacBook-Pro:~ admin$ git clone <a href="https://github.com/PyMySQL/PyMySQL" target="_blank" rel="external">https://github.com/PyMySQL/PyMySQL</a><br>TTZhangdeMacBook-Pro:~ admin$ cd PyMySQL/<br>TTZhangdeMacBook-Pro:PyMySQL admin$ python3 setup.py install</p>
+<p>安装PyMySQL：<br>TTZhangdeMacBook-Pro:~ admin$ git clone <a href="https://github.com/PyMySQL/PyMySQL" target="_blank" rel="noopener">https://github.com/PyMySQL/PyMySQL</a><br>TTZhangdeMacBook-Pro:~ admin$ cd PyMySQL/<br>TTZhangdeMacBook-Pro:PyMySQL admin$ python3 setup.py install</p>
 
       
 
@@ -445,7 +522,7 @@
 
         
         <a href="/2017/07/02/pycharm-e5-85-b3-e8-81-94github/" class="archive-article-date">
-  	<time datetime="2017-07-02T13:33:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-02</time>
+  	<time datetime="2017-07-02T21:33:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-02</time>
 </a>
         
       </header>
@@ -499,161 +576,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/07/02/pycharm-e5-85-b3-e8-81-94github/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/26/python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c/">Python Django之路与您同行</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/26/python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c/" class="archive-article-date">
-  	<time datetime="2017-06-26T14:14:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近折腾了一个自己的个人博客：87testing.com，这样可以记录自己的学习、工作和生活。主要在这里写下自己的学习笔记、软件测试思考及读书感悟等，后续可能会系统的介绍一些python、django、移动端自动化测试、接口自动化测试、性能测试等。欢迎您的光临！</p>
-<p>要想深入测试，必须了解功能逻辑，对数据流及网站架构比较清楚，这点也说过多次，真的很重要，必须要体现在工作当中，养成习惯，绝对不要对自己测试过的功能模块其中的技术实现不清楚。这样测试路会不好走！！！</p>
-<p>—————————–华丽的分割线—————————-</p>
-<p>今天分享的内容为django，适合初学者，同样也慢慢对网站能够有些了解。以下内容是在mac下操作的(其他系统大同小异)，使用的python自带版本2.7。</p>
-<ul>
-<li><strong>mac下安装pip</strong><br>在终端Terminal里面输入sudo easy_install pip，回车，就开始进行下载安装，网络好的话几秒钟就安装好。</li>
-</ul>
-<p>安装成功后，终端Terminal中直接pip就出出现pip命令的说明信息，说明pip安装成功可以正常使用了。</p>
-<ul>
-<li><strong>安装Django</strong><br>终端Terminal中输入sudo pip install django，等待安装完成，如图：</li>
-</ul>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/assets/blogimg/Django001.png" alt=""></p>
-<p>使用命令python -m django –version或者pip show django查看django版本信息，如图：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/assets/blogimg/Django002.png" alt=""></p>
-<ul>
-<li><strong>使用django创建一个项目，项目名称ceshijiagoushi</strong><br>django-admin startproject ceshijiagoushi</li>
-</ul>
-<p>新建好项目以后，使用PyCharm打开，也可以看到目录</p>
-<p>新建好后的目录说明：</p>
-<p><strong>ceshijiagoushi:</strong> 项目的容器。</p>
-<p><strong>manage.py: </strong>一个实用的命令行工具，可让你以各种方式与该 Django 项目进行交互。</p>
-<p><strong>ceshijiagoushi/init.py: </strong>一个空文件，告诉 Python 该目录是一个 Python 包。</p>
-<p><strong>ceshijiagoushi/settings.py: </strong>该 Django 项目的设置/配置。</p>
-<p><strong>ceshijiagoushi/urls.py: </strong>该 Django 项目的 URL 声明; 一份由 Django 驱动的网站”目录”。</p>
-<p><strong>ceshijiagoushi/wsgi.py: </strong>一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目。</p>
-<ul>
-<li><strong>在ceshijiagoushi项目的容器中创建一个testing应用</strong><br>python manage.py startapp testing</li>
-</ul>
-<p>应用创建完成后，运行项目：</p>
-<p>python manage.py runserver</p>
-<p>运行成功并正常启动，如图：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/Django003.png" alt=""></p>
-<p><img src="http://www.87testing.com/assets/blogimg/Django004.png" alt=""><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""></p>
-<p>有可能会遇到的问题是8000端口被占用，可以将端口号改为8001，那么在重新启动时指定端口号：</p>
-<p>python manage.py runserver 127.0.0.1:8001</p>
-<p><strong>备注：</strong></p>
-<p>后续可能还会遇到8001端口被占用的提示，那么可以使用命令：</p>
-<p>lsof -i:8001查出端口被哪个程序占用，</p>
-<p>然后把端口对应的进程关掉：kill -9 pid(对应的进程号)</p>
-<ul>
-<li><strong>如果要在此项目的web页面上打印一句话出来，”Hello，ceshijiagoushi！”</strong><br>接下来需要配置几个地方：</li>
-</ul>
-<p>1.将testing应用添加到项目中，ceshijiagoushi/settings.py中新增testing：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/assets/blogimg/setting.png" alt=""></p>
-<p>2.ceshijiagoushi/urls.py，导入testing应用views文件、新增index/路径配置：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/assets/blogimg/urls.png" alt=""></p>
-<p>3.定义index函数，并通过HttpResponse类向浏览器返回字符串”Hello ceshijiagoushi!”</p>
-<p><img src="http://www.87testing.com/assets/blogimg/views.png" alt=""></p>
-<p>以上都修改完成后，启动项目，浏览器访问127.0.0.1:8001/index/ （在这里我启用了8001的端口）就看到打印结果了：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/printhello.png" alt=""></p>
-<p>通过上面我们已经知道怎么在页面打印出字符串：”Hello ceshijiagoushi!”</p>
-<ul>
-<li><strong>将字符串替换成html页面</strong><br>接下来将字符串替换成html页面，这样就可以不断的对页面进行优化了。</li>
-</ul>
-<p>首先，在testing目录中创建templates目录，然后在templates目录中创建index.html文件。修改下html文件，如图：</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/assets/blogimg/templateshtml.png" alt=""></p>
-<p>其次，views.py文件index函数中的HttpResponse类修改为render函数，request请求对象改成index.html</p>
-<p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""></p>
-<p>再次访问<a href="http://127.0.0.1:8001/index/，页面就展示的index.html页面的内容了。" target="_blank" rel="external">http://127.0.0.1:8001/index/，页面就展示的index.html页面的内容了。</a></p>
-<p><strong>用户访问到显示html页面django处理得过程如下：</strong></p>
-<p>1. 用户通过浏览器请求一个页面</p>
-<p>2.请求到达Request Middlewares，中间件对request做一些预处理或者直接response请求</p>
-<p>3.URLConf通过urls.py文件和请求的URL找到相应的View</p>
-<p>4.View Middlewares被访问，它同样可以对request做一些处理或者直接返回response</p>
-<p>5.调用View中的函数</p>
-<p>6.View中的方法调用Django的render函数请求index.html，最终返回index.html中的内容。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">django</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/26/python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c/">展开全文 >></a>
         </p>
       
 
@@ -781,6 +703,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
@@ -789,19 +715,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -821,7 +743,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -829,11 +751,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -845,11 +775,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">

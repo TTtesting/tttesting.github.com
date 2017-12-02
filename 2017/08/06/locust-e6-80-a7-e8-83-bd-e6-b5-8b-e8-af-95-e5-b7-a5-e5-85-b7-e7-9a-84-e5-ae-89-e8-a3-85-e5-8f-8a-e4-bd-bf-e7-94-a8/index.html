@@ -8,7 +8,7 @@
   <link rel="dns-prefetch" href="http://youxitest.com">
   <title>Locust性能测试工具的安装及使用 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、安装Locust 安装Locust之前先安装的库：gevent库：第三方库，gevent为python提供了比较完善的协程支持。使用gevent,可以获得极高的并发性能。 pip install gevent==1.1.2 flask库：Flask是一个使用 Python 编写的轻量级 Web 应用框架。 pip install flask==0.10.1 requests库:用python写">
+  <meta name="description" content="一、安装Locust 安装Locust之前先安装的库：gevent库：第三方库，gevent为python提供了比较完善的协程支持。使用gevent,可以获得极高的并发性能。 pip install gevent==1.1.2 flask库：Flask是一个使用 Python 编写的轻量级 Web 应用框架。 pip ">
 <meta name="keywords" content="Locust,性能测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Locust性能测试工具的安装及使用">
@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://www.87testing.com/assets/blogimg/locust01.png">
 <meta property="og:image" content="http://www.87testing.com/assets/blogimg/locust02.png">
-<meta property="og:updated_time" content="2017-08-16T03:15:21.000Z">
+<meta property="og:updated_time" content="2017-12-02T11:28:58.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Locust性能测试工具的安装及使用">
 <meta name="twitter:description" content="一、安装Locust 安装Locust之前先安装的库：gevent库：第三方库，gevent为python提供了比较完善的协程支持。使用gevent,可以获得极高的并发性能。 pip install gevent==1.1.2 flask库：Flask是一个使用 Python 编写的轻量级 Web 应用框架。 pip install flask==0.10.1 requests库:用python写">
@@ -163,7 +163,7 @@
 
         
         <a href="/2017/08/06/locust-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95-e5-b7-a5-e5-85-b7-e7-9a-84-e5-ae-89-e8-a3-85-e5-8f-8a-e4-bd-bf-e7-94-a8/" class="archive-article-date">
-  	<time datetime="2017-08-06T15:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
+  	<time datetime="2017-08-06T23:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
 </a>
         
       </header>
@@ -184,13 +184,13 @@
 <p>pyzmq库：Pyzmq是zeromq的Python绑定。</p>
 <p>pip install pyzmq==15.2.0</p>
 <a id="more"></a>
-<p>安装库的过程中可能会遇到一些报错信息：<br>ReadTimeoutError: HTTPSConnectionPool(host=’pypi.python.org’, port=443): Read timed out.<br>解决方案：<br>更新pip版本到pip官网下载：<a href="https://pypi.python.org/simple/pip/" target="_blank" rel="external">https://pypi.python.org/simple/pip/</a><br>比如下载pip-9.0.1-py2.py3-none-any.whl<br>pip install pip-9.0.1-py2.py3-none-any.whl<br>如果还报错再执行：<br>pip –default-timeout=100 install -U pip</p>
+<p>安装库的过程中可能会遇到一些报错信息：<br>ReadTimeoutError: HTTPSConnectionPool(host=’pypi.python.org’, port=443): Read timed out.<br>解决方案：<br>更新pip版本到pip官网下载：<a href="https://pypi.python.org/simple/pip/" target="_blank" rel="noopener">https://pypi.python.org/simple/pip/</a><br>比如下载pip-9.0.1-py2.py3-none-any.whl<br>pip install pip-9.0.1-py2.py3-none-any.whl<br>如果还报错再执行：<br>pip –default-timeout=100 install -U pip</p>
 <p>其他第三方库都安装完成后，接下来再安装locust：</p>
 <p>pip install locustio</p>
 <p>安装locustio库时可能会报错：<br>error:command ‘gcc’ failed with exit status 1<br>解决方案：yum install gcc python-devel</p>
 <p>安装完成后，执行：locust–help<br>看到如下locust相关命令介绍，说明安装成功。</p>
 <p>Usage: locust [options] [LocustClass [LocustClass2 … ]]</p>
-<p>Options:<br>-h, –help show this help message and exit<br>-H HOST, –host=HOST Host to load test in the following format:<br><a href="http://10.21.32.33" target="_blank" rel="external">http://10.21.32.33</a><br>–web-host=WEB_HOST Host to bind the web interface to. Defaults to ‘’ (all<br>interfaces)<br>-P PORT, –port=PORT, –web-port=PORT<br>Port on which to run web host<br>-f LOCUSTFILE, –locustfile=LOCUSTFILE<br>Python module file to import, e.g. ‘../other.py’.<br>Default: locustfile<br>–master Set locust to run in distributed mode with this<br>process as master<br>–slave Set locust to run in distributed mode with this<br>process as slave<br>–master-host=MASTER_HOST<br>Host or IP address of locust master for distributed<br>load testing. Only used when running with –slave.<br>Defaults to 127.0.0.1.<br>–master-port=MASTER_PORT<br>The port to connect to that is used by the locust<br>master for distributed load testing. Only used when<br>running with –slave. Defaults to 5557. Note that<br>slaves will also connect to the master node on this<br>port + 1.<br>–master-bind-host=MASTER_BIND_HOST<br>Interfaces (hostname, ip) that locust master should<br>bind to. Only used when running with –master.<br>Defaults to * (all available interfaces).<br>–master-bind-port=MASTER_BIND_PORT<br>Port that locust master should bind to. Only used when<br>running with –master. Defaults to 5557. Note that<br>Locust will also use this port + 1, so by default the<br>master node will bind to 5557 and 5558.<br>–no-web Disable the web interface, and instead start running<br>the test immediately. Requires -c and -r to be<br>specified.<br>-c NUM_CLIENTS, –clients=NUM_CLIENTS<br>Number of concurrent clients. Only used together with<br>–no-web<br>-r HATCH_RATE, –hatch-rate=HATCH_RATE<br>The rate per second in which clients are spawned. Only<br>used together with –no-web<br>-n NUM_REQUESTS, –num-request=NUM_REQUESTS<br>Number of requests to perform. Only used together with<br>–no-web<br>-L LOGLEVEL, –loglevel=LOGLEVEL<br>Choose between DEBUG/INFO/WARNING/ERROR/CRITICAL.<br>Default is INFO.<br>–logfile=LOGFILE Path to log file. If not set, log will go to<br>stdout/stderr<br>–print-stats Print stats in the console<br>–only-summary Only print the summary stats<br>-l, –list Show list of possible locust classes and exit<br>–show-task-ratio print table of the locust classes’ task execution<br>ratio<br>–show-task-ratio-json<br>print json data of the locust classes’ task execution<br>ratio<br>-V, –version show program’s version number and exit</p>
+<p>Options:<br>-h, –help show this help message and exit<br>-H HOST, –host=HOST Host to load test in the following format:<br><a href="http://10.21.32.33" target="_blank" rel="noopener">http://10.21.32.33</a><br>–web-host=WEB_HOST Host to bind the web interface to. Defaults to ‘’ (all<br>interfaces)<br>-P PORT, –port=PORT, –web-port=PORT<br>Port on which to run web host<br>-f LOCUSTFILE, –locustfile=LOCUSTFILE<br>Python module file to import, e.g. ‘../other.py’.<br>Default: locustfile<br>–master Set locust to run in distributed mode with this<br>process as master<br>–slave Set locust to run in distributed mode with this<br>process as slave<br>–master-host=MASTER_HOST<br>Host or IP address of locust master for distributed<br>load testing. Only used when running with –slave.<br>Defaults to 127.0.0.1.<br>–master-port=MASTER_PORT<br>The port to connect to that is used by the locust<br>master for distributed load testing. Only used when<br>running with –slave. Defaults to 5557. Note that<br>slaves will also connect to the master node on this<br>port + 1.<br>–master-bind-host=MASTER_BIND_HOST<br>Interfaces (hostname, ip) that locust master should<br>bind to. Only used when running with –master.<br>Defaults to * (all available interfaces).<br>–master-bind-port=MASTER_BIND_PORT<br>Port that locust master should bind to. Only used when<br>running with –master. Defaults to 5557. Note that<br>Locust will also use this port + 1, so by default the<br>master node will bind to 5557 and 5558.<br>–no-web Disable the web interface, and instead start running<br>the test immediately. Requires -c and -r to be<br>specified.<br>-c NUM_CLIENTS, –clients=NUM_CLIENTS<br>Number of concurrent clients. Only used together with<br>–no-web<br>-r HATCH_RATE, –hatch-rate=HATCH_RATE<br>The rate per second in which clients are spawned. Only<br>used together with –no-web<br>-n NUM_REQUESTS, –num-request=NUM_REQUESTS<br>Number of requests to perform. Only used together with<br>–no-web<br>-L LOGLEVEL, –loglevel=LOGLEVEL<br>Choose between DEBUG/INFO/WARNING/ERROR/CRITICAL.<br>Default is INFO.<br>–logfile=LOGFILE Path to log file. If not set, log will go to<br>stdout/stderr<br>–print-stats Print stats in the console<br>–only-summary Only print the summary stats<br>-l, –list Show list of possible locust classes and exit<br>–show-task-ratio print table of the locust classes’ task execution<br>ratio<br>–show-task-ratio-json<br>print json data of the locust classes’ task execution<br>ratio<br>-V, –version show program’s version number and exit</p>
 <p><strong>二、使用Locust测试淘宝首页</strong></p>
 <p>#locust_taobao.py</p>
 <p><code>#!/usr/bin/env python</code><br><code>#-*-coding:utf-8-*-</code><br><code>#author:@TT</code></p>
@@ -200,9 +200,9 @@
 <p><code>@task</code><br><code>def taobao_page(self): #定义一个方法访问淘宝首页</code><br><code>self.client.get(&quot;/&quot;)</code></p>
 <p>&nbsp;</p>
 <p><code>class WebsiteUser(HttpLocust):</code><br><code>task_set = UserBehavior</code><br><code>min_wait = 3000 #用户等待时间下限</code><br><code>max_wait = 5000 #用户等待时间上限</code></p>
-<p>执行：<br>locust -f locust_taobao.py –host=<a href="https://www.taobao.com" target="_blank" rel="external">https://www.taobao.com</a></p>
+<p>执行：<br>locust -f locust_taobao.py –host=<a href="https://www.taobao.com" target="_blank" rel="noopener">https://www.taobao.com</a></p>
 <p>提示：Starting web monitor at *.8089<br>Starting Locust 0.7.5</p>
-<p>说明已经启动成功，浏览器输入：<a href="http://120.76.139.13:8089即可看到设置页面,并监控" target="_blank" rel="external">http://120.76.139.13:8089即可看到设置页面,并监控</a></p>
+<p>说明已经启动成功，浏览器输入：<a href="http://120.76.139.13:8089即可看到设置页面,并监控" target="_blank" rel="noopener">http://120.76.139.13:8089即可看到设置页面,并监控</a></p>
 <p><img src="http://www.87testing.com/assets/blogimg/locust01.png" alt=""></p>
 <p>Number of users to simulate：设置需要模拟的用户数量，这次只是为了演示，设置为10；</p>
 <p>Hatch rate：每秒需要启动的用户数量，这次只是为了演示，设置为2；</p>
@@ -496,6 +496,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
@@ -504,19 +508,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -536,7 +536,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -544,11 +544,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,11 +568,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">

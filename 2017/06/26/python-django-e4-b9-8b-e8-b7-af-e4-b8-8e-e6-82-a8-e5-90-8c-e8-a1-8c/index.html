@@ -8,7 +8,7 @@
   <link rel="dns-prefetch" href="http://youxitest.com">
   <title>Python Django之路与您同行 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近折腾了一个自己的个人博客：87testing.com，这样可以记录自己的学习、工作和生活。主要在这里写下自己的学习笔记、软件测试思考及读书感悟等，后续可能会系统的介绍一些python、django、移动端自动化测试、接口自动化测试、性能测试等。欢迎您的光临！ 要想深入测试，必须了解功能逻辑，对数据流及网站架构比较清楚，这点也说过多次，真的很重要，必须要体现在工作当中，养成习惯，绝对不要对自己测">
+  <meta name="description" content="最近折腾了一个自己的个人博客：87testing.com，这样可以记录自己的学习、工作和生活。主要在这里写下自己的学习笔记、软件测试思考及读书感悟等，后续可能会系统的介绍一些python、django、移动端自动化测试、接口自动化测试、性能测试等。欢迎您的光临！ 要想深入测试，必须了解功能逻辑，对数据流及网站架构比较清">
 <meta name="keywords" content="python,django">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python Django之路与您同行">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
 <meta property="og:image" content="http://www.87testing.com/assets/blogimg/templateshtml.png">
 <meta property="og:image" content="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==">
-<meta property="og:updated_time" content="2017-08-16T05:03:45.000Z">
+<meta property="og:updated_time" content="2017-12-02T11:28:58.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Django之路与您同行">
 <meta name="twitter:description" content="最近折腾了一个自己的个人博客：87testing.com，这样可以记录自己的学习、工作和生活。主要在这里写下自己的学习笔记、软件测试思考及读书感悟等，后续可能会系统的介绍一些python、django、移动端自动化测试、接口自动化测试、性能测试等。欢迎您的光临！ 要想深入测试，必须了解功能逻辑，对数据流及网站架构比较清楚，这点也说过多次，真的很重要，必须要体现在工作当中，养成习惯，绝对不要对自己测">
@@ -177,7 +177,7 @@
 
         
         <a href="/2017/06/26/python-django-e4-b9-8b-e8-b7-af-e4-b8-8e-e6-82-a8-e5-90-8c-e8-a1-8c/" class="archive-article-date">
-  	<time datetime="2017-06-26T14:14:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-26</time>
+  	<time datetime="2017-06-26T22:14:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-26</time>
 </a>
         
       </header>
@@ -242,7 +242,7 @@
 <p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""><img src="http://www.87testing.com/assets/blogimg/templateshtml.png" alt=""></p>
 <p>其次，views.py文件index函数中的HttpResponse类修改为render函数，request请求对象改成index.html</p>
 <p><img src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" alt=""></p>
-<p>再次访问<a href="http://127.0.0.1:8001/index/，页面就展示的index.html页面的内容了。" target="_blank" rel="external">http://127.0.0.1:8001/index/，页面就展示的index.html页面的内容了。</a></p>
+<p>再次访问<a href="http://127.0.0.1:8001/index/，页面就展示的index.html页面的内容了。" target="_blank" rel="noopener">http://127.0.0.1:8001/index/，页面就展示的index.html页面的内容了。</a></p>
 <p><strong>用户访问到显示html页面django处理得过程如下：</strong></p>
 <p>1. 用户通过浏览器请求一个页面</p>
 <p>2.请求到达Request Middlewares，中间件对request做一些预处理或者直接response请求</p>
@@ -526,6 +526,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
@@ -534,19 +538,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,7 +566,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,11 +574,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,11 +598,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -147,6 +147,192 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-micro-service-architecture" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/27/micro-service-architecture/">学习微服务架构·基础篇</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/27/micro-service-architecture/" class="archive-article-date">
+  	<time datetime="2017-11-27T22:13:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>看到最近“微服务架构”这个概念这么火，作为一个积极上进的程序猿，成小胖忍不住想要学习学习。而架构师老王（不是隔壁老王）最近刚好在做公司基础服务的微服务化研究和落地，对此深有研究。</p>
+<p>于是成小胖马上屁颠屁颠的跑过去向老王请教：“王哥，我看微服务架构这么火，我也想学，您给我讲讲啥是微服务架构呗？”</p>
+<p>老王笑了笑说：“要想知道什么是微服务架构，你得先知道什么系统架构设计。”</p>
+<p>成小胖的理想是成为一名架构师，平时积累了不少知识，因此对“系统架构设计”这个概念还是很熟悉的，因此他马上就给出了答案【1】：</p>
+<p>系统架构设计描述了在应用系统的内部，如何根据业务、技术、组织、灵活性、可扩展性以及可维护性等多种因素，将应用系统划分成不同的部分，并使这些部分彼此之间相互分工、相互协作，从而为用户提供某种特定的价值的方式。</p>
+<p>老王满意的点点头，继续问：“你看最近我在做微服务的研究和落地，你知道为什么要做这个事情吗？”</p>
+<p>“因为目前的三层架构存在很多弊端，不满足业务发展的需求了呗。”</p>
+<p>“对的，我看你对公司目前的架构也非常熟悉了，你来仔细说说现在的三层架构吧。”</p>
+<p>于是成小胖拿了一张A4纸，图文并茂地给老王讲了他对三层架构的理解：<br>三层架构是指在业务和技术的发展过程中，系统中不同职责的部分被定义在不同的层次，每一层负责的功能更加具体化。三层架构通常包括表示层、业务逻辑层和数据访问层，层与层之间互相连接、互相协作，构成一个整体，并且层的内部可以被替换成其他可以工作的部分，但对整体的影响不大。</p>
+<p>以 Web 应用程序为例，早期是将所有的表示逻辑、业务逻辑和数据访问逻辑放在一起，这就是一层架构。</p>
+<p>后来随着 java、.NET 等高级语言的发展，提供了越来越方便的数据访问机制，如 java 的 JDBC 和 .NET 的 ADO.NET。这时数据访问部分被分离开来，形成了二层架构。</p>
+<p>再后来，随着面向对象设计、企业架构模式等理念的不断发展，表示逻辑和业务逻辑也被分离开来，形成了现在的三层架构。</p>
+<p>三层架构的具体内容如下：</p>
+<p>表示层： 用户使用应用程序时，看到的、听见的、输入的或者交互的部分。<br>业务逻辑层： 根据用户输入的信息，进行逻辑计算或者业务处理的部分。<br>数据访问层： 关注有效地操作原始数据的部分，如将数据存储到存储介质（如数据库、文件系统）及从存储介质中读取数据等。<br>老王对这个解释非常满意，作了进一步的补充：“你看虽然现在程序被分成了三层，但只是逻辑上的分层，并不是物理上的分层。也就是说，对不同层的代码而言，经过编译、打包和部署后，所有的代码最终还是运行在同一个进程中。而这，就是所谓的单块架构。”</p>
+<p>成小胖挠了挠头：“原来单块架构是这个意思啊~~”</p>
+<p>“嗯。根据你的实际工作经验，你再总结下单块架构的优缺点吧。”</p>
+<p>平时勤于总结的成小胖很快便列出了单块架构的优缺点：<br> 优点：</p>
+<p>易于开发： 开发方式简单，IDE 支持好，方便运行和调试。<br>易于测试： 所有功能运行在一个进程中，一旦进程启动，便可以进行系统测试。<br>易于部署： 只需要将打好的一个软件包发布到服务器即可。<br>易于水平伸缩： 只需要创建一个服务器节点，配置好运行时环境，再将软件包发布到新服务器节点即可运行程序（当然也需要采取分发策略保证请求能有效地分发到新节点）。<br>缺点：</p>
+<p>维护成本大： 当应用程序的功能越来越多、团队越来越大时，沟通成本、管理成本显著增加。当出现 bug 时，可能引起 bug 的原因组合越来越多，导致分析、定位和修复的成本增加；并且在对全局功能缺乏深度理解的情况下，容易在修复 bug 时引入新的 bug。<br>持续交付周期长： 构建和部署时间会随着功能的增多而增加，任何细微的修改都会触发部署流水线。<br>新人培养周期长： 新成员了解背景、熟悉业务和配置环境的时间越来越长。<br>技术选型成本高： 单块架构倾向于采用统一的技术平台或方案来解决所有问题，如果后续想引入新的技术或框架，成本和风险都很大。<br>可扩展性差： 随着功能的增加，垂直扩展的成本将会越来越大；而对于水平扩展而言，因为所有代码都运行在同一个进程，没办法做到针对应用程序的部分功能做独立的扩展。<br>老王拍了拍成小胖的肩膀，眼睛眯成了一条缝：“小伙子总结的很不错！既然你已经对目前的单块架构的优缺点有了很好的理解，那现在咱们就可以开始来学习微服务架构了。”</p>
+<p>老王先从网上搜索“微服务架构”关键字，出来这么一段话：</p>
+<p>微服务架构是一种架构模式，它提倡将单一应用程序划分成一组小的服务，服务之间互相协调、互相配合，为用户提供最终价值。每个服务运行在其独立的进程中，服务于服务间采用轻量级的通信机制互相沟通（通常是基于 HTTP 的 RESTful API）。每个服务都围绕着具体业务进行构建，并且能够被独立地部署到生产环境、类生产环境等。另外，应尽量避免统一的、集中式的服务管理机制，对具体的一个服务而言，应根据业务上下文，选择合适的语言、工具对其进行构建。</p>
+<p>成小胖看完了这段话，说：“看着有点晕，云里雾里的感觉……”</p>
+<p>老王嘿嘿一笑：“莫慌，现在就给你详细讲讲微服务架构的特性。” </p>
+<ol>
+<li>单一职责</li>
+</ol>
+<p>微服务架构中的每个服务，都是具有业务逻辑的，符合高内聚、低耦合原则以及单一职责原则的单元，不同的服务通过“管道”的方式灵活组合，从而构建出庞大的系统。</p>
+<ol>
+<li>轻量级通信</li>
+</ol>
+<p>服务之间通过轻量级的通信机制实现互通互联，而所谓的轻量级，通常指语言无关、平台无关的交互方式。</p>
+<p>对于轻量级通信的格式而言，我们熟悉的 XML 和 JSON，它们是语言无关、平台无关的；对于通信的协议而言，通常基于 HTTP，能让服务间的通信变得标准化、无状态化。目前大家熟悉的 REST（Representational State Transfer）是实现服务间互相协作的轻量级通信机制之一。使用轻量级通信机制，可以让团队选择更适合的语言、工具或者平台来开发服务本身。</p>
+<ol>
+<li>独立性</li>
+</ol>
+<p>每个服务在应用交付过程中，独立地开发、测试和部署。</p>
+<p>在单块架构中所有功能都在同一个代码库，功能的开发不具有独立性；当不同小组完成多个功能后，需要经过集成和回归测试，测试过程也不具有独立性；当测试完成后，应用被构建成一个包，如果某个功能存在 bug，将导致整个部署失败或者回滚。</p>
+<p>在微服务架构中，每个服务都是独立的业务单元，与其他服务高度解耦，只需要改变当前服务本身，就可以完成独立的开发、测试和部署。</p>
+<ol>
+<li>进程隔离</li>
+</ol>
+<p>单块架构中，整个系统运行在同一个进程中，当应用进行部署时，必须停掉当前正在运行的应用，部署完成后再重启进程，无法做到独立部署。</p>
+<p>有时候我们会将重复的代码抽取出来封装成组件，在单块架构中，组件通常的形态叫做共享库（如 jar 包或者 DLL），但是当程序运行时，所有组件最终也会被加载到同一进程中运行。</p>
+<p>在微服务架构中，应用程序由多个服务组成，每个服务都是高度自治的独立业务实体，可以运行在独立的进程中，不同的服务能非常容易地部署到不同的主机上。</p>
+<p>理论上所有服务可以部署在同一个服务器节点，但是并不推荐这么做，因为微服务架构的主旨就是高度自治和高度隔离。</p>
+<p>“王哥你真厉害，您这么一说我的思维清晰了很多！”成小胖激动的几乎要叫起来。</p>
+<p>“我之前了解过 SOA，好像跟微服务架构的思想很像啊，您能帮我区分一下吗？”成小胖追问到。<br>老王嘿嘿一笑，拿起成小胖手上的A4纸，翻到另外一面画了个表格：</p>
+<p>SOA实现    微服务架构实现<br>企业级，自顶向下开展实施    团队级，自底向上开展实施<br>服务由多个子系统组成，粒度大    一个系统被拆分成多个服务，粒度细<br>企业服务总线，集中式的服务架构    无集中式总线，松散的服务架构<br>集成方式复杂（ESB/WS/SOAP）    集成方式简单（HTTP/REST/JSON）<br>单块架构系统，相互依赖，部署复杂    服务能独立部署</p>
+<p>接着老王又画了一张图：</p>
+<p>成小胖看了之后说：“您这么一画我倒是大概明白了，但是图里面的 DevOps 这个概念我不懂诶……”</p>
+<p>“这个 DevOps 就说来话长了，有时间你自己先去查查资料了解下吧。”</p>
+<p>“好的。现在我对微服务架构的概念有了了解，您能再深入剖析下它的本质吗？”<br>“好，你可仔细听好了哈！” </p>
+<ol>
+<li>服务作为组件</li>
+</ol>
+<p>微服务也可以被认为是一种组件，但是跟传统组件的区别在于它可以独立部署，因此它的一个显著的优势。另外一个优点是，它在组件与组件之间定义了清晰的、语言无关、平台无关的规范接口，耦合度低，灵活性非常高。但它的不足之处是，分布式调用严重依赖于网络的可靠性和稳定性。</p>
+<ol>
+<li>围绕业务组织团队</li>
+</ol>
+<p>在单块架构中，企业一般会根据技能划分团队，在这种组织架构下，即便是简单的需求变更都有可能需要跨团队协作，沟通成本很高。而在微服务架构中，它提倡以业务为核心，按照业务能力来组织团队，团队中的成员具有多样性的技能。</p>
+<ol>
+<li>关注产品而非项目</li>
+</ol>
+<p>在单块架构中，应用基本上是基于“项目模式”构建的，即项目启动时从不同技能资源池中抽取相关资源组成团队，项目结束后释放所有资源。这种情况下团队成员缺乏主人翁意识和产品成就感。</p>
+<p>在微服务架构中，提倡采用“产品模式”构建，即更倾向于让团队负责整个服务的生命周期，以便提供更优质的服务。</p>
+<ol>
+<li>技术多样性</li>
+</ol>
+<p>微服务架构中，提倡针对不同的业务特征选择合适的技术方案，有针对性的解决具体业务问题，而不是像单块架构中采用统一的平台或技术来解决所有问题。</p>
+<ol>
+<li>业务数据独立</li>
+</ol>
+<p>微服务架构提供自主管理其相关的业务数据，这样可以随着业务的发展提供数据接口集成，而不是以数据库的方式同其他服务集成。另外，随着业务的发展，可以方便地选择更合的工具管理或者迁移业务数据。</p>
+<ol>
+<li>基础设施自动化</li>
+</ol>
+<p>在微服务架构的实践过程中，对持续交付和部署流水线的要求很高，将促进企业不断寻找更高效的方式完成基础设施的自动化及 DevOps 运维能力的提升。</p>
+<p>听完成小胖忍不住表达了敬佩之意：“老司机就是老司机，噢说错了……架构师就是架构师，总结得这么简洁又深刻！”</p>
+<p>“咳咳，低调低调……”</p>
+<p>“听您讲解了这么多，我觉得微服务架构解决了很多当前三层架构的痛点。不过我觉得没有任何一项技术或架构是完美的。”</p>
+<p>“非常正确。进行微服务架构的落地是存在很多挑战的。” </p>
+<ol>
+<li>分布式系统的复杂性</li>
+</ol>
+<p>微服务架构是基于分布式的系统，而构建分布式系统必然会带来额外的开销。</p>
+<p>性能： 分布式系统是跨进程、跨网络的调用，受网络延迟和带宽的影响。<br>可靠性： 由于高度依赖于网络状况，任何一次的远程调用都有可能失败，随着服务的增多还会出现更多的潜在故障点。因此，如何提高系统的可靠性、降低因网络引起的故障率，是系统构建的一大挑战。<br>异步： 异步通信大大增加了功能实现的复杂度，并且伴随着定位难、调试难等问题。<br>数据一致性： 要保证分布式系统的数据强一致性，成本是非常高的，需要在 C（一致性）A（可用性）P（分区容错性） 三者之间做出权衡。</p>
+<ol>
+<li>运维成本</li>
+</ol>
+<p>运维主要包括配置、部署、监控与告警和日志收集四大方面。微服务架构中，每个服务都需要独立地配置、部署、监控和收集日志，成本呈指数级增长。</p>
+<ol>
+<li>自动化部署</li>
+</ol>
+<p>在微服务架构中，每个服务都独立部署，交付周期短且频率高，人工部署已经无法适应业务的快速变化。因此如何有效地构建自动化部署体系，是微服务面临的另一个挑战。</p>
+<ol>
+<li>DevOps 与组织架构</li>
+</ol>
+<p>在微服务架构的实施过程中，开发人员和运维人员的角色发生了变化，开发者将承担起整个服务的生命周期的责任，包括部署和监控；而运维则更倾向于顾问式的角色，尽早考虑服务如何部署。因此，按需调整组织架构、构建全功能的团队，也是一个不小的挑战。</p>
+<ol>
+<li>服务间的依赖测试</li>
+</ol>
+<p>单块架构中，通常使用集成测试来验证依赖是否正常。而在微服务架构中，服务数量众多，每个服务都是独立的业务单元，服务主要通过接口进行交互，如何保证依赖的正常，是测试面临的主要挑战。</p>
+<ol>
+<li>服务间的依赖管理</li>
+</ol>
+<p>微服务架构中，服务数量众多，如何清晰有效地展示服务间的依赖关系也是个不小的挑战。</p>
+<p>“微服务的落地需要经过全面的考察和完善的试验，并不是每个场景都适合使用微服务架构，也不是每个企业都有能力或者精力去面对这些挑战。”老王最后语重心长的说。</p>
+<p>“嗯嗯，每件事都有两面性，最合适的才是最好的！对了王哥，您已经给我上完理论课了，啥时候带我实践下呗？”</p>
+<p>“你先好好消化完今天讲的这些，下次再说吧……”</p>
+<p>“好吧，很期待我们的下一次交流……”</p>
+<p>【1】图片源及内容主要参考《微服务架构与实践》。</p>
+<p>作者：cyfonly<br>出处：<a href="http://www.cnblogs.com/cyfonly/" target="_blank" rel="noopener">http://www.cnblogs.com/cyfonly/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">微服务</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/27/micro-service-architecture/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
     <article id="post-create-vpn" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -160,7 +346,7 @@
 
         
         <a href="/2017/11/26/create-vpn/" class="archive-article-date">
-  	<time datetime="2017-11-26T00:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-26</time>
+  	<time datetime="2017-11-26T08:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-26</time>
 </a>
         
       </header>
@@ -169,15 +355,14 @@
       
         <p>在工作和生活中，大家应该都会遇到，同事在群里分享了一个讲解某一技术知识的链接，需要翻墙才能打开，或者在你的朋友圈中有人分享了YouTube视频或资讯，也无法打开，或许会问为啥无法打开，对方回复需要科学上网，等等……</p>
 <p>自己作为一个从事IT相关工作，还是有必要进行科学上网，最常用的就是可以任意的google，了解最新及全面的技术知识，体验国外做得好的一些APP。下面针对windows、mac、ios、Android不同终端使用上做简单整理。</p>
-<p>###一、Windows和Mac上配置ShadowsocksR的方法</p>
-<p>1.下载地址：链接: <a href="https://pan.baidu.com/s/1o7NOrUU" target="_blank" rel="external">https://pan.baidu.com/s/1o7NOrUU</a> 密码: yvxq<br>2.下载后直接解压后打开，相关配置都配置好确定<br><img src="http://www.87testing.com/assets/blogimg/vpn001.png" alt=""></p>
-<p>MAC电脑上配置方法与windows类似，就不过多描述了。Mac下载地址：链接: <a href="https://pan.baidu.com/s/1pKBBcqn" target="_blank" rel="external">https://pan.baidu.com/s/1pKBBcqn</a> 密码: tn3c</p>
-<p>###二、iOS手机上安装Shadowrocket软件</p>
+<p>一、Windows和Mac上配置ShadowsocksR的方法</p>
+<p>1.下载地址：链接: <a href="https://pan.baidu.com/s/1o7NOrUU" target="_blank" rel="noopener">https://pan.baidu.com/s/1o7NOrUU</a> 密码: yvxq<br>2.下载后直接解压后打开，相关配置都配置好确定<br><img src="http://www.87testing.com/assets/blogimg/vpn001.png" alt=""></p>
+<p>MAC电脑上配置方法与windows类似，就不过多描述了。Mac下载地址：链接: <a href="https://pan.baidu.com/s/1pKBBcqn" target="_blank" rel="noopener">https://pan.baidu.com/s/1pKBBcqn</a> 密码: tn3c</p>
+<p>二、iOS手机上安装Shadowrocket软件</p>
 <p>（国内用户在App Store下载不到，按照如下两种方法进行安装）<br>方法一：<br>直接注册美国或香港的App Store账号，然后在App Store中直接下载安装，或者去某宝买账号。</p>
-<p>方法二：<br>使用爱思助手在电脑上将软件导入到iOS设备中<br>1．Windows系统安装好“爱思助手”<br>2．苹果手机连接好爱思助手<br>3．下载到电脑上需要的ipa文件（下载链接: <a href="https://pan.baidu.com/s/1qYLsB8o" target="_blank" rel="external">https://pan.baidu.com/s/1qYLsB8o</a> 密码:qhkr<br>4．爱思助手连接成功后，点击爱思助手上的我的设备—应用游戏，直接将刚刚下载好的ipa文件拖入到爱思助手窗口或者点击导入安装选择ipa文件确定，即可成功安装到手机上<br><img src="http://www.87testing.com/assets/blogimg/vpn002.png" alt=""></p>
-<p>5．在手机上打开Shadowrocket客户端后添加节点进行配置即可<br><img src="http://www.87testing.com/assets/blogimg/vpn003.png" alt=""></p>
-<p>###三、Android手机上安装Shadowrocket客户端</p>
-<p>1.下载Android客户端：链接: <a href="https://pan.baidu.com/s/1mi1hZvU" target="_blank" rel="external">https://pan.baidu.com/s/1mi1hZvU</a> 密码: 2nkv<br>2.下载安装完成打开SSR，添加配置启动即可<br><img src="http://www.87testing.com/assets/blogimg/vpn004.png" alt=""></p>
+<p>方法二：<br>使用爱思助手在电脑上将软件导入到iOS设备中<br>1．Windows系统安装好“爱思助手”<br>2．苹果手机连接好爱思助手<br>3．下载到电脑上需要的ipa文件（下载链接: <a href="https://pan.baidu.com/s/1qYLsB8o" target="_blank" rel="noopener">https://pan.baidu.com/s/1qYLsB8o</a> 密码:qhkr<br>4．爱思助手连接成功后，点击爱思助手上的我的设备—应用游戏，直接将刚刚下载好的ipa文件拖入到爱思助手窗口或者点击导入安装选择ipa文件确定，即可成功安装到手机上<br><img src="http://www.87testing.com/assets/blogimg/vpn002.png" alt=""></p>
+<p>5．在手机上打开Shadowrocket客户端后添加节点进行配置即可<br><img src="http://www.87testing.com/assets/blogimg/vpn003.png" alt=""><br>三、Android手机上安装Shadowrocket客户端</p>
+<p>1.下载Android客户端：链接: <a href="https://pan.baidu.com/s/1mi1hZvU" target="_blank" rel="noopener">https://pan.baidu.com/s/1mi1hZvU</a> 密码: 2nkv<br>2.下载安装完成打开SSR，添加配置启动即可<br><img src="http://www.87testing.com/assets/blogimg/vpn004.png" alt=""></p>
 <p>####以上是我在使用过程中的简单整理，仅供参考。针对还未体验过科学上网的朋友，可在微信公众号测试架构师后台留言找到我。</p>
 
       
@@ -246,7 +431,7 @@
 
         
         <a href="/2017/11/10/tt-dimission/" class="archive-article-date">
-  	<time datetime="2017-11-10T10:35:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-10</time>
+  	<time datetime="2017-11-10T18:35:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-10</time>
 </a>
         
       </header>
@@ -317,7 +502,7 @@
 
         
         <a href="/2017/10/13/linux-log-cy/" class="archive-article-date">
-  	<time datetime="2017-10-13T00:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-13</time>
+  	<time datetime="2017-10-13T08:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-13</time>
 </a>
         
       </header>
@@ -405,7 +590,7 @@
 
         
         <a href="/2017/09/24/loadrunnerfirs/" class="archive-article-date">
-  	<time datetime="2017-09-24T08:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-24</time>
+  	<time datetime="2017-09-24T16:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-24</time>
 </a>
         
       </header>
@@ -460,83 +645,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/09/24/loadrunnerfirs/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-apache-ab" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/20/apache-ab/">get、post请求使用ab工具如何做并发测试？</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/20/apache-ab/" class="archive-article-date">
-  	<time datetime="2017-09-20T15:13:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p style="line-height: 2em;"><br>    <span style="font-family: helvetica, arial, freesans, clean, sans-serif; font-size: 13.34px; background-color: rgb(248, 248, 248);">最近确实也有些忙，原来都是利用周末的时间写东西，现在周末的时间被占满，照顾小孩。只能忙中找空，写点东西。</span><br></p><br><p style="line-height: 2em;"><br>    <span style="font-family: helvetica, arial, freesans, clean, sans-serif; font-size: 13.34px; background-color: rgb(248, 248, 248);">最近正好使用ab性能测试工具测了一个项目，主要用来做并发测试，需求是控制水军用户的并发数，通过nginx配置控制并发量（针对异常ip–双ip），所以为了能够快速上线，就选择了ab工具。觉得ab工具多多少少还是可以快速的运用到工作当中，所以有必要写出来分享给需要的同行。主要介绍下使用ab工具并发发送get和post请求，比如日常工具中做并发测试可以使用（针对活动等相关库存的并发测试）</span><br></p>
-
-<p><code>linux下安装ab性能测试工具</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install httpd-tools</div></pre></td></tr></table></figure></p>
-<p>安装完成后，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 100 -c 30 http://m.1768.com/?act=index&amp;st=login</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p><code>备注</code>：<br></p>
-<font color="#0A0A0A" size="2">2.2.2.2为模拟的ip</font>
-
-</blockquote>
-<p>查看nginx访问日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">m.1768.com 21.58.201.31 - - [18/Sep/2017:18:57:43 +0800] &quot;GET /?act=index&amp;st=login HTTP/1.0&quot; 200 266 &quot;-&quot; &quot;ApacheBench/2.3&quot; 2.2.2.2,47.94.13.33</div></pre></td></tr></table></figure></p>
-<p>执行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">[root@iZ9q9Z /]# ab -H &apos;X-Forwarded-For:2.2.2.2&apos; -n 100 -c 30 http://m.1768.com/?</div><div class="line">act=index&amp;st=login</div><div class="line">[1] 4515</div><div class="line">[root@iZ9otb9Z /]# This is ApacheBench, Version 2.3 &lt;$Revision: 1430300 $&gt;</div><div class="line">Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/</div><div class="line">Licensed to The Apache Software Foundation, http://www.apache.org/</div><div class="line"></div><div class="line">Benchmarking 10test7-admin.stg3.1768.com (be patient).....done</div><div class="line"></div><div class="line"></div><div class="line">Server Software:        nginx</div><div class="line">Server Hostname:        m.1768.com</div><div class="line">Server Port:            80</div><div class="line"></div><div class="line">Document Path:          /?act=index    #请求的资源</div><div class="line">Document Length:        0 bytes     #文档返回的长度，不包括相应的头</div><div class="line"></div><div class="line">Concurrency Level:      30          #并发数</div><div class="line">Time taken for tests:   0.609 seconds   #总请求时长</div><div class="line">Complete requests:      100            #总请求数</div><div class="line">Failed requests:        0           #失败的请求数</div><div class="line">Write errors:           0          #错误</div><div class="line">Non-2xx responses:      100</div><div class="line">Total transferred:      45900 bytes   #总共传输数据量 </div><div class="line">HTML transferred:       0 bytes</div><div class="line">Requests per second:    164.18 [#/sec] (mean)   #平均每秒的请求数，重要指标：相当于LR中的每秒事务数，后面的括号中mean表示这是一个平均值</div><div class="line">Time per request:       182.725 [ms] (mean)    #平均每个请求消耗的时间，重要指标：LR中的平均事务响应时间</div><div class="line">Time per request:       6.091 [ms] (mean, across all concurrent requests)   #上面的请求除以并发数，即服务器平均请求响应时间 在并发量为1时 用户等待时间相同  </div><div class="line">Transfer rate:          73.59 [Kbytes/sec] received   #平均每秒多少K，即传输速率</div><div class="line"></div><div class="line">Connection Times (ms)</div><div class="line">              min  mean[+/-sd] median   max</div><div class="line">Connect:       28   32   1.7     32      36</div><div class="line">Processing:    70  106  25.5    100     169</div><div class="line">Waiting:       70  106  25.5    100     169</div><div class="line">Total:        100  138  25.7    134     202</div><div class="line"></div><div class="line">Percentage of the requests served within a certain time (ms)</div><div class="line">  50%    134        #50%的请求都在134ms内完成</div><div class="line">  66%    143</div><div class="line">  75%    153</div><div class="line">  80%    163</div><div class="line">  90%    180</div><div class="line">  95%    188</div><div class="line">  98%    193</div><div class="line">  99%    202</div><div class="line"> 100%    202 (longest request)</div></pre></td></tr></table></figure></p>
-<p>具体每个参数的含义可以参考如下地址，里面有很详细的介绍。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://www.jb51.net/article/59469.htm</div></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2017/09/20/apache-ab/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/20/apache-ab/">展开全文 >></a>
         </p>
       
 
@@ -664,6 +772,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
@@ -672,19 +784,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -704,7 +812,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -712,11 +820,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -728,11 +844,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">

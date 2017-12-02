@@ -8,14 +8,14 @@
   <link rel="dns-prefetch" href="http://youxitest.com">
   <title>本地数据库mysql安装和使用 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="mac本地数据库mysql的安装：mysql官方下载链接：https://dev.mysql.com/downloads/mysql/下载完并安装成功后，会有个默认的数据库账号密码：root@localhost: waTADIuz0y=w 安装好mysql服务后，打开『系统偏好设置』，点击MySQL图标,在弹出的框中，点击Start MySQL Server,进行启动(如果启动成功，按钮会变成St">
+  <meta name="description" content="mac本地数据库mysql的安装：mysql官方下载链接：https://dev.mysql.com/downloads/mysql/下载完并安装成功后，会有个默认的数据库账号密码：root@localhost: waTADIuz0y=w 安装好mysql服务后，打开『系统偏好设置』，点击MySQL图标,在弹出的框中，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="本地数据库mysql安装和使用">
 <meta property="og:url" content="http://youxitest.com/2017/07/02/e6-9c-ac-e5-9c-b0-e6-95-b0-e6-8d-ae-e5-ba-93mysql-e5-ae-89-e8-a3-85-e5-92-8c-e4-bd-bf-e7-94-a8/index.html">
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
 <meta property="og:description" content="mac本地数据库mysql的安装：mysql官方下载链接：https://dev.mysql.com/downloads/mysql/下载完并安装成功后，会有个默认的数据库账号密码：root@localhost: waTADIuz0y=w 安装好mysql服务后，打开『系统偏好设置』，点击MySQL图标,在弹出的框中，点击Start MySQL Server,进行启动(如果启动成功，按钮会变成St">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-13T02:47:14.000Z">
+<meta property="og:updated_time" content="2017-12-02T11:28:58.690Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="本地数据库mysql安装和使用">
 <meta name="twitter:description" content="mac本地数据库mysql的安装：mysql官方下载链接：https://dev.mysql.com/downloads/mysql/下载完并安装成功后，会有个默认的数据库账号密码：root@localhost: waTADIuz0y=w 安装好mysql服务后，打开『系统偏好设置』，点击MySQL图标,在弹出的框中，点击Start MySQL Server,进行启动(如果启动成功，按钮会变成St">
@@ -159,14 +159,14 @@
 
         
         <a href="/2017/07/02/e6-9c-ac-e5-9c-b0-e6-95-b0-e6-8d-ae-e5-ba-93mysql-e5-ae-89-e8-a3-85-e5-92-8c-e4-bd-bf-e7-94-a8/" class="archive-article-date">
-  	<time datetime="2017-07-02T14:21:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-02</time>
+  	<time datetime="2017-07-02T22:21:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>mac本地数据库mysql的安装：<br>mysql官方下载链接：<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">https://dev.mysql.com/downloads/mysql/</a><br>下载完并安装成功后，会有个默认的数据库账号密码：<br>root@localhost: waTADIuz0y=w</p>
+        <p>mac本地数据库mysql的安装：<br>mysql官方下载链接：<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/mysql/</a><br>下载完并安装成功后，会有个默认的数据库账号密码：<br>root@localhost: waTADIuz0y=w</p>
 <p>安装好mysql服务后，打开『系统偏好设置』，点击MySQL图标,在弹出的框中，点击Start MySQL Server,进行启动(如果启动成功，按钮会变成Stop MySQL Server)</p>
 <p>在Terminal终端登录MySQL，输入：<br>TTZhangdeMacBook-Pro:~ admin$ PATH=”$PATH”:/usr/local/mysql/bin<br>TTZhangdeMacBook-Pro:~ admin$ mysql -u root -p<br>此时，会提示输入密码，输入刚刚默认给出的密码即可</p>
 <p>展示当前数据库下所有的库：<br>mysql&gt; show databases;<br>此时，可能会有报错提示：ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.<br>遇到这种情况，只要输入如下命令重新设置即可解决：<br>mysql&gt; SET PASSWORD = PASSWORD(‘123456’);</p>
@@ -179,7 +179,7 @@
 <p>mysql&gt; CREATE DATABASE guest CHARACTER SET utf8;<br>Query OK, 1 row affected (0.00 sec)</p>
 <p>安装pymysql：<br>sudo pip install pymysql</p>
 <p>给电脑安装一个好用的查看数据库的插件吧，由于我是在mac上使用，所以使用插件：Valentina Studio ,windows上可使用Navicat</p>
-<p>安装PyMySQL：<br>TTZhangdeMacBook-Pro:~ admin$ git clone <a href="https://github.com/PyMySQL/PyMySQL" target="_blank" rel="external">https://github.com/PyMySQL/PyMySQL</a><br>TTZhangdeMacBook-Pro:~ admin$ cd PyMySQL/<br>TTZhangdeMacBook-Pro:PyMySQL admin$ python3 setup.py install</p>
+<p>安装PyMySQL：<br>TTZhangdeMacBook-Pro:~ admin$ git clone <a href="https://github.com/PyMySQL/PyMySQL" target="_blank" rel="noopener">https://github.com/PyMySQL/PyMySQL</a><br>TTZhangdeMacBook-Pro:~ admin$ cd PyMySQL/<br>TTZhangdeMacBook-Pro:PyMySQL admin$ python3 setup.py install</p>
 
       
 
@@ -441,6 +441,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
@@ -449,19 +453,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -481,7 +481,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -489,11 +489,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -505,11 +513,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">

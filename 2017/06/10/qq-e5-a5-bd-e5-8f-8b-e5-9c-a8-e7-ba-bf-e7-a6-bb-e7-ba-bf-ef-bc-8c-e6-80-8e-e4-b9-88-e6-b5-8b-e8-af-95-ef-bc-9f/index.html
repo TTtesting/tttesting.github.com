@@ -8,14 +8,14 @@
   <link rel="dns-prefetch" href="http://youxitest.com">
   <title>QQ好友在线/离线，怎么测试？ | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="即时通讯是目前internet上最为流行的通讯方式，各种各样的即时通讯软件也层出不穷，那么今天主要针对QQ好友在线状态/QQ群友在线状态功能出发，一起思考其中的实现原理以及我们如何去测试此功能？ &amp;nbsp; 当大家在使用QQ的时候，是否和我一样有如下疑问： &amp;nbsp;  在好友列表中为什么可以实时的看到qq好友的在线、离线等状态？ 在QQ群的群友列表中能看到当前群友的在线、离线等状态，是如何实">
+  <meta name="description" content="即时通讯是目前internet上最为流行的通讯方式，各种各样的即时通讯软件也层出不穷，那么今天主要针对QQ好友在线状态/QQ群友在线状态功能出发，一起思考其中的实现原理以及我们如何去测试此功能？ &amp;nbsp; 当大家在使用QQ的时候，是否和我一样有如下疑问： &amp;nbsp;  在好友列表中为什么可以实时的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QQ好友在线&#x2F;离线，怎么测试？">
 <meta property="og:url" content="http://youxitest.com/2017/06/10/qq-e5-a5-bd-e5-8f-8b-e5-9c-a8-e7-ba-bf-e7-a6-bb-e7-ba-bf-ef-bc-8c-e6-80-8e-e4-b9-88-e6-b5-8b-e8-af-95-ef-bc-9f/index.html">
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
 <meta property="og:description" content="即时通讯是目前internet上最为流行的通讯方式，各种各样的即时通讯软件也层出不穷，那么今天主要针对QQ好友在线状态/QQ群友在线状态功能出发，一起思考其中的实现原理以及我们如何去测试此功能？ &amp;nbsp; 当大家在使用QQ的时候，是否和我一样有如下疑问： &amp;nbsp;  在好友列表中为什么可以实时的看到qq好友的在线、离线等状态？ 在QQ群的群友列表中能看到当前群友的在线、离线等状态，是如何实">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-13T02:47:14.000Z">
+<meta property="og:updated_time" content="2017-12-02T11:28:58.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="QQ好友在线&#x2F;离线，怎么测试？">
 <meta name="twitter:description" content="即时通讯是目前internet上最为流行的通讯方式，各种各样的即时通讯软件也层出不穷，那么今天主要针对QQ好友在线状态/QQ群友在线状态功能出发，一起思考其中的实现原理以及我们如何去测试此功能？ &amp;nbsp; 当大家在使用QQ的时候，是否和我一样有如下疑问： &amp;nbsp;  在好友列表中为什么可以实时的看到qq好友的在线、离线等状态？ 在QQ群的群友列表中能看到当前群友的在线、离线等状态，是如何实">
@@ -159,7 +159,7 @@
 
         
         <a href="/2017/06/10/qq-e5-a5-bd-e5-8f-8b-e5-9c-a8-e7-ba-bf-e7-a6-bb-e7-ba-bf-ef-bc-8c-e6-80-8e-e4-b9-88-e6-b5-8b-e8-af-95-ef-bc-9f/" class="archive-article-date">
-  	<time datetime="2017-06-10T12:54:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
+  	<time datetime="2017-06-10T20:54:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
 </a>
         
       </header>
@@ -468,6 +468,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
@@ -476,19 +480,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -508,7 +508,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,11 +516,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,11 +540,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">
