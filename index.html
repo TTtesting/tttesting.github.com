@@ -147,6 +147,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-linux_python2_python3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/24/linux_python2_python3/">linux下python2升级python3，python2和python3并存</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/24/linux_python2_python3/" class="archive-article-date">
+  	<time datetime="2018-01-24T18:35:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>wget <a href="https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tgz" target="_blank" rel="noopener">https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tgz</a></p>
+<p>解压：tar -xzvf Python-3.6.4.tgz</p>
+<p>cd Python-3.6.4</p>
+<p>/usr/local 创建一个文件夹：mkdir /usr/local/python3</p>
+<p>编辑安装：</p>
+<p>make<br>make install</p>
+<p>不要覆盖老版本，将老版本的名字修改下</p>
+<p>mv /usr/bin/python /usr/bin/python_old</p>
+<p>再建立新版本python的链接</p>
+<p>ln -s /usr/local/python3/bin/python3 /usr/bin/python3</p>
+<p>python2 get-pip.py<br>python3 get-pip.py </p>
+<p>建立软连接：<br>ln -s /usr/local/python2/bin/pip2 /usr/bin/pip2<br>ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3</p>
+<p>查看python2和python3版本，就是对应安装的版本了<br>python2 -V<br>python3 -V</p>
+<p>yum命令就不能正常使用了，去修改vim /usr/bin/yum<br>将第一行#!/usr/bin/python修改为#!/usr/bin/python_old，保存即可。</p>
+<p>pip源配置修改：</p>
+<h2 id="linux的文件在-pip-pip-conf"><a href="#linux的文件在-pip-pip-conf" class="headerlink" title="linux的文件在~/.pip/pip.conf"></a>linux的文件在~/.pip/pip.conf</h2><p>[global]<br>index-url=<a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple/</a></p>
+<p>[install]</p>
+<h2 id="trusted-host-mirrors-aliyun-com"><a href="#trusted-host-mirrors-aliyun-com" class="headerlink" title="trusted-host=mirrors.aliyun.com"></a>trusted-host=mirrors.aliyun.com</h2><p>可以修改为：<br><a href="http://pypi.douban.com/simple" target="_blank" rel="noopener">http://pypi.douban.com/simple</a> </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/24/linux_python2_python3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
     <article id="post-micro-service-architecture" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -480,104 +572,6 @@
 
 
   
-    <article id="post-loadrunnerfirs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/24/loadrunnerfirs/">如何学习LoadRunner性能测试？</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/24/loadrunnerfirs/" class="archive-article-date">
-  	<time datetime="2017-09-24T16:22:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近组内同事针对性能测试LR的脚本部分做了介绍，是个不错的分享。会后反思自己也有很长一段时间没做性能测试了，根据以往的经验，有必要做些整理和补充，本文主要介绍一些Loadrunner性能测试的学习方法、思路、流程以及测试过程中需要注意的点。脚本相关的介绍在这篇文章就不过多描述了，有兴趣的朋友网上进行查找，资料也相对比较丰富。</p>
-<p><strong>一、Loadrunner初步了解</strong></p>
-<p>关于Loadrunner的学习，初期重点关注Vuser Generator的使用，需掌握以下内容，再去实战操作基本就不难了。</p>
-<ul>
-<li>录制脚本的基本步骤；</li>
-<li>理解基础函数的含义：lr_start_transaction(),lr_end_transaction(),web_reg_find(),web_url(),web_submit_form();</li>
-<li>会看输出窗口中的Replay log；</li>
-<li>Vuser-Run Time Setting中Run logic\log\Think Time的设置；</li>
-<li>脚本的迭代；</li>
-<li>手动写脚本，掌握基本函数；</li>
-<li>Loadrunner参数的设置；</li>
-</ul>
-<p>针对我们目前的项目基本上是做HTTP/HTTPS协议的压测，大家手上有项目时，可以通过录制了解一下整个HTTP请求及响应的情况，学习一下Loadrunner内置的函数。</p>
-<p>另外参数设置、迭代、关联函数等等希望大家查一下资料弄懂，实践一下不同方式有什么不同。</p>
-<p><strong>二、性能指标</strong></p>
-<p>在做性能测试之前，简单说下性能指标：</p>
-<p>响应时间</p>
-<p>针对页面操作，响应时间小于2秒，用户会感觉系统较快较满意；响应时间在2~5秒，用户可以接受，但对速度有些不满；响应时间超过5秒，用户将无法接受。作为优秀的项目当然越快越好，我们在做压测的时候，一般希望响应时间在1秒以内，<br>针对系统内部调用的接口响应时间更要快，具体情况视具体接口而定。</p>
-<p>吞吐量</p>
-<p>通常需要结合业务部门的市场目标而定。</p>
-<p>服务器资源占用</p>
-<p>CPU占用率、内存使用率不能过高；Cache命中率不能过低。<br><br><br>
-        
-          <a class="article-more-a" href="/2017/09/24/loadrunnerfirs/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">LoadRunner</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/24/loadrunnerfirs/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -671,11 +665,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
+                <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
+                <a href="javascript:void(0)" class="js-tag color1">https</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,11 +677,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">charles</a>
+                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">https</a>
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -715,7 +709,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -723,11 +717,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -740,14 +738,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -764,6 +754,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">django</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
               </li>
             
             <div class="clearfix"></div>

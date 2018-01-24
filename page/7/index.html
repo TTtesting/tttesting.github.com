@@ -147,6 +147,111 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-123" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/10/123/">QQ群友在线/离线，如何测试？</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/10/123/" class="archive-article-date">
+  	<time datetime="2017-06-10T21:01:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上篇文章『QQ好友在线/离线，如何测试？』针对即时通讯的“状态”进行了分析和总结，主要说到了QQ好友在线/离线实现方案，测试过程中需要注意的测试点。</p>
+<p>&nbsp;</p>
+<p>针对好友状态实时性的要求需要使用不同的方式，如果实时性要求高可以采用推送的方式，那么QQ好友针对在线/离线要求较高，可以采用推送的方式进行同步。大家在做通讯工具方便的项目时，如果实时性要求不高的话，可以采用轮询拉取的方式同步。备注：轮询方式和推送方式在上篇已经介绍到，在这里就不过多描述。</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>QQ群友的状态又是按照什么方式进行同步状态的呢？</p>
+<p>QQ群友的状态又该怎么去测试呢？<br>我们带着这个问题，继续了解和学习，现总结分享如下：</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>简单回顾下QQ好友在线/离线流程，尽量用流程图形式能让大家看明白。</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>用户登录时流程：</p>
+<p><img src="http://www.87testing.com/assets/blogimg/login1.png" alt=""><br>&nbsp;<br>用户登出时流程：</p>
+<p><img src="http://www.87testing.com/assets/blogimg/login2.png" alt=""><br>&nbsp;<br>用户登录时看到哪些好友在线哪些离线的流程：</p>
+<p><img src="http://www.87testing.com/assets/blogimg/login3.png" alt=""><br>&nbsp;</p>
+</blockquote>
+<p>&nbsp;</p>
+<blockquote>
+<p>用户状态变更时的实时推送流程：</p>
+<p><img src="http://www.87testing.com/assets/blogimg/login4.png" alt=""><br>群友状态按正常来讲也可以使用实时推送的方式，从而保证状态的实时性，但是目前大多数还是采用轮询拉取方式，主要因为群友状态实时推送压力实在太大，全部实时获取系统往往会承受不了。那么轮询拉取方式也会给服务器带来比较大的压力，可以使用按需拉取，延时拉取的方式，用户群可能较多，当用户进入某一个群时才进行用户状态的拉取。从来降低服务器压力，且满足需求。</p>
+</blockquote>
+<p>&nbsp;</p>
+<p>从测试角度主要考虑：</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>缓存机制能够正常，缓存数据的准确性；</p>
+<p>拉取方式的测试，当进入某一个群时才拉取；</p>
+<p>用户在线/离线状态的正确性校验；</p>
+<p>并发测试；等等…</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/10/123/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
     <article id="post-qq-e5-a5-bd-e5-8f-8b-e5-9c-a8-e7-ba-bf-e7-a6-bb-e7-ba-bf-ef-bc-8c-e6-80-8e-e4-b9-88-e6-b5-8b-e8-af-95-ef-bc-9f" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -534,98 +639,6 @@
 
 
   
-    <article id="post-linux_python2_python3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/24/linux_python2_python3/">linux下python2升级python3，python2和python3并存</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/24/linux_python2_python3/" class="archive-article-date">
-  	<time datetime="2017-01-24T18:35:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>wget <a href="https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tgz" target="_blank" rel="noopener">https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tgz</a></p>
-<p>解压：tar -xzvf Python-3.6.4.tgz</p>
-<p>cd Python-3.6.4</p>
-<p>/usr/local 创建一个文件夹：mkdir /usr/local/python3</p>
-<p>编辑安装：</p>
-<p>make<br>make install</p>
-<p>不要覆盖老版本，将老版本的名字修改下</p>
-<p>mv /usr/bin/python /usr/bin/python_old</p>
-<p>再建立新版本python的链接</p>
-<p>ln -s /usr/local/python3/bin/python3 /usr/bin/python3</p>
-<p>python2 get-pip.py<br>python3 get-pip.py </p>
-<p>建立软连接：<br>ln -s /usr/local/python2/bin/pip2 /usr/bin/pip2<br>ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3</p>
-<p>查看python2和python3版本，就是对应安装的版本了<br>python2 -V<br>python3 -V</p>
-<p>yum命令就不能正常使用了，去修改vim /usr/bin/yum<br>将第一行#!/usr/bin/python修改为#!/usr/bin/python_old，保存即可。</p>
-<p>pip源配置修改：</p>
-<h2 id="linux的文件在-pip-pip-conf"><a href="#linux的文件在-pip-pip-conf" class="headerlink" title="linux的文件在~/.pip/pip.conf"></a>linux的文件在~/.pip/pip.conf</h2><p>[global]<br>index-url=<a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple/</a></p>
-<p>[install]</p>
-<h2 id="trusted-host-mirrors-aliyun-com"><a href="#trusted-host-mirrors-aliyun-com" class="headerlink" title="trusted-host=mirrors.aliyun.com"></a>trusted-host=mirrors.aliyun.com</h2><p>可以修改为：<br><a href="http://pypi.douban.com/simple" target="_blank" rel="noopener">http://pypi.douban.com/simple</a> </p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/24/linux_python2_python3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
@@ -719,11 +732,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
+                <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
+                <a href="javascript:void(0)" class="js-tag color1">https</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -731,11 +744,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">charles</a>
+                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">https</a>
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -763,7 +776,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -771,11 +784,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -788,14 +805,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -812,6 +821,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">django</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
               </li>
             
             <div class="clearfix"></div>
