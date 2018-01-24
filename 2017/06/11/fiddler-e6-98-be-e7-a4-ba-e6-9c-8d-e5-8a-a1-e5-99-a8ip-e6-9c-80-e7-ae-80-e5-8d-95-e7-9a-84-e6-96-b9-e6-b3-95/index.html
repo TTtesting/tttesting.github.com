@@ -8,7 +8,7 @@
   <link rel="dns-prefetch" href="http://youxitest.com">
   <title>Fiddler显示服务器IP最简单的方法 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Fiddler默认配置中是看不到服务器IP的，接下来简单介绍下在fiddler上也能够看到请求的服务器IP： 1、Fiddler—》Rules—》Customize Rules ， 2、在CustomRules.js里搜索找到：static function Main() ， 3、添加如下一行脚本：   Fiddler">
+  <meta name="description" content="Fiddler默认配置中是看不到服务器IP的，接下来简单介绍下在fiddler上也能够看到请求的服务器IP： 1、Fiddler—》Rules—》Customize Rules ， 2、在CustomRules.js里搜索找到：static function Main() ， 3、添加如下一行脚本：   FiddlerObject.UI.lvSessions.AddBoundColumn(&amp;quo">
 <meta name="keywords" content="fiddler">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fiddler显示服务器IP最简单的方法">
@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
 <meta property="og:description" content="Fiddler默认配置中是看不到服务器IP的，接下来简单介绍下在fiddler上也能够看到请求的服务器IP： 1、Fiddler—》Rules—》Customize Rules ， 2、在CustomRules.js里搜索找到：static function Main() ， 3、添加如下一行脚本：   FiddlerObject.UI.lvSessions.AddBoundColumn(&amp;quo">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-04T05:09:09.533Z">
+<meta property="og:updated_time" content="2018-01-24T08:19:58.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fiddler显示服务器IP最简单的方法">
 <meta name="twitter:description" content="Fiddler默认配置中是看不到服务器IP的，接下来简单介绍下在fiddler上也能够看到请求的服务器IP： 1、Fiddler—》Rules—》Customize Rules ， 2、在CustomRules.js里搜索找到：static function Main() ， 3、添加如下一行脚本：   FiddlerObject.UI.lvSessions.AddBoundColumn(&amp;quo">
@@ -380,7 +380,7 @@ FiddlerObject.UI.lvSessions.AddBoundColumn(&quot;Server IP&quot;, 120, &quot;X-H
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 TT
+    		&copy; 2018 TT
     	</div>
       	<div class="footer-right">
       		<a href="" target="_blank">Hexo</a> & <a href="" target="_blank">Yilia</a> by TT
@@ -459,15 +459,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CDN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CDN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -487,10 +487,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">关键对话</a>
               </li>
              
@@ -499,19 +495,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">创业</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -519,7 +507,35 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Locust</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -535,23 +551,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Locust</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">django</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
               </li>
             
             <div class="clearfix"></div>
