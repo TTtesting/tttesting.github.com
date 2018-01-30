@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
 <meta property="og:description" content="1、首先下载对应windows系统的数据库免安装包：mysql-5.7.21-winx64.zip下载地址：https://dev.mysql.com/downloads/file/?id=474496 2、下载完成，解压到合适的目录中，比如我放在D盘mysql目录下D:\mysql 3、在D:\mysql\mysql-5.7.21-winx64目录下新建一个空的data文件夹，再在D:\mysq">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-30T09:22:13.479Z">
+<meta property="og:updated_time" content="2018-01-30T09:37:06.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows下mysql数据库安装及配置">
 <meta name="twitter:description" content="1、首先下载对应windows系统的数据库免安装包：mysql-5.7.21-winx64.zip下载地址：https://dev.mysql.com/downloads/file/?id=474496 2、下载完成，解压到合适的目录中，比如我放在D盘mysql目录下D:\mysql 3、在D:\mysql\mysql-5.7.21-winx64目录下新建一个空的data文件夹，再在D:\mysq">
@@ -169,20 +169,13 @@
       
         <p>1、首先下载对应windows系统的数据库免安装包：mysql-5.7.21-winx64.zip<br>下载地址：<a href="https://dev.mysql.com/downloads/file/?id=474496" target="_blank" rel="noopener">https://dev.mysql.com/downloads/file/?id=474496</a></p>
 <p>2、下载完成，解压到合适的目录中，比如我放在D盘mysql目录下D:\mysql</p>
-<p>3、在D:\mysql\mysql-5.7.21-winx64目录下新建一个空的data文件夹，再在D:\mysql\mysql-5.7.21-winx64目录下创建一个文件mysql.ini,mysql.ini文件内的内容为：<br>[mysql]</p>
-<h1 id="设置mysql客户端默认字符集"><a href="#设置mysql客户端默认字符集" class="headerlink" title="设置mysql客户端默认字符集"></a>设置mysql客户端默认字符集</h1><p>default-character-set=utf8<br>[mysqld]</p>
-<p>#设置3306端口<br>port = 3306 </p>
-<h1 id="设置mysql的安装目录"><a href="#设置mysql的安装目录" class="headerlink" title="设置mysql的安装目录"></a>设置mysql的安装目录</h1><p>basedir=D:/mysql/mysql-5.7.21-winx64</p>
-<h1 id="设置mysql数据库的数据的存放目录"><a href="#设置mysql数据库的数据的存放目录" class="headerlink" title="设置mysql数据库的数据的存放目录"></a>设置mysql数据库的数据的存放目录</h1><p>datadir=D:/mysql/mysql-5.7.21-winx64/data</p>
-<h1 id="允许最大连接数"><a href="#允许最大连接数" class="headerlink" title="允许最大连接数"></a>允许最大连接数</h1><p>max_connections=200</p>
-<h1 id="服务端使用的字符集默认为8比特编码的latin1字符集"><a href="#服务端使用的字符集默认为8比特编码的latin1字符集" class="headerlink" title="服务端使用的字符集默认为8比特编码的latin1字符集"></a>服务端使用的字符集默认为8比特编码的latin1字符集</h1><p>character-set-server=utf8</p>
-<h1 id="创建新表时将使用的默认存储引擎"><a href="#创建新表时将使用的默认存储引擎" class="headerlink" title="创建新表时将使用的默认存储引擎"></a>创建新表时将使用的默认存储引擎</h1><p>default-storage-engine=INNODB</p>
+<p>3、在D:\mysql\mysql-5.7.21-winx64目录下新建一个空的data文件夹，再在D:\mysql\mysql-5.7.21-winx64目录下创建一个文件mysql.ini,mysql.ini文件内的内容为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[mysql]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line">default-character-set=utf8 </span><br><span class="line">[mysqld]</span><br><span class="line">#设置3306端口</span><br><span class="line">port = 3306 </span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir=D:/mysql/mysql-5.7.21-winx64</span><br><span class="line"># 设置mysql数据库的数据的存放目录</span><br><span class="line">datadir=D:/mysql/mysql-5.7.21-winx64/data</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections=200</span><br><span class="line"># 服务端使用的字符集默认为8比特编码的latin1字符集</span><br><span class="line">character-set-server=utf8</span><br><span class="line"># 创建新表时将使用的默认存储引擎</span><br><span class="line">default-storage-engine=INNODB</span><br></pre></td></tr></table></figure></p>
 <p>4、cmd命令进入到D:/mysql/mysql-5.7.21-winx64/bin目录下，执行：mysqld –initialize-insecure</p>
 <p>5、再输入mysqld -install，会显示Service successfully installed.</p>
 <p>6、最后输入net start mysql 启动mysql服务（或者服务列表中找到mysql手动启动或停止服务）<br>D:\mysql\mysql-5.7.21-winx64\bin&gt;net start mysql<br>MySQL 服务正在启动 .<br>MySQL 服务已经启动成功。</p>
 <p>7、mysql设置密码：mysqladmin -u root password 123456（密码设置为123456）</p>
 <p>8、再输入：mysql -u root -p，此时会提示Enter password：，输入密码即可进入mysql</p>
-<p>9、查看mysql里面的数据库有哪些：show databases;<br>mysql&gt; show databases;<br>+——————–+<br>| Database           |<br>+——————–+<br>| information_schema |<br>| mysql              |<br>| performance_schema |<br>| sys                |<br>+——————–+</p>
+<p>9、查看mysql里面的数据库有哪些：show databases;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">+--------------------+</span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -435,10 +428,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
@@ -452,6 +441,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">支付测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -475,10 +468,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
@@ -487,11 +476,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -507,7 +496,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -528,6 +517,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">django</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
             
             <div class="clearfix"></div>
