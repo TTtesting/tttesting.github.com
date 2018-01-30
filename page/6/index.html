@@ -147,6 +147,253 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/">python实现：将文本文件分割成多个小文本文件</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/" class="archive-article-date">
+  	<time datetime="2017-06-11T16:38:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前两天有个朋友说，想实现一个文本文件按照固定行数进行分割成多个文本文件，却不知如何实现。如果数据量小手动分割下就好了，如果数据量很大的话手动完成实在太耗费人力了，也不现实。那么就需要借助脚本去实现。既然有朋友想简单的完成这个任务，那么不如记录下来，给需要的朋友提供方便。</p>
+<p>&nbsp;</p>
+<p>下面我就使用python进行脚本的实现和操作，当然用其他语言都能实现，大家可根据对语言的熟悉程度进行自主选择，如果有朋友还没有达到编写代码的能力的话，那么最起码对语言环境的使用要会，只要达到这些，就可以完成如下工作。演示如下：</p>
+<p>比如我们要对A.txt文件进行分割，按照5行一分割，分割成多个txt文件。</p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge1.png" alt=""></p>
+<p>&nbsp;</p>
+<p>A.txt文件为要分割的测试数据，我创建了21条数据，如下：</p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge2.png" alt=""></p>
+<p>&nbsp;</p>
+<p>每五行一分割的话就是5个txt文件，下面为实现的python脚本：split.py</p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge3.png" alt=""></p>
+<p>&nbsp;</p>
+<p>执行脚本：python split.py</p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge4.png" alt=""></p>
+<p>&nbsp;</p>
+<p>查看执行结果:</p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge5.png" alt=""></p>
+<p>&nbsp;</p>
+<p>再看下0.txt和4.txt的内容：</p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge6.png" alt=""></p>
+<p><img src="http://www.87testing.com/assets/blogimg/fenge7.png" alt=""></p>
+<p>就这样21条数据就被分割成了5个文本文件，同样数据量大的情况下，只需要修改脚本中的LIMIT（一个txt文件要分割的条数），当然文件格式不仅限于txt，csv等都可以，有兴趣的朋友不妨试试看。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-e4-ba-92-e8-81-94-e7-bd-91-e4-ba-a7-e5-93-81-e6-8e-a5-e5-85-a5-e7-ac-ac-e4-b8-89-e6-96-b9-e6-94-af-e4-bb-98-e5-8a-9f-e8-83-bd-e5-ba-94-e5-a6-82-e4-bd-95-e6-b5-8b-e8-af-95-ef-bc-9f" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/11/e4-ba-92-e8-81-94-e7-bd-91-e4-ba-a7-e5-93-81-e6-8e-a5-e5-85-a5-e7-ac-ac-e4-b8-89-e6-96-b9-e6-94-af-e4-bb-98-e5-8a-9f-e8-83-bd-e5-ba-94-e5-a6-82-e4-bd-95-e6-b5-8b-e8-af-95-ef-bc-9f/">互联网产品接入第三方支付功能应如何测试？</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/11/e4-ba-92-e8-81-94-e7-bd-91-e4-ba-a7-e5-93-81-e6-8e-a5-e5-85-a5-e7-ac-ac-e4-b8-89-e6-96-b9-e6-94-af-e4-bb-98-e5-8a-9f-e8-83-bd-e5-ba-94-e5-a6-82-e4-bd-95-e6-b5-8b-e8-af-95-ef-bc-9f/" class="archive-article-date">
+  	<time datetime="2017-06-11T16:03:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>现在有不少测试朋友做的项目中，可能也会涉及到支付相关的功能。比如：做商城的，做游戏的以及其他在线交易的网站、APP等。如果支付出了问题，或者用户拿少的钱通过篡改请求数据购买大金额的商品，如果是实物的话，发货前还有可能被发现。如果是虚拟商品话费、游戏币等就有可能造成损失。</p>
+<p>&nbsp;</p>
+<p>所以，不管是实物也好，虚拟商品也好，涉及到支付功能时，大家在测试的过程中一定要重视，否则，会造成很大损失。之前可能大家也都看到过或者听过一个bug损失4.6亿美金的惨痛教训或者身边也有发生过其他因为支付功能的bug导致直接损失的案例。</p>
+<p>&nbsp;</p>
+<p>给大家举个真实的案例：比如使用支付宝购买虚拟商品，往支付宝跳转时，篡改了小的金额，结果购买虚拟商品成功了。（原本10元的商品，0.01元就搞定了）。多么可怕的一个bug啊，当然这个问题可能对于一个做过支付有过经验的测试朋友来说，可能会想：哎呀，这个问题都发现不了，还做什么测试？是的，问题是很简单，对于一个刚入职场的测试朋友或者没有支付相关经验的测试朋友来说，很有可能会忽略。</p>
+<p>&nbsp;</p>
+<p>那么，问题来了，对于支付模块的相关测试，我们应该如何进行呢？比如，针对游戏来说，使用第三方支付往游戏充值游戏币功能，看起来是不是很简单，大家主要思考下以下内容：</p>
+<ol>
+<li>支付都是与第三方支付（支付宝、微信、财付通、QQ钱包、短信支付等）进行对接，那么，是否了解了第三方接口有哪些？是否都能清楚我们的产品与第三方是如何交互的？是否能画出流程图？</li>
+<li>异常场景有哪些？</li>
+<li>有哪些风险，如何规避？<br>第三方支付的流程，与商户的对接方式基本相似，大同小异。（题外推荐：如下流程图使用的chrome插件：Gliffy，个人感觉比较好用。）</li>
+</ol>
+<p>支付流程：</p>
+<p><img src="http://www.87testing.com/assets/blogimg/zhifu1.png" alt=""></p>
+<p>&nbsp;</p>
+<p>退款流程：</p>
+<p><img src="http://www.87testing.com/assets/blogimg/zhifu2.png" alt=""></p>
+<p>&nbsp;</p>
+<p>查询流程：</p>
+<p><img src="http://www.87testing.com/assets/blogimg/zhifu3.png" alt=""><br>先看下流程图，是否对流程图有些了解，不仅仅是做支付功能相关测试才去搞清楚其中的流程，做其他的测试一样也要搞清楚流程，只有搞清楚流程，才能更好的评估其中的风险，才能有利于测试用例的设计。当然流程图中只是提到了商户与第三方是如何交互的，同样商户内部处理的流程也要有所了解及数据怎么存储的，涉及到哪些DB也要清楚。</p>
+<p>&nbsp;</p>
+<p>流程清楚之后，我们再来看看其中会涉及到哪些接口？这个支付流程图里面就涉及到了第三方支付接口：</p>
+<ul>
+<li>下单接口：商户提交下单请求到第三方支付接口，第三方支付收单成功后返回下单成功结果给到商户系统。（下单接口的最终处理结果分为下单成功和下单失败，若未收到明确结果可调用单笔订单查询接口查询结果。）</li>
+<li>支付接口：调用该接口时指定支付参数，完成买家账户向商户账户的支付，采用页面跳转交互模式和后台通知交互模式。（结果分为两路返回：一路为前台在return_url页面跳转显示支付结果；一路为后台在notify_url收到支付结果通知后进行响应。）</li>
+<li>退款接口：调用第三方支付的支付请求接口返回付款成功后，在需要做退款处理时调用退款请求接口发起退款处理。（退款接口的最终处理结果分为退款成功和退款失败，若未收到明确结果可调用退款查询接口查询结果。）</li>
+<li>单笔订单查询接口：根据订单号查询单笔订单信息和状态。</li>
+<li>退款订单查询接口：调用第三方支付的退款接口返回后，在需要查询退款请求状态可调用退款订单查询接口查询退款订单的状态和订单信息。<br>那么针对第三方的接口，我们大致也有所了解了，接下来针对测试过程中涉及到主要的测试点整理如下：</li>
+</ul>
+<p>测试过程中需要注意的主要测试点及异常场景：</p>
+<ul>
+<li>首先要保证接口都能正常调用；</li>
+<li>生成一笔订单，支付完成后，同步或异步重复回调，只有一次有效；</li>
+<li>生成一笔订单，复制订单号和金额，再次生成一笔订单，用fiddler设置断点，用第一笔已完成的订单号和订单金额去替换现有的订单号和金额，无法完成支付；</li>
+<li>生成一笔订单，跳转到第三方时修改金额，无法到账，或者如果是游戏充值游戏币的话，到账为篡改后的金额对应的游戏币；</li>
+<li>异步通知屏蔽，同步有效，进行支付，同步能够正常到账；</li>
+<li>同步设置无效，异步有效，进行支付，异步能够正常到账；</li>
+<li>同步异步都设置无效，在第三方支付完成后，在重发机制时间范围内，设置异步有效，到下次通知时间点时，能够正常通知到账（补单机制的验证，如果商户收到第三方支付成功的通知后，要告知第三方支付收到了成功的通知，如果第三方支付收到商户应答不是ok或超时，第三方支付就会认为通知失败，会在规定的时间内持续调用notify_url，一般有时间或次数的限制）；</li>
+<li>针对支付订单在数据库中存储是否完整和正确进行校验（比如：第三方订单号–方便与第三方对账和问题排查、订单金额、订单状态等）；</li>
+<li>如果是用户购买实物商品，用户发起退货，要保证退货流程正常，资金能正常返还，要考虑下并发情况的验证以确保安全性；</li>
+<li><p>如果是用户购买虚拟商品，比如话费、油卡之类的商品，只有在发货失败的时候才能发起退货，注意验证；<br>遇到过的坑：</p>
+</li>
+<li><p>用户购买100元游戏币时，前往第三方支付跳转进行金额的篡改由100元改成0.01元，结果就拿了0.01元充值了100元的游戏币。对订单金额没有做校验导致这样的后果，损失比较大。大家在测试的过程中一定要注意对服务端进行校验，支付时数据的篡改一定要有校验。</p>
+</li>
+<li>当同步、异步通知都存在的情况的，异步通知（第三方支付成功后台通知），没有到账，导致部分用户充值不到账，引起客诉。当同步、异步并存的时候，一定要分别对同步和异步进行检验，确保都能正常到账。<br>&nbsp;</li>
+</ul>
+<p>我们所做的绝大多少的互联网产品都会涉及到第三方支付，所以支付功能必然是重要的，作为测试互联网产品的一员，我们必须要做好支付的安全性。</p>
+<p>那么，如何规避支付风险？</p>
+<p>为了进一步的加强支付功能的安全，也可以适当的增加一些监控机制，比如：订单与第三方订单进行对比，可以使用跑批完成，当我们完成支付的订单从数据库中查出来与通过第三方订单查询接口查询出来的同一个订单金额有异常时，进行报警通知能够及时发现处理，甚至当有异常情况进行创建订单的终止，从而把损失降到最低。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">安全测试</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">支付测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/11/e4-ba-92-e8-81-94-e7-bd-91-e4-ba-a7-e5-93-81-e6-8e-a5-e5-85-a5-e7-ac-ac-e4-b8-89-e6-96-b9-e6-94-af-e4-bb-98-e5-8a-9f-e8-83-bd-e5-ba-94-e5-a6-82-e4-bd-95-e6-b5-8b-e8-af-95-ef-bc-9f/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
     <article id="post-e4-bd-a0-e9-97-ae-e6-88-91-e7-ad-94-ef-bc-8c-e5-8f-8a-e6-b5-8b-e8-af-95-e4-ba-ba-e5-91-98-e6-96-b9-e5-90-91-e5-8f-91-e5-b1-95" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -487,201 +734,9 @@ FiddlerObject.UI.lvSessions.AddBoundColumn(&quot;Server IP&quot;, 120, &quot;X-H
 
 
   
-    <article id="post-e5-86-99-e7-bb-99-e6-b5-ae-e8-ba-81-e7-9a-84-e6-b5-8b-e8-af-95-e5-b7-a5-e7-a8-8b-e5-b8-88-e4-b8-80-e5-b0-81-e4-bf-a1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/11/e5-86-99-e7-bb-99-e6-b5-ae-e8-ba-81-e7-9a-84-e6-b5-8b-e8-af-95-e5-b7-a5-e7-a8-8b-e5-b8-88-e4-b8-80-e5-b0-81-e4-bf-a1/">写给浮躁的测试工程师一封信</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/11/e5-86-99-e7-bb-99-e6-b5-ae-e8-ba-81-e7-9a-84-e6-b5-8b-e8-af-95-e5-b7-a5-e7-a8-8b-e5-b8-88-e4-b8-80-e5-b0-81-e4-bf-a1/" class="archive-article-date">
-  	<time datetime="2017-06-11T15:35:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>还是从软件测试相关的QQ群说起，之前加了不少软件测试方面的QQ群，最近一个月都在时不时的观察群中聊天的内容，大部分都在聊天，聊的内容和技术无关。大部分内容总结为：<br><strong>撩妹</strong>–</p>
-<p>只要群中有新加入的女孩子，群中的男生就按捺不住了，然后就开始让爆照什么的。<br><strong>诉苦–</strong><br>看到有很多迷茫的小伙伴，刚上完测试培训班或者将要进入测试行业的应届毕业生们，在诉说找不到工作，多想能够帮助他们，引导他（她）们进入这个行业，听我劝说的都加为好友了，并且也加入到我的『测试架构师』公众号中，希望一起成长，我也会尽力帮助；<br><strong>薪资–</strong><br>在谈论你拿多少工资，『我』拿多少工资，『我』的一个朋友年薪拿了50W、60W等等，为什么别人能拿这么高的工资，请问是否有想过？<br>抱怨–<br>抱怨公司的测试流程，抱怨开发人员开发的bug多，抱怨团队怎么怎么样，抱怨自己的领导怎么怎么样，抱怨加班多，等等怨天尤人;<br>扪心自问，建群的意义何在？请问为何叫软件测试技术相关的群呢？个人觉得，也不是不允许聊天，可适度放松，但我觉得更多的是在浪费时间。<br>如果你也在其中，请从现在开始给自己制定一个年计划，不需要太长，一年的计划即可，再把自己的年计划分成月和天，然后去完成它。<br>说到这里，给大家分享个『GROW模型』：<br>G就是Goals(目标)，给自己设定一个明确目标，比如一年学会python，能独立编写脚本。<br>R就是Reality(现实)，自己当前的现状是什么？比如经常聊QQ等做浪费时间的事情。<br>O就是Options(选项)，找到解决的方案，比如：选择少闲聊QQ，每天学习。<br>W就是Will(计划),比如，制定具体的计划去实现建立的目标：每天学习两个小时，周末每天学习时间加倍4个小时。<br>『GROW模型』个人觉得很实用，可以用在工作上、学习上、生活上等等。<br>写这篇文章的目的有两个：</p>
-<ul>
-<li>希望更多浮躁的测试工程师们能够振奋起来，为自己的未来买单，不要盲目的浪费时间。从现在开始给自己指定一个目标。</li>
-<li>同时，写这篇文章也给自己提醒，不要浪费时间，也要按计划执行，目前自己做的也不够优秀，也要努力。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/11/e5-86-99-e7-bb-99-e6-b5-ae-e8-ba-81-e7-9a-84-e6-b5-8b-e8-af-95-e5-b7-a5-e7-a8-8b-e5-b8-88-e4-b8-80-e5-b0-81-e4-bf-a1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-e6-95-b0-e6-8d-ae-e5-ba-93-e4-ba-8b-e5-8a-a1-e5-92-8c-e9-94-81" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/11/e6-95-b0-e6-8d-ae-e5-ba-93-e4-ba-8b-e5-8a-a1-e5-92-8c-e9-94-81/">数据库事务和锁</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/11/e6-95-b0-e6-8d-ae-e5-ba-93-e4-ba-8b-e5-8a-a1-e5-92-8c-e9-94-81/" class="archive-article-date">
-  	<time datetime="2017-06-11T15:23:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>平常工作中，大家或多或少都听到过或接触过数据库事务和数据库锁，对于还不清楚数据库事务和数据库锁到底是什么的朋友，可以花几分钟时间简单了解下。无论对工作也好，新的一年可能也有朋友考虑要跳槽，也不妨了解下这些概念，不至于一问三不知。也从网上搜集了一些资料，查过维基百科，看过一些博客，觉得整理出来还是有用的，希望对大家也能有所帮助。<strong><br>事务
-</strong>数据库事务（简称：事务）是数据库管理系统执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。</p>
-<p>一个数据库事务通常包含了一个序列的对数据库的读/写操作。它的存在包含有以下两个目的：</p>
-<p>1. 为数据库操作序列提供了一个从失败中恢复到正常状态的方法，同时提供了数据库即使在异常状态下仍能保持一致性的方法。</p>
-<p>2. 当多个应用程序在并发访问数据库时，可以在这些应用程序之间提供一个隔离方法，以防止彼此的操作互相干扰。</p>
-<p>&nbsp;</p>
-<p>当事务被提交给了DBMS（数据库管理系统），则DBMS（数据库管理系统）需要确保该事务中的所有操作都成功完成且其结果被永久保存在数据库中，如果事务中有的操作没有成功完成，则事务中的所有操作都需要被回滚，回到事务执行前的状态;同时，该事务对数据库或者其他事务的执行无影响，所有的事务都好像在独立的运行。</p>
-<p>&nbsp;</p>
-<p>但在现实情况下，失败的风险很高。在一个数据库事务的执行过程中，有可能会遇上事务操作失败、数据库系统/操作系统失败，甚至是存储介质失败等情况。这便需要DBMS对一个执行失败的事务执行恢复操作，将其数据库状态恢复到一致状态（数据的一致性得到保证的状态）。为了实现将数据库状态恢复到一致状态的功能，DBMS通常需要维护事务日志以追踪事务中所有影响数据库数据的操作。</p>
-<p>以上为维基百科的描述，使用一个例子来加深下对事务的理解：同一个银行转账，A转1000元给B，这里就会存在两个操作，一个操作是A账户扣款1000元，另一个操作是B账户增加1000元，两者就构成了转账这个事务。如果把两个操作放在一个事务里面，并且是数据库提供的内在事务支持，那就不会有问题，要不全部成功，要不全部不成功。如果两个操作放在两个独立的事务里面，第一个事务处理成功，第二个事务处理失败，就会出现了中间态（A用户的钱扣了，B用户钱没到账），所以事务使用不当也会存在问题。</p>
-<p>并非任意的对数据库的操作序列都是数据库事务。数据库事务拥有以下四个特性，习惯上被称之为ACID特性。</p>
-<ul>
-<li>原子性（Atomicity）：事务作为一个整体被执行，包含在其中的对数据库的操作要么全部被执行，要么都不执行。</li>
-<li>一致性（Consistency）：事务应确保数据库的状态从一个一致状态转变为另一个一致状态。一致状态的含义是数据库中的数据应满足完整性约束。</li>
-<li>隔离性（Isolation）：多个事务并发执行时，一个事务的执行不应影响其他事务的执行。</li>
-<li>持久性（Durability）：已被提交的事务对数据库的修改应该永久保存在数据库中。</li>
-</ul>
-<hr>
-<p><strong>锁</strong></p>
-<p>当并发事务同时访问一个资源时，有可能导致数据不一致，因此需要一种机制来将数据访问顺序化，以保证数据库数据的一致性。锁就是其中的一种机制。</p>
-<p>1、共享锁</p>
-<p>共享锁（S 锁）允许并发事务在封闭式并发控制下读取 (SELECT)资源。资源上存在共享锁（S锁）时，任何其他事务都不能修改数据。读取操作一完成，就立即释放资源上的共享锁（S锁），除非将事务隔离级别设置为可重复读或更高级别，或者在事务持续时间内用锁定提示保留共享锁（S锁）。</p>
-<p>2、更新锁（U锁）</p>
-<p>更新锁是共享锁和排他锁的结合。更新锁意味着在做一个更新时，一个共享锁在扫描完成符合条件的数据后可能会转化成排他锁。</p>
-<p>这里面有两个步骤：</p>
-<p>1) 扫描获取Where条件时，这部分是一个更新查询，此时是一个更新锁。</p>
-<p>2) 如果将执行写入更新。此时该锁升级到排他锁。否则，该锁转变成共享锁。</p>
-<p>更新锁可以防止常见的死锁。</p>
-<p>3、排他锁</p>
-<p>排他锁（X 锁）可以防止并发事务对资源进行访问。排他锁不与其他任何锁兼容。使用排他锁（X锁）时，任何其他事务都无法修改数据；仅在使用 NOLOCK提示或未提交读隔离级别时才会进行读取操作。</p>
-<p>&nbsp;</p>
-<p>悲观锁</p>
-<p>悲观锁是指假设并发更新冲突会发生，所以不管冲突是否真的发生，都会使用锁机制。<br>悲观锁会完成以下功能：锁住读取的记录，防止其它事务读取和更新这些记录。其它事务会一直阻塞，直到这个事务结束.<br>悲观锁是在使用了数据库的事务隔离功能的基础上，独享占用的资源，以此保证读取数据一致性，避免修改丢失。</p>
-<p>悲观锁可以使用Repeatable Read事务，它完全满足悲观锁的要求。</p>
-<p>&nbsp;</p>
-<p>乐观锁</p>
-<p>乐观锁不会锁住任何东西，也就是说，它不依赖数据库的事务机制，乐观锁完全是应用系统层面的东西。</p>
-<p>如果使用乐观锁，那么数据库就必须加版本字段，否则就只能比较所有字段，但因为浮点类型不能比较，所以实际上没有版本字段是不可行的</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/11/e6-95-b0-e6-8d-ae-e5-ba-93-e4-ba-8b-e5-8a-a1-e5-92-8c-e9-94-81/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
     </nav>
   
 
@@ -772,23 +827,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CDN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CDN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -816,6 +867,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
@@ -824,7 +879,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -832,11 +887,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -845,6 +896,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -860,11 +919,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">django</a>
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+                <a href="javascript:void(0)" class="js-tag color2">django</a>
               </li>
             
             <div class="clearfix"></div>

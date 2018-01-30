@@ -147,6 +147,214 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/">MonkeyScript及Monkeyrunner介绍</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/" class="archive-article-date">
+  	<time datetime="2017-06-18T21:02:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>获取app包名：<br>adb logcat |grep START</p>
+<p>执行Monkey脚本的命令：<br>adb shell monkey -f &lt;scriptfile&gt; &lt;event-count&gt;</p>
+<p>1、Dispatch Trackball命令（轨迹球事件）</p>
+<p>Dispatch Trackball(long downtime,long eventide,<span style="color: #ff0000;">int action,float x,float y</span>,float pressure,float size,int metastate,float xprecision,float yprecision,int device,int edgeflags)<br>action 0代表按下，1代表弹起，x和y代表的坐标点</p>
+<p>2、DispatchPointer命令（点击事件）</p>
+<p>DispatchPointer(long downtime,long eventide,<span style="color: #ff0000;">int action,float x,float y</span>,float pressure,float size,int metastate,float xprecision,float yprecision,int device,int edgeflags)<br>action 0代表按下，1代表弹起，x和y代表的坐标点</p>
+<p>3、DispatchString(String text)(输入字符串事件)</p>
+<p>4、LaunchActivity命令（启动应用）</p>
+<p>LaunchActivity(package,Activity)</p>
+<p>5、UserWait命令（等待事件）</p>
+<p>UserWait(1000)</p>
+<p>6、DispatchPress命令（按下键值）</p>
+<p>DispatchPress(int keycode) #keycode 66 回车键</p>
+<p>举例：<br>1、启动app<br>2、点击输入框<br>3、输入查询词<br>4、点击搜索按钮<br>5、等待结果的出现<br>6、点击clear按钮</p>
+<p>#search.script，使用命令adb shell monkey -f search.script 2(注意脚本在电脑上，monkey在手机上跑，需要将脚本push到手机上：adb push serch.script /data/local/tmp;另外，在AndroidManifest.xml中的activity加入android:exported=”true”,最后，可使用sdk自带工具uiautomatorviewer获取坐标点)</p>
+<p><code>typ=user</code><br><code>count=10</code><br><code>speed=1.0</code><br><code>start data &amp;gt;&amp;gt;</code></p>
+<p><code>LaunchActivity(com.android.chrome,com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity)</code><br><code>UserWait(2000)</code><br><code>DispatchPointer(10,10,0,100,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,100,100,1,1,-1,1,1,0,0)</code><br><code>DispatchString(test)</code><br><code>UserWait(1000)</code><br><code>DispatchPress(66)</code><br><code>UserWait(1000)</code><br><code>DispatchPointer(10,10,0,300,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,300,100,1,1,-1,1,1,0,0)</code><br><code>UserWait(6000)</code><br><code>DispatchPointer(10,10,0,400,100,1,1,-1,1,1,0,0)</code><br><code>DispatchPointer(10,10,1,400,100,1,1,-1,1,1,0,0)</code></p>
+<p><strong>MonkeyRunner:</strong><br>1、MonkeyRunner API -alert(警示框)<br>void alert(string message,string title,string okTitle)</p>
+<p>#举例：demo.py 执行使用monkeyrunner demo.py<br><code>#!usr/bin/python</code><br><code>#_*_ UTF-8 _*_</code><br><code>from com.android.monkeyrunner import MonkeyRunner</code><br><code>MonkeyRunner.alert(&#39;Hello TT frends&#39;,&#39;This is title&#39;,&#39;OK&#39;)</code></p>
+<p>2、MonkeyRunner API -waitForConnection(等待设备连接，有多个device id，需要指明具体哪个设备)<br>WaitForConnection(float timeout,string deviceid)</p>
+<p>3、MonkeyDevice API - drag(拖动)<br>drag(tuple start,tuple end,float duration,integer steps)</p>
+<p>4、MonkeyDevice API - press(按键)<br>press(string keycode,dictionary type)<br>keycode名，Down、UP、DOWN_AND_UP</p>
+<p>5、MonkeyDevice API -startActivity(启动应用)<br>startActivity(package+’/‘+activity)</p>
+<p>6、MonkeyDevice API -touch(点击)<br>touch(integer x,integer y,integer type)<br>x坐标值，y坐标值，<br>type：DOWN,UP,DOWN_AND_UP</p>
+<p>7、MonkeyDevice API - type(输入)<br>type(string message)</p>
+<p>8、MonkeyDevice API - takeSnapshot(截屏)<br>MonkeyImage takeSnapshot()</p>
+<p>9、MonkeyImage API - sameAs(图像对比)<br>boolean sameAs(MonkeyImage other,float percent)</p>
+<p>10、MonkeyImage API - writetoFile(保存图像文件)<br>void writeToFile(string path,string format)</p>
+<p>#举例：实现在搜索框中输入查询词，并截图</p>
+<p><code>#!/usr/bin/python</code><br><code>#_*_ UTF-8 _*_</code><br><code>from com.android.monkeyrunner import MonkeyRunner,MonkeyDevice,MonkeyImage</code><br><code>#连接设备</code><br><code>device = MonkeyRunner.waitForConnection(3,&quot;emulator-5554&quot;)</code><br><code>#启动app</code><br><code>device.startActivity(&quot;com.android.chrome/com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity&quot;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击搜索框</code><br><code>device.touch(100,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#输入查询词</code><br><code>device.type(&#39;test&#39;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击回车键</code><br><code>device.press(&#39;KEYCODE_ENTER&#39;,&#39;DOWN_AND_UP&#39;)</code><br><code>MonkeyRunner.sleep(1)</code><br><code>#点击搜索按钮</code><br><code>device.touch(400,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(5)</code><br><code>#截图</code><br><code>image = device.takeSnapshot()</code><br><code>image.writeToFile(&#39;./test.png&#39;,&#39;png&#39;)</code><br><code>#点击清除按钮</code><br><code>device.touch(300,100,&quot;DOWN_AND_UP&quot;)</code><br><code>MonkeyRunner.sleep(3)</code></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">monkey</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">monkeyrunner</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">monkeyscript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/18/monkeyscript-e5-8f-8amonkeyrunner-e4-bb-8b-e7-bb-8d/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-e8-ae-a9-e5-bf-83-e7-9b-ae-e4-b8-ad-e7-9a-84-e5-a4-a7-e8-b1-a1-ef-bc-8c-e6-8a-93-e7-b4-a7-e6-97-b6-e9-97-b4-e8-b5-b7-e9-a3-9e" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/17/e8-ae-a9-e5-bf-83-e7-9b-ae-e4-b8-ad-e7-9a-84-e5-a4-a7-e8-b1-a1-ef-bc-8c-e6-8a-93-e7-b4-a7-e6-97-b6-e9-97-b4-e8-b5-b7-e9-a3-9e/">让心目中的大象，抓紧时间起飞</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/17/e8-ae-a9-e5-bf-83-e7-9b-ae-e4-b8-ad-e7-9a-84-e5-a4-a7-e8-b1-a1-ef-bc-8c-e6-8a-93-e7-b4-a7-e6-97-b6-e9-97-b4-e8-b5-b7-e9-a3-9e/" class="archive-article-date">
+  	<time datetime="2017-06-17T14:04:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>避开创业陷阱：</strong><br>1、钱太多<br>2、技术控</p>
+<p><strong>创新的几大要诀：</strong><br>1、启航–小团队、创意冲刺、找到适合的投资；<br>2、打造产品–爱产品但别太爱、小心未经验证的想法、重视设计；<br>3、锁定客户–观察客户、倾听客户、不要迷信推荐率；<br>4、内部创新–重视员工的独特想法、从失败中获取洞见；<br>5、高速运转七法宝</p>
+<ul>
+<li>10倍以上改善（做出一个比预期产品好的多的产品）</li>
+<li>创造全新市场（比如摩拜等）</li>
+<li>颠覆现有市场</li>
+<li>抓住网络效应（用户发展用户）</li>
+<li>排他性经销权（市场垄断）</li>
+<li>长期用户（提高客户的转换成本）</li>
+<li>品牌</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/17/e8-ae-a9-e5-bf-83-e7-9b-ae-e4-b8-ad-e7-9a-84-e5-a4-a7-e8-b1-a1-ef-bc-8c-e6-8a-93-e7-b4-a7-e6-97-b6-e9-97-b4-e8-b5-b7-e9-a3-9e/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
     <article id="post-e8-af-bb-e3-80-8a-e8-a3-82-e5-8f-98-e5-bc-8f-e5-88-9b-e4-b8-9a-e3-80-8b-e8-bf-99-e6-9c-ac-e4-b9-a6-e7-9a-84-e4-b8-80-e7-82-b9-e6-80-bb-e7-bb-93" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -570,256 +778,9 @@
 
 
   
-    <article id="post-e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/11/e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/">关键对话，带给我的思考</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/11/e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/" class="archive-article-date">
-  	<time datetime="2017-06-11T17:17:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在生活当中经常会遇到很多情况，第一、升职加薪、面试、第一次去相亲等等，这都可以理解为关键对话。第二、对话双方的情绪很激烈，两个人都在大声的嚷嚷和争论，这时候也是关键对话。第三、双方的意见存在很大的分歧，比如，你希望你的孩子不要玩游戏，而你的孩子非要玩游戏。以上三种都称之为关键对话。</p>
-<p>&nbsp;</p>
-<p>有没有自己反思过关键时候掉链子的情况，每次谈完话就想，我当时说这个就好了，我怎么忘了这事呢！为什么会在关键时候掉链子？当面临公众演讲的时候，当面临与领导谈话的时候，当跟开发或者产品争论的时候，都会变得嘴有些笨，该说的话都没有说出来。一般人处理关键对话两种不好的结局：要么得罪对方，自己变得特别失态，失去风度；还有一种状况是，算了，假装没发生，避而不谈。那么有没有做的很好呢？要对对方保持百分之一百的尊重，同时要做到百分之一百的坦诚。</p>
-<p>&nbsp;</p>
-<p>从心开始。做一个关键对话之前要做一些准备，先把自己的心态调整好，让自己的心平静下来再与对方进行对话。生气的时候不要与别人沟通，当你生气的时候智商为零，特别高兴的时候不要随便答应给别人东西，彩票中了分你一半，真中了结果会分么？我们总以为苦恼是由他人导致的，这种思维方式会让你的情绪不受控制，并且不由自主的想要伤害对方，或者自认倒霉。其实只有改变自己才能改变结果。要知道你永远都有着选择的权利，没有能够伤害你，除非你自己允许。做到这一点，你才能努力考虑如何去解决问题，而不是伤害或被伤害。</p>
-<p>&nbsp;</p>
-<p>在对话前学会问自己几个问题：</p>
-<p>1、这次对话我的目标是什么？</p>
-<p>2、这次对话我希望为对方达成的目标是什么？</p>
-<p>3、这次对话之后我希望为我们俩的关系达成一个什么样的目标？</p>
-<p>4、为了达成这些目标我应该怎么做？</p>
-<p>&nbsp;</p>
-<p>当我们把这几个问题问完，这就是关键对话的引导性思维。比如，你的孩子喜欢天天玩游戏，说他怎么都没用，发脾气没收手机都没用，来做一场关键对话：</p>
-<p>&nbsp;</p>
-<p>1、这次对话的目标：希望通过这场对话帮助他减少打游戏时间，能够让他更专注学习；</p>
-<p>2、这次对话我希望为对方达成的目标是什么：我希望让对方感觉到爸妈是爱他的，能够感觉到爸妈是替他着想的，并且找到一个平衡打游戏和学习的方法；</p>
-<p>3、这次对话之后我希望为我们俩的关系达成一个什么样的目标：通过这次对话，跟孩子的关系变得更加融洽，让孩子感受到对他无条件的爱；</p>
-<p>4、应该怎么做：比如应该先表达关心和爱，应该先表达理解，应该告诉他说爸爸小时候也特别喜欢打游戏，那么为什么爸爸要跟你谈这个事，咱们应该怎么做。</p>
-<p>&nbsp;</p>
-<p>另外，<strong>对于测试人员来说，也存在不少关键对话。这里就拿与产品、开发对话举例：</strong></p>
-<p>假如，产品给你一个需求，产品三言两语的简单说下什么需求，开发leader认为这个需求很简单，不需要再次核对，就交给小弟去做了，但是作为测试人员的我们可能认为其中有不少需要注意的地方，还是需要一起理下需求和技术实现，达成一致，同时保证质量且能够按时交付上线。结果，做了三四天实现的功能并不是产品所需，又打回重做，这样前期就浪费了不少时间和资源，造成的后果是，必须要上线了，重新定方案，开发leader亲自做，最后通过加班也如期上线了。其实通过这个小的需求当中项目相关人员还是存在不少问题的。</p>
-<p>&nbsp;</p>
-<p>测试人员还是要坚持自己的原则，对于不明确或者存在风险的地方，主动与产品、开发从产品需求和技术实现上达成一致，只有这样才能更好的为测试做准备，设计好测试分析和用例，提前规避风险。那么针对这个案例就可以参考关键对话：</p>
-<p>1、这次对话的目标：希望产品需求和技术实现达成一致；</p>
-<p>2、这次对话我希望为对方达成的目标是什么：满足产品需求，理清技术方案，避免不必要的时间和资源浪费；</p>
-<p>3、这次对话之后我希望为我们俩的关系达成一个什么样的目标：通过这次对话，与产品、开发关系更融洽，让他们感受到对产品的质量负责；</p>
-<p>4、应该怎么做：召集产品、开发一起理清需求和技术方案的讨论，测试人员提前准备好疑惑点，最后经过讨论达成一致，并评估出提测时间和上线时间，做好会议纪要发给大家。</p>
-<p>&nbsp;</p>
-<p><strong>关键对话中需要注意：</strong></p>
-<p>1、从心开始（调整心态，自己首先摆脱暴力或沉默的状态，寻找双赢的可能）</p>
-<p>2、注意观察（除了内容，还要关注谈话的氛围）</p>
-<p>3、保证安全（如果对方情绪出现问题，想办法让对方觉得安全）</p>
-<p>4、控制想法（不要轻易的觉得受到冒犯或者不公平，公平不重要，解决问题才重要）</p>
-<p>5、陈述观点（输出事实，表达观点，对比说明）</p>
-<p>6、了解动机（帮助对方调整情绪）</p>
-<p>&nbsp;</p>
-<p>可以尝试着用在工作和生活当中，希望对你能有所帮助！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">关键对话</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">职场沟通</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/11/e5-85-b3-e9-94-ae-e5-af-b9-e8-af-9d-ef-bc-8c-e5-b8-a6-e7-bb-99-e6-88-91-e7-9a-84-e6-80-9d-e8-80-83/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/11/charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3/">Charles抓取https请求详解</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/11/charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3/" class="archive-article-date">
-  	<time datetime="2017-06-11T17:16:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>现在基本大部分网站都使用了https，所以要想抓到https的请求，首要任务是先有工具：charles、fiddler，先介绍下charles针对https请求的抓取方法，此方法兼容windows和mac用户（mac用户方法类似，如果有必要，请关注微信公众号：测试架构师，留言给我。后续我会专门再做整理）。</p>
-<p>1、 windows下安装charles，看到此文章的用户相信都已经安装了charles，如果还真的没安装，麻烦就自行搜索，进行安装了，打开charles（我使用的charles版本是3.11.4），再继续浏览。</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles001.png" alt=""></p>
-<p>2、 ok，charles已准备完成，接下来就要配置charles证书：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles002.jpg" alt=""></p>
-<p>之后会弹出安装证书：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles003.jpg" alt=""></p>
-<p>点击安装，一路下一步，直到提示“导入成功”</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles004.jpg" alt=""></p>
-<p>此时证书还是不被信任的，让不信任变成信任：打开IE浏览器—&gt;工具—&gt;Internet选项—&gt;内容—&gt;证书—&gt;把中级证书颁发机构中的charles证书导出来—&gt;再把导出来的证书导入到受信任的根证书颁发机构中。这样就ok了。</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles005.jpg" alt=""></p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles006.jpg" alt=""></p>
-<p>3、 在移动设备上配置手机代理并安装证书</p>
-<p>在手机上设置代理：设置—&gt;无线网络，设置服务器ip和端口号：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles007.jpg" alt=""></p>
-<p>然后，手机安装证书：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles008.jpg" alt=""></p>
-<p>会弹出一个提示框，如下：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles009.jpg" alt=""></p>
-<p>然后手机浏览器输入如上地址：<a href="http://charlesproxy.com/getssl" target="_blank" rel="noopener">http://charlesproxy.com/getssl</a>会弹出如下页面：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles010.png" alt=""></p>
-<p>点击安装即可，安装完成后就变成已验证，如下：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles011.png" alt=""></p>
-<p>下面以访问百度wap站点为例：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles012.jpg" alt=""></p>
-<p>上图看到，访问百度wap站点还是看不到https的请求数据，下面还需要再继续配置：</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles013.jpg" alt=""></p>
-<p>点击SSL Proxying Settings，弹出下面的框，输入Host填写要抓取的ip或域名，port填写443即可。</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles014.jpg" alt=""></p>
-<p>设置完成后，重新方位百度wap站点就可以抓取到https请求了</p>
-<p><img src="http://www.87testing.com/assets/blogimg/charles015.jpg" alt=""></p>
-<p>如果以上还没解决，请关注我的微信公众号：测试架构师，后台留言找到我！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">charles</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">https</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/未分类/" class="article-tag-list-link color4">未分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/11/charles-e6-8a-93-e5-8f-96https-e8-af-b7-e6-b1-82-e8-af-a6-e8-a7-a3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 
@@ -910,23 +871,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CDN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">charles</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">https</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CDN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻墙</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -954,6 +911,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
@@ -962,7 +923,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">fiddler</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -970,11 +931,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -983,6 +940,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">LoadRunner</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -998,11 +963,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">django</a>
+                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
+                <a href="javascript:void(0)" class="js-tag color2">django</a>
               </li>
             
             <div class="clearfix"></div>
