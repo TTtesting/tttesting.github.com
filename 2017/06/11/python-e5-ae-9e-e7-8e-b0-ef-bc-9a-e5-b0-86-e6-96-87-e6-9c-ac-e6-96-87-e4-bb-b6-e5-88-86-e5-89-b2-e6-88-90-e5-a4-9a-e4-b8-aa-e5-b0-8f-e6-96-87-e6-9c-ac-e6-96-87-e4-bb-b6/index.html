@@ -5,14 +5,14 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://youxitest.com">
+  <link rel="dns-prefetch" href="http://87testing.com">
   <title>python实现：将文本文件分割成多个小文本文件 | 测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="前两天有个朋友说，想实现一个文本文件按照固定行数进行分割成多个文本文件，却不知如何实现。如果数据量小手动分割下就好了，如果数据量很大的话手动完成实在太耗费人力了，也不现实。那么就需要借助脚本去实现。既然有朋友想简单的完成这个任务，那么不如记录下来，给需要的朋友提供方便。 &amp;nbsp; 下面我就使用python进行脚本的实现和操作，当然用其他语言都能实现，大家可根据对语言的熟悉程度进行自主选择，如果">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python实现：将文本文件分割成多个小文本文件">
-<meta property="og:url" content="http://youxitest.com/2017/06/11/python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/index.html">
+<meta property="og:url" content="http://87testing.com/2017/06/11/python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/index.html">
 <meta property="og:site_name" content="测试架构师--聊软件测试，写读书感悟，偶尔谈谈互联网和人生。">
 <meta property="og:description" content="前两天有个朋友说，想实现一个文本文件按照固定行数进行分割成多个文本文件，却不知如何实现。如果数据量小手动分割下就好了，如果数据量很大的话手动完成实在太耗费人力了，也不现实。那么就需要借助脚本去实现。既然有朋友想简单的完成这个任务，那么不如记录下来，给需要的朋友提供方便。 &amp;nbsp; 下面我就使用python进行脚本的实现和操作，当然用其他语言都能实现，大家可根据对语言的熟悉程度进行自主选择，如果">
 <meta property="og:locale" content="zh-CN">
@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://www.87testing.com/assets/blogimg/fenge5.png">
 <meta property="og:image" content="http://www.87testing.com/assets/blogimg/fenge6.png">
 <meta property="og:image" content="http://www.87testing.com/assets/blogimg/fenge7.png">
-<meta property="og:updated_time" content="2018-01-30T09:37:06.793Z">
+<meta property="og:updated_time" content="2018-01-30T09:44:18.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python实现：将文本文件分割成多个小文本文件">
 <meta name="twitter:description" content="前两天有个朋友说，想实现一个文本文件按照固定行数进行分割成多个文本文件，却不知如何实现。如果数据量小手动分割下就好了，如果数据量很大的话手动完成实在太耗费人力了，也不现实。那么就需要借助脚本去实现。既然有朋友想简单的完成这个任务，那么不如记录下来，给需要的朋友提供方便。 &amp;nbsp; 下面我就使用python进行脚本的实现和操作，当然用其他语言都能实现，大家可根据对语言的熟悉程度进行自主选择，如果">
@@ -310,7 +310,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://youxitest.com/2017/06/11/python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://87testing.com/2017/06/11/python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -366,7 +366,7 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://youxitest.com/2017/06/11/python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/", 
+    url: "http://87testing.com/2017/06/11/python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/", 
     sourceId: "python-e5-ae-9e-e7-8e-b0-ef-bc-9a-e5-b0-86-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6-e5-88-86-e5-89-b2-e6-88-90-e5-a4-9a-e4-b8-aa-e5-b0-8f-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6",
     productKey: "true",
     target: "cloud-tie-wrapper"
@@ -479,6 +479,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">安全测试</a>
               </li>
              
@@ -487,7 +491,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">团队管理</a>
+                <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -499,10 +503,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">接口测试</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">创业</a>
               </li>
              
@@ -511,27 +511,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Locust</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,7 +519,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,15 +539,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">tomcat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Locust</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">性能测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">PyCharm</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">django</a>
+                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+                <a href="javascript:void(0)" class="js-tag color2">django</a>
               </li>
             
             <div class="clearfix"></div>
